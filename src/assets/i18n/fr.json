@@ -1,3 +1,30 @@
 {
+  "global": {
+    "app-name": "`Em"
+  },
+  "actions": {
+    "login": "Connexion",
+    "register": "Création de mon compte"
+  },
+  "forms": {
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirm-password": "Confirmer le mot de passe",
 
+    "email-required": "Adresse e-mail obligatoire!",
+    "email-invalid": "Adresse e-mail invalide!",
+    "password-required": "Mot de passe obligatoire!",
+    "confirm-password-required": "La confirmation du mot de passe est obligatoire!",
+    "confirm-password-not-match": "Les mots de passe ne coincident pas!"
+  },
+  "login": {
+    "not-account": "Pas encore de compte ?",
+    "create-account": "Viens par ici\uD83D\uDE09",
+    "connect": "Me connecter"
+  },
+  "register": {
+    "already-account": "Déjà parmis nous ?",
+    "connect": "Je me connecte!",
+    "create": "Créer mon compte"
+  }
 }

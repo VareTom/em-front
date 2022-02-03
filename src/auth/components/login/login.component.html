@@ -1,0 +1,69 @@
+<div class="container-form">
+    <nb-card center>
+        <nb-card-body>
+            <h1 id="title" class="title">{{ 'actions.login'|translate }}</h1>
+
+            <nb-alert *ngIf="showMessages && !isSubmitted" outline="danger" role="alert">
+                <p class="alert-title"><b>Oh snap!</b></p>
+                <ul class="alert-message-list">
+                    {{ showMessages.error.message }}
+                </ul>
+            </nb-alert>
+
+            <form [formGroup]="loginForm" aria-labelledby="title">
+
+                <div class="form-control-group">
+                    <label class="label" for="input-email">{{ 'forms.email'| translate }}</label>
+                    <input nbInput
+                           fullWidth
+                           id="input-email"
+                           formControlName="email"
+                           pattern=".+@.+\..+"
+                           autofocus>
+                    <ng-container *ngIf="isEmailRequired()">
+                        <p class="caption status-danger">
+                            {{ 'forms.email-required'| translate }}
+                        </p>
+                    </ng-container>
+                    <ng-container *ngIf="isEmailInvalid()">
+                        <p class="caption status-danger">
+                            {{ 'forms.email-invalid'| translate }}
+                        </p>
+                    </ng-container>
+                </div>
+
+                <div class="form-control-group">
+                    <label class="label" for="input-password">{{ 'forms.password'| translate }}</label>
+                    <input nbInput
+                           fullWidth
+                           formControlName="password"
+                           type="password"
+                           id="input-password"
+                    >
+                    <ng-container *ngIf="isRequiredInputInvalid('password')">
+                        <p class="caption status-danger">
+                            {{ 'forms.password-required'| translate }}
+                        </p>
+                    </ng-container>
+                </div>
+
+                <div class="button-control-group">
+                    <button nbButton
+                            fullWidth
+                            status="info"
+                            [nbSpinner]="isSubmitted"
+                            nbSpinnerStatus="info"
+                            [disabled]="isSubmitted || !loginForm.valid"
+                            [class.btn-pulse]="isSubmitted"
+                            (click)="onLogin()">
+                        {{ 'login.connect'|translate }}
+                    </button>
+                </div>
+            </form>
+
+            <section class="another-action" aria-label="Register">
+                {{ 'login.not-account'|translate }} <a class="text-link" routerLink="/register">{{ 'login.create-account'|translate }}</a>
+            </section>
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -2,7 +2,6 @@ import { Store } from '../store';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 // Third Party modules
@@ -14,16 +13,16 @@ import { AppComponent } from './app.component';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
-import { HomeModule } from '../home/home.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
 }
 
 const routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'home' },
-]
+  { path: '', pathMatch: 'full', redirectTo: 'auth' },
+  { path: '**', redirectTo: 'auth' },
+];
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ const routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}),
 
     // Third party modules
@@ -45,9 +43,8 @@ const routes = [
     }),
 
     // Custom Modules
-    HomeModule,
+    AuthModule,
     SharedModule
-
   ],
   providers: [
       Store

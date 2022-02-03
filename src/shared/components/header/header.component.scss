@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-family: 'Martel Sans', sans-serif;
+    opacity: 0.9;
+  }
+
+  img {
+    width: auto;
+    height: 70px;
+  }
+}
