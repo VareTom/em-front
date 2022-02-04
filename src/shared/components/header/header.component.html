@@ -2,7 +2,7 @@
     <img src="assets/images/em_icon.png" alt="em logo">
     <h1>`Em</h1>
 
-    <div class="menu" *ngIf="isConnected">
+    <div class="menu" *ngIf="(connectedUser$| async)">
         mlsdmldsmlds
     </div>
 </div>

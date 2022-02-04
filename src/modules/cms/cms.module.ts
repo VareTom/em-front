@@ -9,7 +9,8 @@ import { RouterModule, Routes} from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module';
 
 // Containers
-import { CmsComponent } from './components/cms/cms.component';
+import { CmsComponent } from './containers/cms/cms.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   { path: '', component: CmsComponent, children: [
@@ -20,7 +21,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    CmsComponent
+    // Containers
+    CmsComponent,
+    
+    // Components
+    SidebarComponent
   ],
   imports: [
     CommonModule,

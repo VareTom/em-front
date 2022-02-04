@@ -38,9 +38,9 @@ import { HeaderComponent } from './components/header/header.component';
     // Nebular
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
+    NbSidebarModule.forRoot(),
     NbEvaIconsModule,
     NbSpinnerModule,
-    NbSidebarModule,
     NbButtonModule,
     NbAlertModule,
     NbCardModule,

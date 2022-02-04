@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from 'src/store';
+
+// Models
+import { User } from 'src/shared/models/user';
 
 @Component({
   selector: 'app-header',
@@ -6,11 +11,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isConnected: boolean = false;
+  connectedUser$: Observable<User>;
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
   }
 
 }

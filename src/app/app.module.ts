@@ -44,7 +44,7 @@ const routes = [
       }
     }),
 
-    // Custom Modules
+    // Modules
     AuthModule,
     CmsModule
   ],

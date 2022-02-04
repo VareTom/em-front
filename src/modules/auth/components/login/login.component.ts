@@ -51,12 +51,11 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value)
       .subscribe(() => {
         this.isSubmitted = false;
-        this.router.navigateByUrl('/home');
-        console.log(this.store.value.connectedUser)
+        this.router.navigateByUrl('dashboard');
       }, (error) => {
         this.isSubmitted = false;
         if (error.status === 404) {
-          this.errorMessages = this.translate.instant('errors.http-not-found')
+          this.errorMessages = this.translate.instant('errors.http-not-found');
         }
         else{
           this.errorMessages = error.error.message;
