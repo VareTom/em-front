@@ -1,11 +1,11 @@
 export class User {
-    firstName: string;
-    lastName: string;
-    email: string;
-    
-    constructor(json: any) {
-        this.firstName = json.first_name;
-        this.lastName = json.last_name;
-        this.email = json.email;
-    }
+  uuid: string;
+  email: string;
+  createdAt: string;
+
+  constructor(json: any) {
+    this.uuid = json.uuid; // TODO:: change id to uuid in api respoonse
+    this.email = json.email;
+    this.createdAt = json.createdAt;
+  }
 }
