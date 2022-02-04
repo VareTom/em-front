@@ -26,5 +26,10 @@
     "already-account": "Déjà parmis nous ?",
     "connect": "Je me connecte!",
     "create": "Créer mon compte"
+  },
+  "errors": {
+    "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
+    "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
+    "title": "Ah shit, here we go again."
   }
 }

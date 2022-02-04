@@ -23,6 +23,10 @@ html, body {
 
 .container-form {
 
+  .alert-error-message {
+    color: $red;
+  }
+
   .title {
     text-align: center;
   }

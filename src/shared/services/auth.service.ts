@@ -23,7 +23,6 @@ export class AuthService {
     return this.httpClient.post(`${this.baseRoute}/login`, parameters)
       .pipe(
         map((result: any) => {
-          console.log(result);
           localStorage.setItem('token', result.token);
           const newUser = new User(result.user);
           this.store.set('connectedUser', newUser);
