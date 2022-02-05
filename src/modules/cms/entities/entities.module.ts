@@ -3,22 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 // Containers
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { EntitiesComponent } from './containers/entities/entities.component';
 
 // Custom Modules
 import { SharedModule } from 'src/shared/shared.module';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent
-  }
+  { path: '', component: EntitiesComponent}
 ]
 
 @NgModule({
   declarations: [
     // Containers
-    DashboardComponent
+    EntitiesComponent
   ],
   imports: [
     CommonModule,
@@ -28,4 +25,4 @@ const routes: Routes = [
     SharedModule
   ]
 })
-export class DashboardModule { }
+export class EntitiesModule { }

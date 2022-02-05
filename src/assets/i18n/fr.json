@@ -28,6 +28,13 @@
     "connect": "Je me connecte!",
     "create": "Créer mon compte"
   },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "entities": "Mes entités",
+    "services": "Mes services",
+    "clients": "Mes clients",
+    "orders": "Mes commandes"
+  },
   "errors": {
     "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
     "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",

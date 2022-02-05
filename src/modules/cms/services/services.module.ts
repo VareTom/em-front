@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 // Containers
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { ServicesComponent } from './containers/services/services.component';
 
 // Custom Modules
 import { SharedModule } from 'src/shared/shared.module';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent
-  }
+  { path: '', component: ServicesComponent }
 ]
 
 @NgModule({
   declarations: [
     // Containers
-    DashboardComponent
+    ServicesComponent
   ],
   imports: [
     CommonModule,
@@ -28,4 +25,4 @@ const routes: Routes = [
     SharedModule
   ]
 })
-export class DashboardModule { }
+export class ServicesModule { }
