@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Service
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from 'src/shared/services/auth-guard.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 // Modules Nebular
 import {
@@ -15,6 +17,9 @@ import {
   NbSidebarModule,
   NbSpinnerModule,
   NbCardModule,
+  NbActionsModule,
+  NbIconModule,
+  NbTooltipModule,
   NbThemeModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -44,6 +49,9 @@ import { HeaderComponent } from './components/header/header.component';
     NbButtonModule,
     NbAlertModule,
     NbCardModule,
+    NbActionsModule,
+    NbIconModule,
+    NbTooltipModule,
     NbInputModule
   ],
   exports: [
@@ -59,6 +67,9 @@ import { HeaderComponent } from './components/header/header.component';
     NbSpinnerModule,
     NbAlertModule,
     NbCardModule,
+    NbActionsModule,
+    NbIconModule,
+    NbTooltipModule,
     NbInputModule,
     
     // Components
@@ -71,8 +82,12 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
-          // Services
-          AuthService
+        // Services
+        AuthService,
+        JwtHelperService,
+        
+        // Guards
+        AuthGuardService
       ]
     }
   }

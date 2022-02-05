@@ -5,7 +5,8 @@
 @include nb-install() {
   @include nb-theme-global();
 };
-@import 'src/styles/colors.scss';
+@import 'src/styles/colors';
+@import 'src/styles/nebular';
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400&display=swap');

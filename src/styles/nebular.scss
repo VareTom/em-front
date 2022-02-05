@@ -1,0 +1,7 @@
+@import "colors";
+
+.nb-theme-cosmic nb-actions.size-small nb-action {
+  &.press-action {
+    cursor: pointer;
+  }
+}

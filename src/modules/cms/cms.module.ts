@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes} from '@angular/router';
 
-// Components
+// Guards
+import {
+  AuthGuardService as AuthGuard
+} from 'src/shared/services/auth-guard.service';
 
 
 // Modules
@@ -13,7 +16,7 @@ import { CmsComponent } from './containers/cms/cms.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
-  { path: '', component: CmsComponent, children: [
+  { path: '', canActivate: [AuthGuard], component: CmsComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
     ]}

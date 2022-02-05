@@ -4,7 +4,8 @@
   },
   "actions": {
     "login": "Connexion",
-    "register": "Création de mon compte"
+    "register": "Création de mon compte",
+    "logout": "Se déconnecter"
   },
   "forms": {
     "email": "Adresse e-mail",

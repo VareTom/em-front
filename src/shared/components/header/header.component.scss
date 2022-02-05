@@ -1,8 +1,8 @@
 .header {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   h1 {
     font-family: 'Martel Sans', sans-serif;
@@ -12,5 +12,21 @@
   img {
     width: auto;
     height: 70px;
+  }
+
+  .title {
+    height: 76px;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .menu {
+    flex: 1;
+    display: flex;
+    position: absolute;
+    right: 10px;
+    top: 25px;
   }
 }

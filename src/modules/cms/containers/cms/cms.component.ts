@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from 'src/store';
+import { User } from 'src/shared/models/user';
 
 @Component({
   selector: 'app-cms',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CmsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.set('connectedUser',new User({
+      uuid: '1',
+      email: 'test@gmail.com',
+      createdAt: new Date()
+    }))
   }
 
 }
