@@ -10,6 +10,7 @@ import { CreateEntityDialogComponent } from 'src/shared/components/create-entity
 
 // Models
 import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,8 @@ import { User } from 'src/shared/models/user';
 })
 export class HeaderComponent implements OnInit {
   connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
+  
   menuSize: NbComponentSize = 'small';
   menuEntities: any[] = [];
 
@@ -28,12 +31,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.connectedUser$ = this.store.select<User>('connectedUser');
-    this.menuEntities = [
-      {
-        title: 'entity2',
-        queryParams: { uuid: "1" }
-      }
-    ]
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
+    if (this.store.value.connectedUser &&
+      this.store.value.connectedUser.entities &&
+      this.store.value.connectedUser.entities.length > 0) {
+        this.store.value.connectedUser.entities.forEach(entity => {
+          this.menuEntities.push({
+            title: entity.name,
+            queryParams: { uuid: entity.uuid }
+          });
+        })
+    }
     
     this.nbMenuService.onItemClick()
       .pipe(

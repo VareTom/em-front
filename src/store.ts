@@ -5,7 +5,8 @@ import { BehaviorSubject, distinctUntilChanged, Observable, OperatorFunction, pl
 import { StoreState } from './storeState';
 
 const state: StoreState = {
-    connectedUser: undefined
+    connectedUser: undefined,
+    currentEntity: undefined
 };
 
 @Injectable()

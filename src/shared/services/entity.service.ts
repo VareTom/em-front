@@ -25,8 +25,16 @@ export class EntityService {
     return this.httpClient.post(`${this.baseRoute}/`, parameters)
       .pipe(
         map((result: any) => {
-          this.store.value.connectedUser.entities.push(new Entity(result));
-          console.log(result);
+          
+          if (!this.store.value.connectedUser.entities) {
+            this.store.set('currentEntity',result);
+            this.store.value.connectedUser.entities = [new Entity(result)];
+          } else {
+            this.store.value.connectedUser.entities.push(new Entity(result));
+          }
+  
+          console.log(this.store.value.connectedUser.entities)
+          console.log(this.store.value.currentEntity)
         }),
         catchError(error => throwError(error))
       );
