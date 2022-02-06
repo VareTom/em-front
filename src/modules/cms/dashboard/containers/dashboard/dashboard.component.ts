@@ -14,5 +14,8 @@ export class DashboardComponent implements OnInit {
     //if (this.store.value.connectedUser.entities)
     
   }
-
+  
+  isNewUser(): boolean {
+    return true;
+  }
 }

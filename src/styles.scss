@@ -23,23 +23,18 @@ html, body {
 }
 
 .container-form {
-
   .alert-error-message {
     color: $red;
   }
-
   .title {
     text-align: center;
   }
-
   .form-control-group {
     margin: 10px 0;
   }
-
   .button-control-group {
     margin-top: 20px;
   }
-
   .another-action {
     margin-top: 10px;
     a {
@@ -49,3 +44,13 @@ html, body {
   }
 }
 
+.container {
+  width: 100%;
+  height: auto;
+}
+
+.divider {
+  width: 100%;
+  height: 3px;
+  background: $light;
+}

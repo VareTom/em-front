@@ -6,10 +6,29 @@
 
     <div class="menu" *ngIf="(connectedUser$| async)">
         <nb-actions [size]="menuSize">
-            <nb-action>{{ (connectedUser$| async).email | uppercase }}</nb-action>
+            <!--<nb-action>{{ (connectedUser$| async).email | uppercase }}</nb-action>-->
+            <nb-action *ngIf="true; else noEntity">
+                <nb-user [name]="(connectedUser$| async).email | uppercase"
+                         title="entity1"
+                         nbContextMenuTag="entity-context-menu"
+                         [nbContextMenu]="menuEntities">
+                </nb-user>
+            </nb-action>
+            <ng-template #noEntity>
+                <nb-action>
+                    <button nbButton status="info" (click)="onCreateFirstEntity()">
+                        {{ 'header.create-first-entity'|translate }}
+                    </button>
+                </nb-action>
+            </ng-template>
+            <nb-action (click)="onSettings()" class="press-action"
+                       [nbTooltip]="'header.settings'|translate | uppercase"
+                       nbTooltipPlacement="bottom">
+                <nb-icon icon="settings-2-outline"></nb-icon>
+            </nb-action>
             <nb-action (click)="onLogout()" class="press-action"
-                       [nbTooltip]="'actions.logout'|translate | uppercase"
-                       nbTooltipPlacement="bottom" nbTooltipStatus="danger" >
+                       [nbTooltip]="'header.logout'|translate | uppercase"
+                       nbTooltipPlacement="bottom" nbTooltipStatus="danger">
                 <nb-icon icon="power-outline" status="danger" ></nb-icon>
             </nb-action>
         </nb-actions>

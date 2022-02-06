@@ -14,10 +14,12 @@ import {
   NbButtonModule,
   NbInputModule,
   NbLayoutModule,
+  NbContextMenuModule,
   NbSidebarModule,
   NbSpinnerModule,
   NbCardModule,
   NbActionsModule,
+  NbUserModule,
   NbIconModule,
   NbTooltipModule,
   NbThemeModule, NbMenuModule, NbDialogModule
@@ -27,13 +29,15 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 // Components
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CreateEntityDialogComponent } from './components/create-entity-dialog/create-entity-dialog.component';
 
 @NgModule({
   declarations: [
   
     // Components
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    CreateEntityDialogComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { HeaderComponent } from './components/header/header.component';
     NbActionsModule,
     NbIconModule,
     NbTooltipModule,
+    NbContextMenuModule,
+    NbUserModule,
     NbInputModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
@@ -72,13 +78,16 @@ import { HeaderComponent } from './components/header/header.component';
     NbActionsModule,
     NbIconModule,
     NbTooltipModule,
+    NbContextMenuModule,
+    NbUserModule,
     NbInputModule,
     NbMenuModule,
     NbDialogModule,
     
     // Components
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    CreateEntityDialogComponent
   ]
 })
 export class SharedModule {

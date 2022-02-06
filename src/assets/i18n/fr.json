@@ -5,7 +5,7 @@
   "actions": {
     "login": "Connexion",
     "register": "Création de mon compte",
-    "logout": "Se déconnecter"
+    "create": "Créer"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -33,11 +33,25 @@
     "entities": "Mes entités",
     "services": "Mes services",
     "clients": "Mes clients",
-    "orders": "Mes commandes"
+    "orders": "Mes commandes",
+    "expenditures": "Mes dépenses"
+  },
+  "header": {
+    "settings": "Paramètres",
+    "create-first-entity": "Créer ma première entité",
+    "logout": "Se déconnecter"
   },
   "errors": {
     "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
     "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
     "title": "Ah shit, here we go again."
+  },
+  "dashboard": {
+    "new-user": {
+      "title": "Bienvenue dans votre Entity Manager!",
+      "content": "La première étape est de créer votre entité qui représentera votre business ou entreprise.",
+      "create": "Pour créer votre entité, un bouton est normalement présent sur le haut de votre page.",
+      "step2": "Ensuite, voyagez dans les pages à l'aide du menu à vôtre gauche et remplissez les informations sur votre entité (vos services ou prestations, vos dépenses ou encore les commandes que vous avez)"
+    }
   }
 }

@@ -7,6 +7,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
 // Custom Modules
 import { SharedModule } from 'src/shared/shared.module';
+import { NewUserComponent } from './components/new-user/new-user.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // Containers
-    DashboardComponent
+    DashboardComponent,
+    
+    // Components
+    NewUserComponent
   ],
   imports: [
     CommonModule,

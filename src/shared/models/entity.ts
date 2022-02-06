@@ -4,7 +4,7 @@ export class Entity {
   description: string;
   authorUuid: string
   createdAt: string;
-  services?: Service[];
+  //services?: Service[];
   
   // TODO:: get members (add at)
   
@@ -12,6 +12,6 @@ export class Entity {
     this.uuid = json.uuid;
     this.name = json.name;
     this.description = json.description;
-    this.authorUuid = json.a
+    this.authorUuid = json.authorUuid;
   }
 }
