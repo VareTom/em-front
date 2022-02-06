@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from 'src/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    //if (this.store.value.connectedUser.entities)
+    
   }
 
 }

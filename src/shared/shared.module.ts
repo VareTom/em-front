@@ -20,7 +20,7 @@ import {
   NbActionsModule,
   NbIconModule,
   NbTooltipModule,
-  NbThemeModule, NbMenuModule
+  NbThemeModule, NbMenuModule, NbDialogModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -54,6 +54,7 @@ import { HeaderComponent } from './components/header/header.component';
     NbTooltipModule,
     NbInputModule,
     NbMenuModule.forRoot(),
+    NbDialogModule.forRoot(),
   ],
   exports: [
     TranslateModule,
@@ -73,6 +74,7 @@ import { HeaderComponent } from './components/header/header.component';
     NbTooltipModule,
     NbInputModule,
     NbMenuModule,
+    NbDialogModule,
     
     // Components
     FooterComponent,
