@@ -2,7 +2,7 @@ import { Store } from '../store';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // Third Party modules
@@ -15,6 +15,9 @@ import { AppComponent } from './app.component';
 // Modules
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { CmsModule } from 'src/modules/cms/cms.module';
+
+// Interceptors
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
@@ -49,7 +52,8 @@ const routes = [
     CmsModule
   ],
   providers: [
-      Store
+    Store,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

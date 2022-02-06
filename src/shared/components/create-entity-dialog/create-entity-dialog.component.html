@@ -1,1 +1,37 @@
-<p>create-entity-dialog works!</p>
+<nb-card accent="info">
+    <nb-card-header>{{ 'entity.create'|translate }}</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="entityForm">
+
+            <div class="form-control-group">
+                <label class="label" for="name">{{ 'forms.entity-name'| translate }}*</label>
+                <input nbInput
+                       fullWidth
+                       id="name"
+                       formControlName="name"
+                       autofocus>
+                <ng-container *ngIf="isRequiredInputInvalid('name')">
+                    <p class="caption status-danger">
+                        {{ 'forms.entity-name-required'| translate }}
+                    </p>
+                </ng-container>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="description">{{ 'forms.entity-description'| translate }}</label>
+                <input nbInput
+                       fullWidth
+                       id="description"
+                       formControlName="description"
+                       autofocus>
+            </div>
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="info" (click)="onSubmit()"> {{ 'actions.create'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

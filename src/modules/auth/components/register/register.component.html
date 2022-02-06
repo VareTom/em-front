@@ -34,13 +34,21 @@
 
                 <div class="form-control-group">
                     <label class="label" for="input-password">{{ 'forms.password'| translate }}</label>
-                    <input nbInput
-                           fullWidth
-                           formControlName="password"
-                           type="password"
-                           id="input-password"
-                           (input)="onPasswordChange()"
-                    >
+                    <nb-form-field>
+                        <input [type]="getPasswordInputType()"
+                               nbInput
+                               fullWidth
+                               formControlName="password"
+                               type="password"
+                               id="input-password"
+                               (input)="onPasswordChange()">
+                        <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
+                            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                     pack="eva"
+                                     [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                            </nb-icon>
+                        </button>
+                    </nb-form-field>
                     <ng-container *ngIf="isRequiredInputInvalid('password')">
                         <p class="caption status-danger">
                             {{ 'forms.confirm-password-required'| translate }}
@@ -50,12 +58,20 @@
 
                 <div class="form-control-group">
                     <label class="label" for="input-confirm-password">{{ 'forms.confirm-password'| translate }}</label>
-                    <input nbInput
-                           fullWidth
-                           formControlName="confirmPassword"
-                           type="password"
-                           id="input-confirm-password"
-                    >
+                    <nb-form-field>
+                        <input [type]="getConfirmPasswordInputType()"
+                               nbInput
+                               fullWidth
+                               formControlName="confirmPassword"
+                               type="password"
+                               id="input-confirm-password">
+                        <button nbSuffix nbButton ghost (click)="toggleConfirmShowPassword()">
+                            <nb-icon [icon]="showConfirmPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                     pack="eva"
+                                     [attr.aria-label]="showConfirmPassword ? 'hide password' : 'show password'">
+                            </nb-icon>
+                        </button>
+                    </nb-form-field>
                     <ng-container *ngIf="isRequiredInputInvalid('confirmPassword')">
                         <p class="caption status-danger">
                             {{ 'forms.confirm-password-required'| translate }}
@@ -72,6 +88,7 @@
                 <div class="button-control-group">
                     <button nbButton
                             fullWidth
+                            hero
                             status="info"
                             [nbSpinner]="isSubmitted"
                             nbSpinnerStatus="info"

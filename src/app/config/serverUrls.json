@@ -1,4 +1,5 @@
 {
   "prefix": "/api/v1/",
-  "auth": "auth"
+  "auth": "auth",
+  "entity": "entities"
 }

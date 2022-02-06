@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { Store } from 'src/store';
-import { NbComponentSize, NbMenuService } from '@nebular/theme';
+import { NbComponentSize, NbDialogService, NbMenuService } from '@nebular/theme';
 import { Params, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+
+// Components
+import { CreateEntityDialogComponent } from 'src/shared/components/create-entity-dialog/create-entity-dialog.component';
 
 // Models
 import { User } from 'src/shared/models/user';
@@ -18,7 +21,10 @@ export class HeaderComponent implements OnInit {
   menuSize: NbComponentSize = 'small';
   menuEntities: any[] = [];
 
-  constructor(private store: Store, private router: Router, private nbMenuService: NbMenuService) { }
+  constructor(private store: Store,
+              private router: Router,
+              private nbMenuService: NbMenuService,
+              private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
     this.connectedUser$ = this.store.select<User>('connectedUser');
@@ -49,6 +55,9 @@ export class HeaderComponent implements OnInit {
   
   onCreateFirstEntity(): void {
     console.log('create first entity')
+    this.dialogService.open(CreateEntityDialogComponent, {
+      dialogClass: 'medium-dialog'
+    });
   }
   
   private onEntitySwitch(selectedEntity: Params): void {

@@ -22,6 +22,8 @@ export class RegisterComponent implements OnInit {
   });
   isConfirmPasswordError: boolean = false
   errorMessages: string;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -51,6 +53,28 @@ export class RegisterComponent implements OnInit {
   onPasswordChange(): void {
     this.registerForm.controls['confirmPassword'].reset();
     this.isConfirmPasswordError = false;
+  }
+  
+  getPasswordInputType(): string {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+  
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+  
+  getConfirmPasswordInputType(): string {
+    if (this.showConfirmPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+  
+  toggleConfirmShowPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
   
   onRegister(): void {

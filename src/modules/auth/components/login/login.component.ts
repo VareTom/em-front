@@ -13,7 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
+  
+  showPassword: boolean = false;
   isSubmitted: boolean = false;
   loginForm: FormGroup = this.fb.group({
     email: ['', [ Validators.email, Validators.required ]],
@@ -44,6 +45,17 @@ export class LoginComponent {
   isEmailRequired(): boolean {
     const formControl = this.loginForm.get('email');
     return formControl.touched && formControl.getError('required');
+  }
+  
+  getInputType(): string {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+  
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
   onLogin(): void {

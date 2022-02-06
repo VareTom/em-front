@@ -5,13 +5,17 @@
   "actions": {
     "login": "Connexion",
     "register": "Création de mon compte",
-    "create": "Créer"
+    "create": "Créer",
+    "cancel": "Annuler"
   },
   "forms": {
     "email": "Adresse e-mail",
     "password": "Mot de passe",
     "confirm-password": "Confirmer le mot de passe",
+    "entity-name": "Nom de votre entité",
+    "entity-description": "Description",
 
+    "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
     "email-invalid": "Adresse e-mail invalide!",
     "password-required": "Mot de passe obligatoire!",
@@ -37,7 +41,7 @@
     "expenditures": "Mes dépenses"
   },
   "header": {
-    "settings": "Paramètres",
+    "settings": "Gérer mes entités",
     "create-first-entity": "Créer ma première entité",
     "logout": "Se déconnecter"
   },
@@ -50,8 +54,11 @@
     "new-user": {
       "title": "Bienvenue dans votre Entity Manager!",
       "content": "La première étape est de créer votre entité qui représentera votre business ou entreprise.",
-      "create": "Pour créer votre entité, un bouton est normalement présent sur le haut de votre page.",
-      "step2": "Ensuite, voyagez dans les pages à l'aide du menu à vôtre gauche et remplissez les informations sur votre entité (vos services ou prestations, vos dépenses ou encore les commandes que vous avez)"
+      "create": "Pour créer votre première entité, un bouton est normalement présent dans le coin supérieur droit de votre page.",
+      "step2": "Ensuite, voyagez dans les pages à l'aide du menu à vôtre gauche et remplissez les informations sur votre entité (vos services ou prestations, vos dépenses ou encore les commandes que vous avez)."
     }
+  },
+  "entity": {
+    "create": "Création de votre entité"
   }
 }
