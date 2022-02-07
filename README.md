@@ -4,7 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Urls
 
-Front : `https://github.com/VareTom/tclean-front`
+### Git
+
+Server : `https://github.com/VareTom/tclean-server`
 
 ## Development server
 
