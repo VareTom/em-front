@@ -20,9 +20,11 @@ import { Entity } from 'src/shared/models/entity';
 export class HeaderComponent implements OnInit {
   connectedUser$: Observable<User>;
   currentEntity$: Observable<Entity>;
-  
+
   menuSize: NbComponentSize = 'small';
-  menuEntities: any[] = [];
+  menuEntities: any[] = [
+    { title: 'empty entity' }
+  ];
 
   constructor(private store: Store,
               private router: Router,
@@ -32,10 +34,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.connectedUser$ = this.store.select<User>('connectedUser');
     this.currentEntity$ = this.store.select<Entity>('currentEntity');
-    
+
     if (this.store.value.connectedUser &&
       this.store.value.connectedUser.entities &&
       this.store.value.connectedUser.entities.length > 0) {
+        this.menuEntities = [];
         this.store.value.connectedUser.entities.forEach(entity => {
           this.menuEntities.push({
             title: entity.name,
@@ -43,7 +46,7 @@ export class HeaderComponent implements OnInit {
           });
         })
     }
-    
+
     this.nbMenuService.onItemClick()
       .pipe(
         filter(({tag}) => tag === 'entity-context-menu'),
@@ -51,24 +54,24 @@ export class HeaderComponent implements OnInit {
       )
       .subscribe(queryParams => this.onEntitySwitch(queryParams));
   }
-  
+
   onLogout(): void {
     localStorage.removeItem('token');
     this.store.set('connectedUser',undefined);
     this.router.navigateByUrl('login')
   }
-  
+
   onSettings(): void {
     this.router.navigateByUrl('entities');
   }
-  
+
   onCreateFirstEntity(): void {
     console.log('create first entity')
     this.dialogService.open(CreateEntityDialogComponent, {
       dialogClass: 'medium-dialog'
     });
   }
-  
+
   private onEntitySwitch(selectedEntity: Params): void {
     console.log(selectedEntity)
     // TODO:: find from user entities where name ===
