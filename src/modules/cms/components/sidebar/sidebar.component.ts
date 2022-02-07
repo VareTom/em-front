@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
   menuItems: NbMenuItem[] = [
     {
       title: this.translate.instant('sidebar.dashboard'),
-      icon: 'home-outline',
+      icon: 'home',
       link: 'dashboard'
     },
     {
