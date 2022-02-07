@@ -31,7 +31,12 @@
     <nb-card-footer>
         <div class="actions">
             <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
-            <button nbButton hero status="info" (click)="onSubmit()"> {{ 'actions.create'|translate }} </button>
+            <button nbButton hero status="info"
+                    [nbSpinner]="isSubmitted"
+                    nbSpinnerStatus="info"
+                    [disabled]="isSubmitted || !entityForm.valid"
+                    [class.btn-pulse]="isSubmitted"
+                    (click)="onSubmit()"> {{ 'actions.create'|translate }} </button>
         </div>
     </nb-card-footer>
 </nb-card>

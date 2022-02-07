@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from 'src/store';
 
 @Component({
   selector: 'app-sidebar',
@@ -36,9 +37,10 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService, private store: Store) { }
 
   ngOnInit(): void {
+    console.log(this.store.value.connectedUser);
   }
 
 }

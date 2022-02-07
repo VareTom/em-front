@@ -35,15 +35,23 @@ export class CreateEntityDialogComponent {
   }
   
   onSubmit() {
+    this.isSubmitted = true;
+    
     const entityInput = {
       ...this.entityForm.value,
       authorUuid: this.store.value.connectedUser.uuid
     }
-    this.entityService.create(entityInput).subscribe(() => {
+    setTimeout(() => {
+      this.isSubmitted = false;
+    }, 1000);
+    console.log(this.store.value.connectedUser);
+    /*this.entityService.create(entityInput).subscribe(() => {
+      this.isSubmitted = false;
       this.dialogRef.close();
     }, (err) => {
+      this.isSubmitted = false;
       console.log(err)
-    });
+    });*/
     
   }
 }

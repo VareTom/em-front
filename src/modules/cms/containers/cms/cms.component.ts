@@ -13,9 +13,7 @@ export class CmsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.set('connectedUser',new User({
-      uuid: '1',
-      email: 'test@gmail.com',
-      createdAt: new Date()
+    
     }))
   }
 

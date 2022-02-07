@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onCreateFirstEntity(): void {
-    console.log('create first entity')
+    console.log(this.store.value.connectedUser)
     this.dialogService.open(CreateEntityDialogComponent, {
       dialogClass: 'medium-dialog'
     });

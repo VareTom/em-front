@@ -26,8 +26,8 @@ import {
   NbTooltipModule,
   NbThemeModule, NbMenuModule, NbDialogModule
 } from '@nebular/theme';
-
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 // Components
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';

@@ -6,9 +6,9 @@
 
     <div class="menu" *ngIf="(connectedUser$| async)">
         <nb-actions [size]="menuSize">
-            <nb-action *ngIf="(connectedUser$| async).entities; else noEntity">
+            <nb-action *ngIf="(connectedUser$| async).entities.length > 0; else noEntity">
                 <nb-user [name]="(connectedUser$| async).email | uppercase"
-                         [title]="(currentEntity$| async).name"
+                         [title]="(currentEntity$| async)?.name"
                          nbContextMenuTag="entity-context-menu"
                          [nbContextMenu]="menuEntities">
                 </nb-user>
