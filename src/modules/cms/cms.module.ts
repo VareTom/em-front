@@ -5,7 +5,7 @@ import { RouterModule, Routes} from '@angular/router';
 // Guards
 import {
   AuthGuardService as AuthGuard
-} from 'src/shared/services/auth-guard.service';
+} from 'src/shared/guards/auth-guard.service';
 
 
 // Modules
@@ -31,14 +31,14 @@ const routes: Routes = [
   declarations: [
     // Containers
     CmsComponent,
-    
+
     // Components
     SidebarComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    
+
     // Modules
     SharedModule.forRoot()
   ]
