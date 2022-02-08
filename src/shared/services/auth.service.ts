@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import Config from 'src/app/config/serverUrls.json';
+import { Router } from '@angular/router';
 import { Store } from 'src/store';
 
 // Models
@@ -21,6 +22,7 @@ export class AuthService {
   private readonly jwtHelper = new JwtHelperService();
 
   constructor(private httpClient: HttpClient,
+              private router: Router,
               private store: Store) {
     this.baseRoute = environment.serverUrl + Config.prefix + Config.auth;
   }
@@ -28,6 +30,14 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+  
+  onLogout(): void {
+    this.store.set('currentEntity', undefined);
+    this.store.set('connectedUser', undefined);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userUuid');
+    this.router.navigateByUrl('login')
   }
 
   login (parameters: any): Observable<void> {

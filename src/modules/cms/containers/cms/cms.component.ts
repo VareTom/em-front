@@ -9,12 +9,9 @@ import { User } from 'src/shared/models/user';
 })
 export class CmsComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.store.set('connectedUser',new User({
-    
-    }))
   }
 
 }

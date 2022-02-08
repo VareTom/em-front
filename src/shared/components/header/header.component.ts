@@ -11,6 +11,7 @@ import { CreateEntityDialogComponent } from 'src/shared/components/create-entity
 // Models
 import { User } from 'src/shared/models/user';
 import { Entity } from 'src/shared/models/entity';
+import { AuthService } from 'src/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private store: Store,
               private router: Router,
+              private readonly authService: AuthService,
               private nbMenuService: NbMenuService,
               private dialogService: NbDialogService) { }
 
@@ -56,9 +58,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    localStorage.removeItem('token');
-    this.store.set('connectedUser',undefined);
-    this.router.navigateByUrl('login')
+    this.authService.onLogout();
   }
 
   onSettings(): void {
