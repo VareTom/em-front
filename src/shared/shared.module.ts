@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Service
 import { AuthService } from './services/auth.service';
-import { AuthGuardService } from 'src/shared/services/auth-guard.service';
+import { AuthGuardService } from 'src/shared/guards/auth-guard.service';
 import { EntityService } from 'src/shared/services/entity.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -35,7 +35,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
 
 @NgModule({
   declarations: [
-  
+
     // Components
     FooterComponent,
     HeaderComponent,
@@ -45,7 +45,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
     CommonModule,
     TranslateModule,
     ReactiveFormsModule,
-    
+
     // Nebular
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
@@ -68,7 +68,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
   exports: [
     TranslateModule,
     ReactiveFormsModule,
-    
+
     // Nebular
     NbLayoutModule,
     NbSidebarModule,
@@ -87,7 +87,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
     NbInputModule,
     NbMenuModule,
     NbDialogModule,
-    
+
     // Components
     FooterComponent,
     HeaderComponent,
@@ -103,7 +103,7 @@ export class SharedModule {
         AuthService,
         JwtHelperService,
         EntityService,
-        
+
         // Guards
         AuthGuardService
       ]
