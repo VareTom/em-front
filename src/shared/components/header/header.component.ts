@@ -37,9 +37,10 @@ export class HeaderComponent implements OnInit {
     this.connectedUser$ = this.store.select<User>('connectedUser');
     this.currentEntity$ = this.store.select<Entity>('currentEntity');
 
+    // > 1 to show entity menu switch only when you have the multiple entities
     if (this.store.value.connectedUser &&
       this.store.value.connectedUser.entities &&
-      this.store.value.connectedUser.entities.length > 0) {
+      this.store.value.connectedUser.entities.length > 1) {
         this.menuEntities = [];
         this.store.value.connectedUser.entities.forEach(entity => {
           this.menuEntities.push({
