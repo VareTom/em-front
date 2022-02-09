@@ -26,12 +26,12 @@ export class AuthService {
               private store: Store) {
     this.baseRoute = environment.serverUrl + Config.prefix + Config.auth;
   }
-  
+
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
-  
+
   onLogout(): void {
     this.store.set('currentEntity', undefined);
     this.store.set('connectedUser', undefined);
@@ -44,16 +44,23 @@ export class AuthService {
     return this.httpClient.post(`${this.baseRoute}/login`, parameters)
       .pipe(
         map((result: any) => {
-          console.log(result);
           localStorage.setItem('token', result.token);
           const newUser = new User(result.user);
           this.store.set('connectedUser', newUser);
-          
+
           if (this.store.value.connectedUser.entities.length > 0) {
-            this.store.set('currentEntity',this.store.value.connectedUser.entities[0]);
+            if (newUser.activeEntityUuid) {
+              const activeEntity = this.store.value.connectedUser.entities.find(entity => entity.uuid === newUser.activeEntityUuid);
+              if (activeEntity) {
+                this.store.set('currentEntity', activeEntity);
+              } else {
+                this.store.set('currentEntity',this.store.value.connectedUser.entities[0]);
+                // TODO:: update activeentityuuid to user
+              }
+            } else {
+              this.store.set('currentEntity',this.store.value.connectedUser.entities[0]);
+            }
           }
-          console.log(this.store.value.connectedUser)
-          console.log(this.store.value.currentEntity)
         }),
         catchError(error => throwError(error))
       );

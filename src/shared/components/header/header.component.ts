@@ -75,6 +75,7 @@ export class HeaderComponent implements OnInit {
 
   private onEntitySwitch(selectedEntity: Params): void {
     console.log(selectedEntity)
+    // TODO:: update user activeEntityUuid
     // TODO:: find from user entities where name ===
   }
 }
