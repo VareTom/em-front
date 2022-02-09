@@ -1,9 +1,14 @@
-<div class="container">
-    <div class="header-title">
-        <h1>{{ 'sidebar.entities'|translate }}</h1>
-        <button nbButton hero status="info" size="large">
-            {{'entity.create'|translate }}
-        </button>
-    </div>
-    <div class="divider"></div>
-</div>
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <div class="header-title">
+                <h1>{{ 'sidebar.entities'|translate }}</h1>
+                <button nbButton hero status="info" size="large"
+                        (click)="onCreate()">
+                    {{'entity.create'|translate }}
+                </button>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </nb-layout-column>
+</nb-layout>

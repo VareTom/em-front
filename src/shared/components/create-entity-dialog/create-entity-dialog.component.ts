@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from 'src/store';
 
 // Services
 import { EntityService } from 'src/shared/services/entity.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-entity-dialog',
@@ -23,7 +24,9 @@ export class CreateEntityDialogComponent {
   constructor(protected dialogRef: NbDialogRef<CreateEntityDialogComponent>,
               private formBuilder: FormBuilder,
               private store: Store,
-              private entityService: EntityService) { }
+              private translate: TranslateService,
+              private toastrService: NbToastrService,
+              private readonly entityService: EntityService) { }
   
   isRequiredInputInvalid(formControlName: string): boolean {
     const formControl = this.entityForm.controls[formControlName];
@@ -45,13 +48,14 @@ export class CreateEntityDialogComponent {
       this.isSubmitted = false;
     }, 1000);
     console.log(this.store.value.connectedUser);
-    /*this.entityService.create(entityInput).subscribe(() => {
+    this.entityService.create(entityInput).subscribe(() => {
       this.isSubmitted = false;
+      this.toastrService.success(this.translate.instant('entity.creation-succeed'));
       this.dialogRef.close();
     }, (err) => {
       this.isSubmitted = false;
-      console.log(err)
-    });*/
+      this.toastrService.danger(this.translate.instant('errors.basic-failed'),this.translate.instant('errors.title'));
+    });
     
   }
 }

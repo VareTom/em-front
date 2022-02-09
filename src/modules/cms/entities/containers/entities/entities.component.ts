@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CreateEntityDialogComponent } from 'src/shared/components/create-entity-dialog/create-entity-dialog.component';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'app-entities',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntitiesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
   }
-
+  
+  onCreate(): void {
+    this.dialogService.open(CreateEntityDialogComponent, {
+      dialogClass: 'medium-dialog'
+    });
+  }
 }

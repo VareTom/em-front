@@ -1,5 +1,9 @@
-<div class="container">
-    <h1>{{ 'sidebar.dashboard'|translate }}</h1>
-    <div class="divider"></div>
-    <app-new-user *ngIf="isNewUser()"></app-new-user>
-</div>
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <h1>{{ 'sidebar.dashboard'|translate }}</h1>
+            <div class="divider"></div>
+            <app-new-user *ngIf="isNewUser()"></app-new-user>
+        </div>
+    </nb-layout-column>
+</nb-layout>

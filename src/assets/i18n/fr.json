@@ -48,7 +48,8 @@
   "errors": {
     "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
     "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
-    "title": "Ah shit, here we go again."
+    "title": "Ah shit, here we go again.",
+    "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!"
   },
   "dashboard": {
     "new-user": {
@@ -61,22 +62,18 @@
   "entity": {
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
-    "create-button-tooltip": "Créer encore un nouveau business."
+    "creation-succeed": "La création de votre nouvelle entité à été un succès!"
   },
   "expenditure": {
-    "create": "Ajouter une nouvelle dépense",
-    "create-button-tooltip": "Oui! J'ai encore abusé..."
+    "create": "Ajouter une nouvelle dépense"
   },
   "service": {
-    "create": "Créer un nouveau service",
-    "create-button-tooltip": "Ajouter une corde à mon arc"
+    "create": "Créer un nouveau service"
   },
   "order": {
-    "create": "Créer une nouvelle commande",
-    "create-button-tooltip": "Encore un qui va se rétracter en voyant la note"
+    "create": "Créer une nouvelle commande"
   },
   "client": {
-    "create": "Ajouter une nouveau client",
-    "create-button-tooltip": "Et un pigeon de plus!"
+    "create": "Ajouter une nouveau client"
   }
 }
