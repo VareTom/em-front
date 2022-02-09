@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     {
       title: this.translate.instant('sidebar.expenditures'),
       icon: 'credit-card-outline',
-      link: 'entities'
+      link: 'expenditures'
     },
     {
       title: this.translate.instant('sidebar.services'),

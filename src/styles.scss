@@ -47,6 +47,16 @@ html, body {
 .container {
   width: 100%;
   height: auto;
+
+  .header-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      //height: 40px;
+    }
+  }
 }
 
 .divider {

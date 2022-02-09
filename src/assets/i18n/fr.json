@@ -59,6 +59,24 @@
     }
   },
   "entity": {
-    "create": "Création de votre entité"
+    "creation": "Création de votre entité",
+    "create": "Créer une nouvelle entité",
+    "create-button-tooltip": "Créer encore un nouveau business."
+  },
+  "expenditure": {
+    "create": "Ajouter une nouvelle dépense",
+    "create-button-tooltip": "Oui! J'ai encore abusé..."
+  },
+  "service": {
+    "create": "Créer un nouveau service",
+    "create-button-tooltip": "Ajouter une corde à mon arc"
+  },
+  "order": {
+    "create": "Créer une nouvelle commande",
+    "create-button-tooltip": "Encore un qui va se rétracter en voyant la note"
+  },
+  "client": {
+    "create": "Ajouter une nouveau client",
+    "create-button-tooltip": "Et un pigeon de plus!"
   }
 }

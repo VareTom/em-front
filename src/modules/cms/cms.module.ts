@@ -7,7 +7,6 @@ import {
   AuthGuardService as AuthGuard
 } from 'src/shared/guards/auth-guard.service';
 
-
 // Modules
 import { SharedModule } from 'src/shared/shared.module';
 
@@ -19,6 +18,7 @@ const routes: Routes = [
   { path: '', canActivate: [AuthGuard], component: CmsComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'expenditures', loadChildren: () => import('./expenditures/expenditures.module').then(m => m.ExpendituresModule) },
       { path: 'entities', loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule) },
       { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
       { path: 'services', loadChildren: () => import('./services/services.module').then(m => m.ServicesModule) },
