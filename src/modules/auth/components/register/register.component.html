@@ -3,13 +3,6 @@
         <nb-card-body>
             <h1 id="title" class="title">{{ 'actions.register'|translate }}</h1>
 
-            <nb-alert *ngIf="errorMessages && !isSubmitted" outline="danger" role="alert">
-                <!--                <p class="alert-title"><b>{{ 'errors.title'|translate }}</b></p>-->
-                <p class="alert-error-message">
-                    <b>{{ errorMessages }}</b>
-                </p>
-            </nb-alert>
-
             <form [formGroup]="registerForm" aria-labelledby="title">
 
                 <div class="form-control-group">
@@ -20,12 +13,12 @@
                            formControlName="email"
                            pattern=".+@.+\..+"
                            autofocus>
-                    <ng-container *ngIf="isEmailRequired()">
+                    <ng-container *ngIf="isEmailRequired">
                         <p class="caption status-danger">
                             {{ 'forms.email-required'| translate }}
                         </p>
                     </ng-container>
-                    <ng-container *ngIf="isEmailInvalid()">
+                    <ng-container *ngIf="isEmailInvalid">
                         <p class="caption status-danger">
                             {{ 'forms.email-invalid'| translate }}
                         </p>
@@ -49,9 +42,9 @@
                             </nb-icon>
                         </button>
                     </nb-form-field>
-                    <ng-container *ngIf="isRequiredInputInvalid('password')">
+                    <ng-container *ngIf="isPasswordRequired">
                         <p class="caption status-danger">
-                            {{ 'forms.confirm-password-required'| translate }}
+                            {{ 'forms.password-required'| translate }}
                         </p>
                     </ng-container>
                 </div>
@@ -72,12 +65,12 @@
                             </nb-icon>
                         </button>
                     </nb-form-field>
-                    <ng-container *ngIf="isRequiredInputInvalid('confirmPassword')">
+                    <ng-container *ngIf="isConfirmPasswordRequired">
                         <p class="caption status-danger">
                             {{ 'forms.confirm-password-required'| translate }}
                         </p>
                     </ng-container>
-                    <ng-container *ngIf="isConfirmPasswordError">
+                    <ng-container *ngIf="!isConfirmPasswordRequired && arePasswordNotMatching">
                         <p class="caption status-danger">
                             {{ 'forms.confirm-password-not-match'| translate }}
                         </p>

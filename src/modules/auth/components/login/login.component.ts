@@ -6,6 +6,7 @@ import { Store } from 'src/store';
 // Services
 import { AuthService } from 'src/shared/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +21,12 @@ export class LoginComponent {
     email: ['', [ Validators.email, Validators.required ]],
     password: ['', Validators.required]
   });
-  errorMessages: string;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private authService: AuthService,
               private store: Store,
+              private toastrService: NbToastrService,
               private translate: TranslateService) {
   }
 
@@ -67,10 +68,10 @@ export class LoginComponent {
       }, (error) => {
         this.isSubmitted = false;
         if (error.status === 404) {
-          this.errorMessages = this.translate.instant('errors.http-not-found');
+          this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
         }
         else{
-          this.errorMessages = error.error.message;
+          this.toastrService.danger(this.translate.instant('errors.http-server'), this.translate.instant('errors.title'));
         }
       })
   }

@@ -3,13 +3,6 @@
         <nb-card-body>
             <h1 id="title" class="title">{{ 'actions.login'|translate }}</h1>
 
-            <nb-alert *ngIf="errorMessages && !isSubmitted" outline="danger" role="alert">
-<!--                <p class="alert-title"><b>{{ 'errors.title'|translate }}</b></p>-->
-                <p class="alert-error-message">
-                    <b>{{ errorMessages }}</b>
-                </p>
-            </nb-alert>
-
             <form [formGroup]="loginForm" aria-labelledby="title">
 
                 <div class="form-control-group">

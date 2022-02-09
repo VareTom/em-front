@@ -24,7 +24,7 @@ import {
   NbUserModule,
   NbIconModule,
   NbTooltipModule,
-  NbThemeModule, NbMenuModule, NbDialogModule
+  NbThemeModule, NbMenuModule, NbDialogModule, NbToastrModule, NbGlobalLogicalPosition
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -32,6 +32,12 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateEntityDialogComponent } from './components/create-entity-dialog/create-entity-dialog.component';
+
+const nebularToastrConfig = {
+  position: NbGlobalLogicalPosition.BOTTOM_END,
+  duration: 3000,
+  preventDuplicates: true
+}
 
 @NgModule({
   declarations: [
@@ -48,6 +54,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
 
     // Nebular
     NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbToastrModule.forRoot(nebularToastrConfig),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbEvaIconsModule,
