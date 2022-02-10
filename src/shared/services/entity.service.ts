@@ -38,8 +38,8 @@ export class EntityService {
       );
   }
   
-  getAllForEntity(): Observable<Entity[]> {
-    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
+  getAllForUser(): Observable<Entity[]> {
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.connectedUser.uuid}`)
       .pipe(
         map((result: any) => {
           if (result) {
