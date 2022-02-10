@@ -21,22 +21,31 @@ export class EntityService {
     this.baseRoute = environment.serverUrl + Config.prefix + Config.entity;
   }
   
-  create (parameters: any): Observable<void> {
+  create (parameters: any): Observable<Entity> {
     return this.httpClient.post(`${this.baseRoute}/`, parameters)
       .pipe(
         map((result: any) => {
-          
           if (!this.store.value.connectedUser.entities) {
-            this.store.set('currentEntity',result);
+            this.store.set('currentEntity',new Entity(result));
             this.store.value.connectedUser.entities = [new Entity(result)];
           } else {
             this.store.value.connectedUser.entities.push(new Entity(result));
           }
   
-          console.log(this.store.value.connectedUser.entities)
-          console.log(this.store.value.currentEntity)
+          return new Entity(result);
         }),
         catchError(error => throwError(error))
       );
+  }
+  
+  getAllForEntity(): Observable<Entity[]> {
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
+      .pipe(
+        map((result: any) => {
+          if (result) {
+            return result.map((entity: any) => new Entity(entity));
+          }
+        })
+      )
   }
 }

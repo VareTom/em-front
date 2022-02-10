@@ -9,9 +9,11 @@ export class Entity {
   // TODO:: get members (add at)
   
   constructor(json: any) {
+    console.log(json)
     this.uuid = json.uuid;
     this.name = json.name;
-    this.description = json.description;
+    this.description = json.description ?? null;
     this.authorUuid = json.authorUuid;
+    this.createdAt = json.createdAt;
   }
 }

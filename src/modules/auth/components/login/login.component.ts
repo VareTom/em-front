@@ -62,16 +62,18 @@ export class LoginComponent {
   onLogin(): void {
     this.isSubmitted = true;
     this.authService.login(this.loginForm.value)
-      .subscribe(() => {
-        this.isSubmitted = false;
-        this.router.navigateByUrl('dashboard');
-      }, (error) => {
-        this.isSubmitted = false;
-        if (error.status === 404) {
-          this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
-        }
-        else{
-          this.toastrService.danger(this.translate.instant('errors.http-server'), this.translate.instant('errors.title'));
+      .subscribe({
+        next: () => {
+          this.isSubmitted = false;
+          this.router.navigateByUrl('dashboard');
+        },
+        error: (error) => {
+          this.isSubmitted = false;
+          if (error.status === 404) {
+            this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
+          } else {
+            this.toastrService.danger(this.translate.instant('errors.http-server'), this.translate.instant('errors.title'));
+          }
         }
       })
   }

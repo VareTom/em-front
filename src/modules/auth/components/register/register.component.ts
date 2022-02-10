@@ -94,17 +94,19 @@ export class RegisterComponent implements OnInit {
   onRegister(): void {
     this.isSubmitted = true;
     this.authService.register(this.registerForm.value)
-      .subscribe(() => {
-        this.isSubmitted = false;
-        this.router.navigateByUrl('dashboard');
-      }, (error) => {
-        this.isSubmitted = false;
-        if (error.status === 404) {
-          this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
-        } else{
-          this.toastrService.danger(this.translate.instant('errors.http-server'), this.translate.instant('errors.title'));
+      .subscribe({
+        next: () => {
+          this.isSubmitted = false;
+          this.router.navigateByUrl('dashboard');
+        },
+        error: (error) => {
+          this.isSubmitted = false;
+          if (error.status === 404) {
+            this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
+          } else {
+            this.toastrService.danger(this.translate.instant('errors.http-server'), this.translate.instant('errors.title'));
+          }
         }
       })
-  
   }
 }

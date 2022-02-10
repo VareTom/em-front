@@ -14,11 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CreateEntityDialogComponent {
   
-  isSubmitted: boolean = false;
-  errorMessages: string;
   entityForm: FormGroup = this.formBuilder.group({
-    name: ['', Validators.required],
-    description: ['']
+    name: [null, Validators.required],
+    description: [ null ]
   })
   
   constructor(protected dialogRef: NbDialogRef<CreateEntityDialogComponent>,
@@ -38,24 +36,10 @@ export class CreateEntityDialogComponent {
   }
   
   onSubmit() {
-    this.isSubmitted = true;
-    
     const entityInput = {
       ...this.entityForm.value,
       authorUuid: this.store.value.connectedUser.uuid
     }
-    setTimeout(() => {
-      this.isSubmitted = false;
-    }, 1000);
-    console.log(this.store.value.connectedUser);
-    this.entityService.create(entityInput).subscribe(() => {
-      this.isSubmitted = false;
-      this.toastrService.success(this.translate.instant('entity.creation-succeed'));
-      this.dialogRef.close();
-    }, (err) => {
-      this.isSubmitted = false;
-      this.toastrService.danger(this.translate.instant('errors.basic-failed'),this.translate.instant('errors.title'));
-    });
-    
+    this.dialogRef.close(entityInput);
   }
 }

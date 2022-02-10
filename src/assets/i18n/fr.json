@@ -62,7 +62,12 @@
   "entity": {
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
-    "creation-succeed": "La création de votre nouvelle entité à été un succès!"
+    "creation-succeed": "La création de votre nouvelle entité à été un succès!",
+    "columns": {
+      "name": "Nom de l'entité",
+      "description": "Description de l'entité",
+      "createdAt": "Date de création de l'entité"
+    }
   },
   "expenditure": {
     "create": "Ajouter une nouvelle dépense"

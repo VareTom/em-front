@@ -13,6 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import {
   NbAlertModule,
   NbButtonModule,
+  NbTreeGridModule,
   NbFormFieldModule,
   NbInputModule,
   NbLayoutModule,
@@ -62,6 +63,7 @@ const nebularToastrConfig = {
     NbButtonModule,
     NbAlertModule,
     NbFormFieldModule,
+    NbTreeGridModule,
     NbCardModule,
     NbActionsModule,
     NbIconModule,
@@ -82,6 +84,7 @@ const nebularToastrConfig = {
     NbButtonModule,
     NbThemeModule,
     NbEvaIconsModule,
+    NbTreeGridModule,
     NbSpinnerModule,
     NbAlertModule,
     NbCardModule,
