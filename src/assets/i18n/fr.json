@@ -63,6 +63,7 @@
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
     "creation-succeed": "La création de votre nouvelle entité à été un succès!",
+    "retrieve-failed": "Impossible de récupérer les informations de vos entités",
     "columns": {
       "name": "Nom de l'entité",
       "description": "Description de l'entité",

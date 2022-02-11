@@ -15,6 +15,7 @@ import { CreateEntityDialogComponent } from 'src/shared/components/create-entity
 // Services
 import { EntityService } from 'src/shared/services/entity.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Entity } from 'src/shared/models/entity';
 
 @Component({
   selector: 'app-entities',
@@ -23,7 +24,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EntitiesComponent implements OnInit {
   
-  defaultColumns = [ 'name', 'description', 'createdAt' ];
+  customColumn = 'name';
+  defaultColumns = ['description', 'createdAt'];
+  allColumns = [this.customColumn, ...this.defaultColumns]
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -40,8 +43,12 @@ export class EntitiesComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
 
   ngOnInit(): void {
-    this.initData();
-    // TODO:: get all entities + members for user uuid connected
+    this.entityService.getAllForUser().subscribe({
+      next: (entities) => {
+        this.refreshDataSource(entities);
+      },
+      error: () => this.toastrService.danger(this.translate.instant('entity.retrieve-failed'), this.translate.instant('errors.title'))
+    })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -65,14 +72,7 @@ export class EntitiesComponent implements OnInit {
         this.isSubmitted = true;
         this.entityService.create(result).subscribe({
           next: (result) => {
-            this.data.push({
-              data: {
-                name: result.name,
-                description: result.description ?? '-',
-                createdAt: moment(result.createdAt).format('DD-MM-YYYY hh:mm')
-              }
-            });
-            this.refreshDataSource();
+            this.refreshDataSource([result]);
             this.isSubmitted = false;
             this.toastrService.success(this.translate.instant('entity.creation-succeed'));
           },
@@ -86,22 +86,28 @@ export class EntitiesComponent implements OnInit {
     
   }
   
-  private refreshDataSource(): void {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
-  }
-  
-  private initData(): void {
-    this.store.value.connectedUser.entities.forEach(entity => {
-      this.data.push(
-        {
-          data: {
-            name: entity.name,
-            description: entity.description ?? '-',
-            createdAt: moment(entity.createdAt).format('DD-MM-YYYY hh:mm')
-          }
-        }
-      )
+  private refreshDataSource(entities: Entity[]): void {
+    entities.forEach((entity, index) => {
+      this.data.push({
+        data: {
+          name: entity.name,
+          description: entity.description ?? '-',
+          createdAt: moment(entity.createdAt).format('DD-MM-YYYY HH:mm')
+        },
+        children: []
+      })
+      if (entity.members && entity.members.length > 0) {
+        entity.members.forEach(member => {
+          this.data[index].children.push({
+            data: {
+              name: member.email,
+              description: '-',
+              createdAt: moment(member.addAt).format('DD-MM-YYYY HH:mm'),
+            }
+          })
+        })
+      }
     })
-    this.refreshDataSource();
+    this.dataSource = this.dataSourceBuilder.create(this.data);
   }
 }

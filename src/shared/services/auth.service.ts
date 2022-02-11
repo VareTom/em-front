@@ -19,17 +19,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private readonly baseRoute: string;
-  private readonly jwtHelper = new JwtHelperService();
 
   constructor(private httpClient: HttpClient,
               private router: Router,
               private store: Store) {
     this.baseRoute = environment.serverUrl + Config.prefix + Config.auth;
-  }
-
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
   }
 
   onLogout(): void {
@@ -47,7 +41,7 @@ export class AuthService {
           localStorage.setItem('token', result.token);
           const newUser = new User(result.user);
           this.store.set('connectedUser', newUser);
-
+  
           if (this.store.value.connectedUser.entities.length > 0) {
             if (newUser.activeEntityUuid) {
               const activeEntity = this.store.value.connectedUser.entities.find(entity => entity.uuid === newUser.activeEntityUuid);
