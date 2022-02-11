@@ -6,7 +6,8 @@
     "login": "Connexion",
     "register": "Création de mon compte",
     "create": "Créer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "add": "Ajouter"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -14,13 +15,17 @@
     "confirm-password": "Confirmer le mot de passe",
     "entity-name": "Nom de votre entité",
     "entity-description": "Description",
+    "expenditure-name": "Nom de la dépense",
+    "bought-at": "Acheté le",
+    "price": "Prix d'achat",
 
     "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
     "email-invalid": "Adresse e-mail invalide!",
     "password-required": "Mot de passe obligatoire!",
     "confirm-password-required": "La confirmation du mot de passe est obligatoire!",
-    "confirm-password-not-match": "Les mots de passe ne coincident pas!"
+    "confirm-password-not-match": "Les mots de passe ne coincident pas!",
+    "price-required": "Le prix est obligatoire"
   },
   "login": {
     "not-account": "Pas encore de compte ?",
@@ -63,7 +68,7 @@
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
     "creation-succeed": "La création de votre nouvelle entité à été un succès!",
-    "retrieve-failed": "Impossible de récupérer les informations de vos entités",
+    "retrieve-failed": "Impossible de récupérer les informations de vos entités.",
     "columns": {
       "name": "Nom de l'entité",
       "description": "Description de l'entité",
@@ -71,7 +76,14 @@
     }
   },
   "expenditure": {
-    "create": "Ajouter une nouvelle dépense"
+    "creation": "Ajout de votre nouvelle dépense",
+    "create": "Ajouter une nouvelle dépense",
+    "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
+    "columns": {
+      "name": "Nom de la dépense",
+      "boughtAt": "Date d'achat",
+      "priceInCent": "Prix"
+    }
   },
   "service": {
     "create": "Créer un nouveau service"

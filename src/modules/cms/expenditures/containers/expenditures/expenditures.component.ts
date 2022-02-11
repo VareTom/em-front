@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import {
   NbDialogService,
   NbSortDirection,
-  NbSortRequest,
+  NbSortRequest, NbToastrService,
   NbTreeGridDataSource,
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
+import moment from 'moment';
 import { Store } from 'src/store';
+
+// Services
+import { ExpenditureService } from 'src/shared/services/expenditure.service';
+import { TranslateService } from '@ngx-translate/core';
+
+// Models
+import { Expenditure } from 'src/shared/models/expenditure';
+
+// Components
+import {
+  CreateExpenditureDialogComponent
+} from 'src/modules/cms/expenditures/components/create-expenditure-dialog/create-expenditure-dialog.component';
 
 @Component({
   selector: 'app-expenditures',
@@ -15,7 +28,7 @@ import { Store } from 'src/store';
 })
 export class ExpendituresComponent implements OnInit {
   
-  defaultColumns = [ 'name', 'description' ];
+  defaultColumns = [ 'name', 'boughtAt', 'priceInCent' ];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -24,11 +37,19 @@ export class ExpendituresComponent implements OnInit {
   
   constructor(private dialogService: NbDialogService,
               private store: Store,
+              private toastrService: NbToastrService,
+              private translate: TranslateService,
+              private readonly expenditureService: ExpenditureService,
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    // this.initData();
-    // TODO:: get all entities + members for user uuid connected
+    this.expenditureService.get(this.store.value.currentEntity.uuid)
+      .subscribe({
+        next: (expenditures) => {
+          if (expenditures.length > 0) this.refreshDataSource(expenditures);
+        },
+        error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -43,5 +64,23 @@ export class ExpendituresComponent implements OnInit {
     }
     return NbSortDirection.NONE;
   }
-
+  
+  private refreshDataSource(expenditures: Expenditure[]): void {
+    expenditures.forEach(expenditure => {
+      this.data.push({
+        data: {
+          name: expenditure.name,
+          boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('DD/MM/YYYY'): '-',
+          priceInCent: (expenditure.priceInCent / 100).toFixed(2) + ' €'
+        }
+      })
+    })
+    this.dataSource = this.dataSourceBuilder.create(this.data);
+  }
+  
+  onCreate(): void {
+    this.dialogService.open(CreateExpenditureDialogComponent)
+      .onClose
+      .subscribe((result) => {})
+  }
 }

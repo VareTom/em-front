@@ -8,6 +8,9 @@ import { SharedModule } from 'src/shared/shared.module';
 // Containers
 import { ExpendituresComponent } from 'src/modules/cms/expenditures/containers/expenditures/expenditures.component';
 
+// Components
+import { CreateExpenditureDialogComponent } from './components/create-expenditure-dialog/create-expenditure-dialog.component';
+
 const routes: Routes = [
   { path: '', component: ExpendituresComponent }
 ]
@@ -15,7 +18,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // Containers
-    ExpendituresComponent
+    ExpendituresComponent,
+    
+    // Components
+    CreateExpenditureDialogComponent
   ],
   imports: [
     CommonModule,

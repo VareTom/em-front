@@ -8,6 +8,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from 'src/shared/guards/auth-guard.service';
 import { EntityService } from 'src/shared/services/entity.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from 'src/shared/services/user.service';
+import { ExpenditureService } from 'src/shared/services/expenditure.service';
 
 // Modules Nebular
 import {
@@ -25,7 +27,7 @@ import {
   NbUserModule,
   NbIconModule,
   NbTooltipModule,
-  NbThemeModule, NbMenuModule, NbDialogModule, NbToastrModule, NbGlobalLogicalPosition
+  NbThemeModule, NbMenuModule, NbDialogModule, NbToastrModule, NbGlobalLogicalPosition, NbDatepickerModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -36,7 +38,7 @@ import { CreateEntityDialogComponent } from './components/create-entity-dialog/c
 
 const nebularToastrConfig = {
   position: NbGlobalLogicalPosition.BOTTOM_END,
-  duration: 3000,
+  duration: 5000,
   preventDuplicates: true
 }
 
@@ -58,6 +60,7 @@ const nebularToastrConfig = {
     NbToastrModule.forRoot(nebularToastrConfig),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
+    NbDatepickerModule.forRoot(),
     NbEvaIconsModule,
     NbSpinnerModule,
     NbButtonModule,
@@ -81,6 +84,7 @@ const nebularToastrConfig = {
     // Nebular
     NbLayoutModule,
     NbSidebarModule,
+    NbDatepickerModule,
     NbButtonModule,
     NbThemeModule,
     NbEvaIconsModule,
@@ -113,6 +117,8 @@ export class SharedModule {
         AuthService,
         JwtHelperService,
         EntityService,
+        UserService,
+        ExpenditureService,
 
         // Guards
         AuthGuardService

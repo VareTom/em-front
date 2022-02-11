@@ -69,8 +69,10 @@ html, body {
   margin: 20px 0;
 }
 
-.medium-dialog {
-  //width: 45%;
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 // Scrollbar
