@@ -38,6 +38,6 @@ export class CreateExpenditureDialogComponent implements OnInit {
   }
   
   onSubmit(): void {
-  
+    this.dialogRef.close(this.expenditureForm.value);
   }
 }

@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
   }
   
   onPasswordChange(): void {
-    console.log('ddd')
     this.registerForm.get('confirmPassword').setValidators([
       Validators.required,
       matchingPassword(this.registerForm.get('password').value)

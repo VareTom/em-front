@@ -81,6 +81,32 @@ export class ExpendituresComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(CreateExpenditureDialogComponent)
       .onClose
-      .subscribe((result) => {})
+      .subscribe((result) => {
+        if (result) {
+          const expenditureInput = {
+            name: result.name,
+            priceInCent: result.priceInCent * 100,
+            boughtAt: result.boughtAt,
+            entityUuid: this.store.value.currentEntity.uuid
+          }
+          this.expenditureService.create(expenditureInput)
+            .subscribe({
+              next: (expenditureCreated) => {
+                this.data.push({
+                  data: {
+                    name: expenditureCreated.name,
+                    boughtAt: expenditureCreated.boughtAt ? moment(expenditureCreated.boughtAt).format('DD/MM/YYYY') : '-',
+                    priceInCent: (expenditureCreated.priceInCent / 100).toFixed(2) + ' €'
+                  }
+                });
+                this.dataSource = this.dataSourceBuilder.create(this.data);
+                this.toastrService.success(this.translate.instant('expenditure.creation-succeed'))
+              },
+              error: (error) => {
+                this.toastrService.danger(this.translate.instant('expenditure.creation-failed'), this.translate.instant('errors.title'))
+              }
+            })
+        }
+      })
   }
 }

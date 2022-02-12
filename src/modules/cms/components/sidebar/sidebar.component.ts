@@ -40,7 +40,6 @@ export class SidebarComponent implements OnInit {
   constructor(private translate: TranslateService, private store: Store) { }
 
   ngOnInit(): void {
-    console.log(this.store.value.connectedUser);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { Store } from 'src/store';
-import { NbComponentSize, NbDialogService, NbMenuService } from '@nebular/theme';
+import { NbComponentSize, NbDialogService, NbMenuService, NbToastrService } from '@nebular/theme';
 import { Params, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +11,11 @@ import { CreateEntityDialogComponent } from 'src/shared/components/create-entity
 // Models
 import { User } from 'src/shared/models/user';
 import { Entity } from 'src/shared/models/entity';
+
+// Services
 import { AuthService } from 'src/shared/services/auth.service';
+import { EntityService } from 'src/shared/services/entity.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +33,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(private store: Store,
               private router: Router,
+              private translate: TranslateService,
               private readonly authService: AuthService,
+              private toastrService: NbToastrService,
+              private readonly entityService: EntityService,
               private nbMenuService: NbMenuService,
               private dialogService: NbDialogService) { }
 
@@ -67,8 +74,19 @@ export class HeaderComponent implements OnInit {
   }
 
   onCreateFirstEntity(): void {
-    this.dialogService.open(CreateEntityDialogComponent, {
-      dialogClass: 'medium-dialog'
+    this.dialogService.open(CreateEntityDialogComponent)
+      .onClose
+      .subscribe((result) => {
+        if (result) {
+          this.entityService.create(result).subscribe({
+            next: (result) => {
+              this.toastrService.success(this.translate.instant('entity.creation-succeed'));
+            },
+            error: () => {
+              this.toastrService.danger(this.translate.instant('errors.basic-failed'), this.translate.instant('errors.title'));
+            }
+          });
+        }
     });
   }
 

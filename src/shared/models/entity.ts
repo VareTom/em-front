@@ -9,7 +9,6 @@ export class Entity {
   members?: EntityMember[] = [];
   
   constructor(json: any) {
-    console.log(json)
     this.uuid = json.uuid;
     this.name = json.name;
     this.description = json.description ?? null;

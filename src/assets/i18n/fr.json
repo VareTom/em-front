@@ -67,8 +67,9 @@
   "entity": {
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
-    "creation-succeed": "La création de votre nouvelle entité à été un succès!",
     "retrieve-failed": "Impossible de récupérer les informations de vos entités.",
+    "creation-succeed": "La création de votre nouvelle entité à été un succès!",
+    "creation-failed": "La création de votre entité a échouée.",
     "columns": {
       "name": "Nom de l'entité",
       "description": "Description de l'entité",
@@ -79,6 +80,8 @@
     "creation": "Ajout de votre nouvelle dépense",
     "create": "Ajouter une nouvelle dépense",
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
+    "creation-succeed": "La création de votre nouvelle dépense à été un succès!",
+    "creation-failed": "La création de votre dépense a échouée.",
     "columns": {
       "name": "Nom de la dépense",
       "boughtAt": "Date d'achat",
@@ -86,7 +89,11 @@
     }
   },
   "service": {
-    "create": "Créer un nouveau service"
+    "creation": "Création de votre nouveau service",
+    "create": "Créer un nouveau service",
+    "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
+    "creation-succeed": "La création de votre nouveau service à été un succès!",
+    "creation-failed": "La création de votre service a échouée."
   },
   "order": {
     "create": "Créer une nouvelle commande"
