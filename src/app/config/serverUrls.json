@@ -3,5 +3,6 @@
   "auth": "auth",
   "entity": "entities",
   "user": "users",
-  "expenditure": "expenditures"
+  "expenditure": "expenditures",
+  "service": "services"
 }

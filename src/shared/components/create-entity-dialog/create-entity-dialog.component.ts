@@ -21,10 +21,7 @@ export class CreateEntityDialogComponent {
   
   constructor(protected dialogRef: NbDialogRef<CreateEntityDialogComponent>,
               private formBuilder: FormBuilder,
-              private store: Store,
-              private translate: TranslateService,
-              private toastrService: NbToastrService,
-              private readonly entityService: EntityService) { }
+              private store: Store) { }
   
   isRequiredInputInvalid(formControlName: string): boolean {
     const formControl = this.entityForm.controls[formControlName];

@@ -1,7 +1,7 @@
 <nb-card accent="info">
-    <nb-card-header>{{ 'expenditure.creation'|translate }}</nb-card-header>
+    <nb-card-header>{{ 'service.creation'|translate }}</nb-card-header>
     <nb-card-body>
-        <form [formGroup]="expenditureForm">
+        <form [formGroup]="serviceForm">
 
             <div class="form-control-group">
                 <label class="label" for="name">{{ 'forms.expenditure-name'| translate }}*</label>
@@ -40,14 +40,21 @@
             </div>
 
             <div class="form-control-group">
-                <label class="label" for="boughtAt">{{ 'forms.bought-at'| translate }}</label>
-                <input [nbDatepicker]="datepicker"
-                       nbInput
+                <label class="label" for="code">{{ 'forms.code-initials'| translate }}</label>
+                <input nbInput
                        fullWidth
-                       id="boughtAt"
-                       formControlName="boughtAt"
+                       id="code"
+                       formControlName="code"
                        autofocus>
-                <nb-datepicker #datepicker></nb-datepicker>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="description">{{ 'forms.description'| translate }}</label>
+                <textarea nbInput
+                       fullWidth
+                       id="description"
+                       formControlName="description"
+                          autofocus></textarea>
             </div>
 
         </form>
@@ -56,8 +63,8 @@
         <div class="actions">
             <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
             <button nbButton hero status="info"
-                    [disabled]="!expenditureForm.valid"
-                    (click)="onSubmit()"> {{ 'actions.add'|translate }} </button>
+                    [disabled]="!serviceForm.valid"
+                    (click)="onSubmit()"> {{ 'actions.create'|translate }} </button>
         </div>
     </nb-card-footer>
 </nb-card>

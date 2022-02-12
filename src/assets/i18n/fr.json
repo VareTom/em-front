@@ -72,8 +72,8 @@
     "creation-failed": "La création de votre entité a échouée.",
     "columns": {
       "name": "Nom de l'entité",
-      "description": "Description de l'entité",
-      "createdAt": "Date de création de l'entité"
+      "description": "Description",
+      "createdAt": "Date de création"
     }
   },
   "expenditure": {
@@ -93,7 +93,13 @@
     "create": "Créer un nouveau service",
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
     "creation-succeed": "La création de votre nouveau service à été un succès!",
-    "creation-failed": "La création de votre service a échouée."
+    "creation-failed": "La création de votre service a échouée.",
+    "columns": {
+      "name": "Nom du service",
+      "code": "Code ou initiales",
+      "description": "Description",
+      "priceInCent": "Prix"
+    }
   },
   "order": {
     "create": "Créer une nouvelle commande"

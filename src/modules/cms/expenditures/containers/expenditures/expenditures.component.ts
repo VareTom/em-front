@@ -92,14 +92,7 @@ export class ExpendituresComponent implements OnInit {
           this.expenditureService.create(expenditureInput)
             .subscribe({
               next: (expenditureCreated) => {
-                this.data.push({
-                  data: {
-                    name: expenditureCreated.name,
-                    boughtAt: expenditureCreated.boughtAt ? moment(expenditureCreated.boughtAt).format('DD/MM/YYYY') : '-',
-                    priceInCent: (expenditureCreated.priceInCent / 100).toFixed(2) + ' €'
-                  }
-                });
-                this.dataSource = this.dataSourceBuilder.create(this.data);
+                this.refreshDataSource([expenditureCreated])
                 this.toastrService.success(this.translate.instant('expenditure.creation-succeed'))
               },
               error: (error) => {

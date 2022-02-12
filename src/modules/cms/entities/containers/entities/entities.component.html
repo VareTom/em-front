@@ -17,7 +17,7 @@
 
                 <ng-container [nbTreeGridColumnDef]="customColumn">
                     <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
-                        {{customColumn}}
+                        {{ 'entity.columns.'+ customColumn |translate }}
                     </th>
 
                     <td nbTreeGridCell *nbTreeGridCellDef="let row" >

@@ -10,6 +10,7 @@ import { EntityService } from 'src/shared/services/entity.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/shared/services/user.service';
 import { ExpenditureService } from 'src/shared/services/expenditure.service';
+import { ServiceService } from 'src/shared/services/service.service';
 
 // Modules Nebular
 import {
@@ -114,11 +115,12 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         // Services
-        AuthService,
         JwtHelperService,
+        AuthService,
         EntityService,
-        UserService,
         ExpenditureService,
+        ServiceService,
+        UserService,
 
         // Guards
         AuthGuardService

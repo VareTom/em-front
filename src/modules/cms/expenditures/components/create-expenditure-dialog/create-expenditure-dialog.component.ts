@@ -17,8 +17,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
   })
   
   constructor(protected dialogRef: NbDialogRef<CreateExpenditureDialogComponent>,
-              private formBuilder: FormBuilder,
-              private store: Store,) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
