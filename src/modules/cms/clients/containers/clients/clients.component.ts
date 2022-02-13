@@ -2,11 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import {
   NbDialogService,
   NbSortDirection,
-  NbSortRequest,
+  NbSortRequest, NbToastrService,
   NbTreeGridDataSource,
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
 import { Store } from 'src/store';
+
+// Services
+import { TranslateService } from '@ngx-translate/core';
+import { ClientService } from 'src/shared/services/client.service';
+
+// Models
+import { Client } from 'src/shared/models/client';
+import {
+  CreateClientDialogComponent
+} from 'src/modules/cms/clients/components/create-client-dialog/create-client-dialog.component';
 
 @Component({
   selector: 'app-clients',
@@ -15,7 +25,7 @@ import { Store } from 'src/store';
 })
 export class ClientsComponent implements OnInit {
   
-  defaultColumns = [ 'firstname', 'lastname' ];
+  defaultColumns = [ 'firstName', 'lastName', 'options', 'locality' ];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -24,11 +34,19 @@ export class ClientsComponent implements OnInit {
   
   constructor(private dialogService: NbDialogService,
               private store: Store,
+              private toastrService: NbToastrService,
+              private translate: TranslateService,
+              private readonly clientService: ClientService,
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    // this.initData();
-    // TODO:: get all entities + members for user uuid connected
+    this.clientService.getAllForEntity(this.store.value.currentEntity.uuid)
+      .subscribe({
+        next: (clients) => {
+          if (clients.length > 0) this.refreshDataSource(clients);
+        },
+        error: (error) => this.toastrService.danger(this.translate.instant('client.retrieve-failed'), this.translate.instant('errors.title'))
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -42,6 +60,38 @@ export class ClientsComponent implements OnInit {
       return this.sortDirection;
     }
     return NbSortDirection.NONE;
+  }
+  
+  private refreshDataSource(clients: Client[]): void {
+    clients.forEach(client => {
+      this.data.push({
+        data: {
+          firstName: client.firstName,
+          lastName: client.lastName,
+          options: client.options,
+          locality: client.address?.locality ?? '-'
+        }
+      })
+    })
+    this.dataSource = this.dataSourceBuilder.create(this.data);
+  }
+  
+  onCreate(): void {
+    this.dialogService.open(CreateClientDialogComponent)
+      .onClose
+      .subscribe((result) => {
+        if (result) {
+          const clientInput = {
+            client: {
+              entityUuid: ''
+            }
+          }
+          clientInput.client.entityUuid = this.store.value.currentEntity.uuid;
+           
+           // TODO:: add entityUuid in client object
+          this.clientService.create(clientInput)
+        }
+      })
   }
   
 }

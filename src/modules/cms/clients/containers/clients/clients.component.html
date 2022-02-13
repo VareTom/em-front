@@ -3,7 +3,8 @@
         <div class="container">
             <div class="header-title">
                 <h1>{{ 'sidebar.clients'|translate }}</h1>
-                <button nbButton hero status="info" size="large">
+                <button nbButton hero status="info" size="large"
+                    (click)="onCreate()">
                     {{'client.create'|translate }}
                 </button>
             </div>
@@ -16,7 +17,7 @@
 
                 <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
                     <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
-                        {{column}}
+                        {{ 'client.columns.'+ column |translate }}
                     </th>
 
                     <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>

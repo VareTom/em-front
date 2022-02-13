@@ -109,6 +109,16 @@
     "create": "Créer une nouvelle commande"
   },
   "client": {
-    "create": "Ajouter une nouveau client"
+    "creation": "Ajout de votre nouveau client",
+    "create": "Ajouter une nouveau client",
+    "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
+    "creation-succeed": "L'ajout de votre nouveau client à été un succès!",
+    "creation-failed": "L'ajout de votre client a échoué.",
+    "columns": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "options": "Informations complémentaires",
+      "locality": "Localité"
+    }
   }
 }

@@ -4,5 +4,6 @@
   "entity": "entities",
   "user": "users",
   "expenditure": "expenditures",
-  "service": "services"
+  "service": "services",
+  "client": "clients"
 }
