@@ -1,7 +1,8 @@
 import { Store } from '../store';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // Third Party modules
@@ -12,8 +13,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 
 // Modules
-import { SharedModule } from '../shared/shared.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { CmsModule } from 'src/modules/cms/cms.module';
+
+// Interceptors
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
@@ -31,6 +35,7 @@ const routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}),
 
     // Third party modules
@@ -42,12 +47,13 @@ const routes = [
       }
     }),
 
-    // Custom Modules
+    // Modules
     AuthModule,
-    SharedModule
+    CmsModule
   ],
   providers: [
-      Store
+    Store,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,29 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <div class="header-title">
+                <h1>{{ 'sidebar.services'|translate }}</h1>
+                <button nbButton hero status="info" size="large"
+                    (click)="onCreate()">
+                    {{'service.create'|translate }}
+                </button>
+            </div>
+            <div class="divider"></div>
+
+            <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
+
+                <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="defaultColumns"></tr>
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: defaultColumns"></tr>
+
+                <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
+                    <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
+                        {{ 'service.columns.'+ column |translate }}
+                    </th>
+
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+                </ng-container>
+
+            </table>
+        </div>
+    </nb-layout-column>
+</nb-layout>

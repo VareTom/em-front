@@ -1,11 +1,20 @@
+import { Entity } from 'src/shared/models/entity';
+
 export class User {
-    firstName: string;
-    lastName: string;
-    email: string;
-    
-    constructor(json: any) {
-        this.firstName = json.first_name;
-        this.lastName = json.last_name;
-        this.email = json.email;
+  uuid: string;
+  email: string;
+  activeEntityUuid?: string;
+  createdAt: string;
+  entities?: Entity[] = [];
+
+  constructor(json: any) {
+    this.uuid = json.uuid;
+    this.email = json.email;
+    this.createdAt = json.createdAt;
+    this.activeEntityUuid = json.activeEntityUuid ?? null;
+
+    if (json.entities && json.entities.length > 0) {
+      this.entities = json.entities.map((entity: any) => new Entity(entity));
     }
+  }
 }

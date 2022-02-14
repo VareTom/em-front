@@ -4,18 +4,32 @@
   },
   "actions": {
     "login": "Connexion",
-    "register": "Création de mon compte"
+    "register": "Création de mon compte",
+    "create": "Créer",
+    "cancel": "Annuler",
+    "add": "Ajouter"
   },
   "forms": {
     "email": "Adresse e-mail",
     "password": "Mot de passe",
     "confirm-password": "Confirmer le mot de passe",
+    "entity-name": "Nom de votre entité",
+    "description": "Description",
+    "expenditure-name": "Nom de la dépense",
+    "bought-at": "Acheté le",
+    "price": "Prix d'achat",
+    "service-name": "Nom du service",
+    "service-price": "Prix de la prestation",
+    "service-code": "Code technique ou initiales",
 
+    "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
     "email-invalid": "Adresse e-mail invalide!",
     "password-required": "Mot de passe obligatoire!",
     "confirm-password-required": "La confirmation du mot de passe est obligatoire!",
-    "confirm-password-not-match": "Les mots de passe ne coincident pas!"
+    "confirm-password-not-match": "Les mots de passe ne coincident pas!",
+    "price-required": "Le prix est obligatoire",
+    "service-name-required": "Le nom du service est obligatoire"
   },
   "login": {
     "not-account": "Pas encore de compte ?",
@@ -26,5 +40,85 @@
     "already-account": "Déjà parmis nous ?",
     "connect": "Je me connecte!",
     "create": "Créer mon compte"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "entities": "Mes entités",
+    "services": "Mes services",
+    "clients": "Mes clients",
+    "orders": "Mes commandes",
+    "expenditures": "Mes dépenses"
+  },
+  "header": {
+    "settings": "Gérer mes entités",
+    "create-first-entity": "Créer ma première entité",
+    "logout": "Se déconnecter"
+  },
+  "errors": {
+    "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
+    "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
+    "title": "Ah shit, here we go again.",
+    "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!"
+  },
+  "dashboard": {
+    "new-user": {
+      "title": "Bienvenue dans votre Entity Manager!",
+      "content": "La première étape est de créer votre entité qui représentera votre business ou entreprise.",
+      "create": "Pour créer votre première entité, un bouton est normalement présent dans le coin supérieur droit de votre page.",
+      "step2": "Ensuite, voyagez dans les pages à l'aide du menu à vôtre gauche et remplissez les informations sur votre entité (vos services ou prestations, vos dépenses ou encore les commandes que vous avez)."
+    }
+  },
+  "entity": {
+    "creation": "Création de votre entité",
+    "create": "Créer une nouvelle entité",
+    "retrieve-failed": "Impossible de récupérer les informations de vos entités.",
+    "creation-succeed": "La création de votre nouvelle entité à été un succès!",
+    "creation-failed": "La création de votre entité a échouée.",
+    "columns": {
+      "name": "Nom de l'entité",
+      "description": "Description",
+      "createdAt": "Date de création"
+    }
+  },
+  "expenditure": {
+    "creation": "Ajout de votre nouvelle dépense",
+    "create": "Ajouter une nouvelle dépense",
+    "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
+    "creation-succeed": "La création de votre nouvelle dépense à été un succès!",
+    "creation-failed": "La création de votre dépense a échouée.",
+    "columns": {
+      "name": "Nom de la dépense",
+      "boughtAt": "Date d'achat",
+      "priceInCent": "Prix"
+    }
+  },
+  "service": {
+    "creation": "Création de votre nouveau service",
+    "create": "Créer un nouveau service",
+    "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
+    "creation-succeed": "La création de votre nouveau service à été un succès!",
+    "creation-failed": "La création de votre service a échouée.",
+    "columns": {
+      "name": "Nom du service",
+      "code": "Code ou initiales",
+      "description": "Description",
+      "priceInCent": "Prix"
+    }
+  },
+  "order": {
+    "create": "Créer une nouvelle commande"
+  },
+  "client": {
+    "creation": "Ajout de votre nouveau client",
+    "create": "Ajouter une nouveau client",
+    "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
+    "creation-succeed": "L'ajout de votre nouveau client à été un succès!",
+    "creation-failed": "L'ajout de votre client a échoué.",
+    "columns": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "options": "Informations complémentaires",
+      "locality": "Localité"
+    }
   }
 }

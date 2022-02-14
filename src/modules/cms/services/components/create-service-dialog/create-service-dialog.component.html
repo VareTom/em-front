@@ -1,0 +1,70 @@
+<nb-card accent="info">
+    <nb-card-header>{{ 'service.creation'|translate }}</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="serviceForm">
+
+            <div class="form-control-group">
+                <label class="label" for="name">{{ 'forms.service-name'| translate }}*</label>
+                <input nbInput
+                       fullWidth
+                       id="name"
+                       formControlName="name"
+                       autofocus>
+                <ng-container *ngIf="isNameRequiredInput">
+                    <p class="caption status-danger">
+                        {{ 'forms.service-name-required'| translate }}
+                    </p>
+                </ng-container>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="priceInCent">{{ 'forms.service-price'| translate }}*</label>
+                <nb-form-field>
+
+                    <input nbInput
+                           type="number"
+                           step=".01"
+                           min="0"
+                           fullWidth
+                           id="priceInCent"
+                           formControlName="priceInCent"
+                           autofocus>
+                    <nb-icon nbPrefix icon="credit-card" pack="eva"></nb-icon>
+                </nb-form-field>
+
+                <ng-container *ngIf="isPriceRequiredInput">
+                    <p class="caption status-danger">
+                        {{ 'forms.price-required'| translate }}
+                    </p>
+                </ng-container>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="code">{{ 'forms.service-code'| translate }}</label>
+                <input nbInput
+                       fullWidth
+                       id="code"
+                       formControlName="code"
+                       autofocus>
+            </div>
+
+            <div class="form-control-group text-area-group">
+                <label class="label" for="description">{{ 'forms.description'| translate }}</label>
+                <textarea nbInput
+                          fullWidth
+                          id="description"
+                          formControlName="description"
+                          autofocus></textarea>
+            </div>
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="info"
+                    [disabled]="!serviceForm.valid"
+                    (click)="onSubmit()"> {{ 'actions.create'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

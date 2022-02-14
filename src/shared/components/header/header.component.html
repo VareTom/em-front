@@ -1,4 +1,35 @@
 <div class="header">
-    <img src="assets/images/em_icon.png" alt="em logo">
-    <h1>`Em</h1>
+    <div class="title">
+        <img src="assets/images/em_icon.png" alt="em logo">
+        <h1>`Em</h1>
+    </div>
+
+    <div class="menu" *ngIf="(connectedUser$| async)">
+        <nb-actions [size]="menuSize">
+            <nb-action *ngIf="(connectedUser$| async).entities.length > 0; else noEntity">
+                <nb-user [name]="(connectedUser$| async).email | uppercase"
+                         [title]="(currentEntity$| async)?.name"
+                         nbContextMenuTag="entity-context-menu"
+                         [nbContextMenu]="menuEntities">
+                </nb-user>
+            </nb-action>
+            <ng-template #noEntity>
+                <nb-action>
+                    <button nbButton hero status="info" (click)="onCreateFirstEntity()">
+                        {{ 'header.create-first-entity'|translate }}
+                    </button>
+                </nb-action>
+            </ng-template>
+            <nb-action (click)="onSettings()" class="press-action"
+                       [nbTooltip]="'header.settings'|translate | uppercase"
+                       nbTooltipPlacement="bottom">
+                <nb-icon icon="settings-2-outline"></nb-icon>
+            </nb-action>
+            <nb-action (click)="onLogout()" class="press-action"
+                       [nbTooltip]="'header.logout'|translate | uppercase"
+                       nbTooltipPlacement="bottom" nbTooltipStatus="danger">
+                <nb-icon icon="power-outline" status="danger" ></nb-icon>
+            </nb-action>
+        </nb-actions>
+    </div>
 </div>

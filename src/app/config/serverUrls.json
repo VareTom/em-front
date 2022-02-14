@@ -1,4 +1,9 @@
 {
-  "prefix": "api/v1",
-  "auth": "auth"
+  "prefix": "/api/v1/",
+  "auth": "auth",
+  "entity": "entities",
+  "user": "users",
+  "expenditure": "expenditures",
+  "service": "services",
+  "client": "clients"
 }

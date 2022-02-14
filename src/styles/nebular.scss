@@ -1,0 +1,15 @@
+@import "colors";
+
+.nb-theme-cosmic nb-actions.size-small nb-action {
+  &.press-action {
+    cursor: pointer;
+  }
+}
+
+.menu-item a .menu-title {
+  text-align: left;
+}
+
+.nb-theme-cosmic nb-layout .layout .layout-container .content .columns nb-layout-column {
+  padding: 1.12rem 1.12rem 0.35rem !important;
+}
