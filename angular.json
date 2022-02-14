@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"clone": {
+		"em-front": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:application": {
@@ -20,7 +20,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/clone",
+						"outputPath": "dist/em-front",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "clone:build:production"
+							"browserTarget": "em-front:build:production"
 						},
 						"development": {
-							"browserTarget": "clone:build:development"
+							"browserTarget": "em-front:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -83,7 +83,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "clone:build"
+						"browserTarget": "em-front:build"
 					}
 				},
 				"test": {
