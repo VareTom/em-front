@@ -11,6 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/shared/services/user.service';
 import { ExpenditureService } from 'src/shared/services/expenditure.service';
 import { ServiceService } from 'src/shared/services/service.service';
+import { OrderService } from 'src/shared/services/order.service';
 
 // Modules Nebular
 import {
@@ -36,6 +37,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateEntityDialogComponent } from './components/create-entity-dialog/create-entity-dialog.component';
+
 
 const nebularToastrConfig = {
   position: NbGlobalLogicalPosition.BOTTOM_END,
@@ -121,6 +123,7 @@ export class SharedModule {
         ExpenditureService,
         ServiceService,
         UserService,
+        OrderService,
 
         // Guards
         AuthGuardService

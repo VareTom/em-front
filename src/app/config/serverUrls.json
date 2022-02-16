@@ -5,5 +5,6 @@
   "user": "users",
   "expenditure": "expenditures",
   "service": "services",
-  "client": "clients"
+  "client": "clients",
+  "order": "orders"
 }

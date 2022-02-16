@@ -106,7 +106,16 @@
     }
   },
   "order": {
-    "create": "Créer une nouvelle commande"
+    "creation": "Encodage de votre nouvelle commande",
+    "create": "Encoder une nouvelle commande",
+    "columns": {
+      "client": "Nom du client",
+      "total": "Total",
+      "duration": "Temps de la prestation",
+      "serviceNumber": "Nombre de service",
+      "performedAt": "Date de la prestation",
+      "isValidated": "Commande cloturée ?"
+    }
   },
   "client": {
     "creation": "Ajout de votre nouveau client",

@@ -7,6 +7,7 @@ import {
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
 import { Store } from 'src/store';
+import { OrderService } from 'src/shared/services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,7 +16,7 @@ import { Store } from 'src/store';
 })
 export class OrdersComponent implements OnInit {
   
-  defaultColumns = [ 'name', 'description' ];
+  defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'isValidated' ];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -24,11 +25,19 @@ export class OrdersComponent implements OnInit {
   
   constructor(private dialogService: NbDialogService,
               private store: Store,
+              private readonly orderService: OrderService,
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    // this.initData();
-    // TODO:: get all entities + members for user uuid connected
+    this.orderService.getAllForEntity()
+      .subscribe({
+        next: () => {
+        
+        },
+        error: () => {
+        
+        }
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
