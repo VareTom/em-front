@@ -31,8 +31,8 @@ export class ClientService {
       );
   }
   
-  getAllForEntity (entityUuid: string): Observable<Client[]> {
-    return this.httpClient.get(`${this.baseRoute}/${entityUuid}`)
+  getAllForEntity (): Observable<Client[]> {
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
       .pipe(
         map((results: any) => {
           return results.map((client: any) => new Client(client));

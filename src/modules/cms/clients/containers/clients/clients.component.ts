@@ -40,7 +40,7 @@ export class ClientsComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    this.clientService.getAllForEntity(this.store.value.currentEntity.uuid)
+    this.clientService.getAllForEntity()
       .subscribe({
         next: (clients) => {
           if (clients.length > 0) this.refreshDataSource(clients);

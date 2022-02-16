@@ -43,7 +43,7 @@ export class ExpendituresComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    this.expenditureService.get(this.store.value.currentEntity.uuid)
+    this.expenditureService.getAllForEntity()
       .subscribe({
         next: (expenditures) => {
           if (expenditures.length > 0) this.refreshDataSource(expenditures);

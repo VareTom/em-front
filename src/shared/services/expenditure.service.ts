@@ -31,8 +31,8 @@ export class ExpenditureService {
       );
   }
   
-  get (entityUuid: string): Observable<Expenditure[]> {
-    return this.httpClient.get(`${this.baseRoute}/${entityUuid}`)
+  getAllForEntity (): Observable<Expenditure[]> {
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
       .pipe(
         map((results: any) => {
           return results.map((expenditure: any) => new Expenditure(expenditure));
