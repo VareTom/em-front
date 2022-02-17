@@ -135,6 +135,12 @@
       "lastName": "Nom de famille",
       "options": "Informations complémentaires",
       "locality": "Localité"
+    },
+    "create-form": {
+      "has-address": "Une adresse ?",
+      "has-car": "Un véhicule ?",
+      "car-title": "Informations sur le véhicule",
+      "address-title": "Informations sur l'adresse"
     }
   }
 }

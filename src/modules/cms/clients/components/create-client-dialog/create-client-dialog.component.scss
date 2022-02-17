@@ -1,0 +1,21 @@
+@import 'src/styles/colors';
+
+.toggle-switch-spacing {
+  margin: 10px 0;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divider {
+  &.light {
+    background: $dark !important;
+  }
+}
+
+.addressForm,.carForm {
+  margin: 10px 0;
+  h6 {
+
+  }
+}

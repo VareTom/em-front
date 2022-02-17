@@ -1,41 +1,126 @@
 <nb-card accent="info">
-  <nb-card-header>{{ 'expenditure.creation'|translate }}</nb-card-header>
+  <nb-card-header>{{ 'client.creation'|translate }}</nb-card-header>
   <nb-card-body>
-    <form [formGroup]="clientForm">
-
-      <div class="form-control-group">
-        <label class="label" for="firstName">{{ 'forms.client-first-name-name'| translate }}*</label>
-        <input nbInput
-               fullWidth
-               id="firstName"
-               formControlName="firstName"
-               autofocus>
-        <ng-container *ngIf="isFirstNameRequiredInput">
-          <p class="caption status-danger">
-            {{ 'forms.client-first-name-required'| translate }}
-          </p>
-        </ng-container>
-      </div>
-
-      <div class="form-control-group">
-        <label class="label" for="lastName">{{ 'forms.client-last-name'| translate }}*</label>
-        <nb-form-field>
-
+    <form class="container-form" [formGroup]="clientForm">
+      <div class="" formGroupName="client">
+      <!-- TODO:: update with stepper -->
+        <div class="form-control-group">
+          <label class="label" for="firstName">{{ 'forms.client-first-name-name'| translate }}*</label>
+          <input nbInput
+                 fullWidth
+                 id="firstName"
+                 formControlName="firstName"
+                 autofocus>
+          <ng-container *ngIf="isFirstNameRequiredInput">
+            <p class="caption status-danger">
+              {{ 'forms.client-first-name-required'| translate }}
+            </p>
+          </ng-container>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="lastName">{{ 'forms.client-last-name'| translate }}*</label>
           <input nbInput
                  fullWidth
                  id="lastName"
                  formControlName="lastName"
                  autofocus>
-          <nb-icon nbPrefix icon="credit-card" pack="eva"></nb-icon>
-        </nb-form-field>
+        </div>
       </div>
 
-      <div class="form-control-group">
-        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleAddressChange($event)" formControlName="hasAddress">{{'has-address'|translate}}</nb-toggle>
-        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleCarChange($event)" formControlName="hasCar">{{'has-car'|translate}}</nb-toggle>
+      <div class="form-control-group toggle-switch-spacing">
+        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleAddressChange($event)" formControlName="hasAddress">{{'client.create-form.has-address'|translate}}</nb-toggle>
+        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleCarChange($event)" formControlName="hasCar">{{'client.create-form.has-car'|translate}}</nb-toggle>
       </div>
 
-      <!-- checkbox has address ? + has car -->
+      <div class="addressForm" formGroupName="address" *ngIf="clientForm.value.hasAddress">
+        <div class="divider dark"></div>
+        <h6>{{'client.create-form.address-title'| translate}}</h6>
+        <div class="form-control-group">
+          <label class="label" for="street">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="street"
+                 formControlName="street"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="number">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="number"
+                 formControlName="number"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="box">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="box"
+                 formControlName="box"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="postalCode">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="postalCode"
+                 formControlName="postalCode"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="locality">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="locality"
+                 formControlName="locality"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="country">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="country"
+                 formControlName="country"
+                 autofocus>
+        </div>
+      </div>
+
+      <div class="carForm" formGroupName="car" *ngIf="clientForm.value.hasCar">
+        <div class="divider dark"></div>
+        <h6>{{'client.create-form.car-title'| translate}}</h6>
+        <div class="form-control-group">
+          <label class="label" for="merch">{{ 'client.create-form.car-merch'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="merch"
+                 formControlName="merch"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="model">{{ 'client.create-form.car-model'| translate }} *</label>
+          <input nbInput
+                 fullWidth
+                 id="model"
+                 formControlName="model"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="color">{{ 'client.create-form.car-color'| translate }}</label>
+          <input nbInput
+                 fullWidth
+                 id="color"
+                 formControlName="color"
+                 autofocus>
+        </div>
+        <div class="form-control-group">
+          <label class="label" for="year">{{ 'client.create-form.car-year'| translate }}</label>
+          <input nbInput
+                 fullWidth
+                 id="year"
+                 formControlName="year"
+                 autofocus>
+        </div>
+      </div>
     </form>
   </nb-card-body>
   <nb-card-footer>

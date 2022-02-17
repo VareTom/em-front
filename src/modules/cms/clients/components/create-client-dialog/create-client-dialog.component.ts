@@ -29,7 +29,10 @@ export class CreateClientDialogComponent implements OnInit {
     }),
     hasCar: [false],
     car: this.formBuilder.group({
-      merch: [null]
+      merch: [null, Validators.required],
+      model: [null, Validators.required],
+      year: [null],
+      color: [null]
     })
   })
 
