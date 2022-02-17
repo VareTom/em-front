@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Service
 import { AuthService } from './services/auth.service';
@@ -29,7 +29,13 @@ import {
   NbUserModule,
   NbIconModule,
   NbTooltipModule,
-  NbThemeModule, NbMenuModule, NbDialogModule, NbToastrModule, NbGlobalLogicalPosition, NbDatepickerModule
+  NbThemeModule,
+  NbMenuModule,
+  NbDialogModule,
+  NbToastrModule,
+  NbGlobalLogicalPosition,
+  NbDatepickerModule,
+  NbToggleModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -56,6 +62,7 @@ const nebularToastrConfig = {
   imports: [
     CommonModule,
     TranslateModule,
+    FormsModule,
     ReactiveFormsModule,
 
     // Nebular
@@ -65,6 +72,7 @@ const nebularToastrConfig = {
     NbSidebarModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbEvaIconsModule,
+    NbToggleModule,
     NbSpinnerModule,
     NbButtonModule,
     NbAlertModule,
@@ -83,6 +91,7 @@ const nebularToastrConfig = {
   exports: [
     TranslateModule,
     ReactiveFormsModule,
+    FormsModule,
 
     // Nebular
     NbLayoutModule,
@@ -90,6 +99,7 @@ const nebularToastrConfig = {
     NbDatepickerModule,
     NbButtonModule,
     NbThemeModule,
+    NbToggleModule,
     NbEvaIconsModule,
     NbTreeGridModule,
     NbSpinnerModule,

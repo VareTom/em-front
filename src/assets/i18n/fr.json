@@ -23,6 +23,8 @@
     "service-name": "Nom du service",
     "service-price": "Prix de la prestation",
     "service-code": "Code technique ou initiales",
+    "client-first-name": "Prénom",
+    "client-last-name": "Nom de famille",
 
     "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
