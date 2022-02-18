@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NbDialogRef } from '@nebular/theme';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbDialogRef, NbStepChangeEvent } from '@nebular/theme';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-client-dialog',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-client-dialog.component.scss']
 })
 export class CreateClientDialogComponent implements OnInit {
-
+  
   hasAddressStep: boolean = false;
   hasCarStep: boolean = false;
 
@@ -34,19 +35,43 @@ export class CreateClientDialogComponent implements OnInit {
   })
 
   constructor(protected dialogRef: NbDialogRef<CreateClientDialogComponent>,
+              private translate: TranslateService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
+  
+  handleStepChange(event: NbStepChangeEvent) {
+    console.log(event);
+  }
 
+  get isNextButtonDisabled(): boolean {
+    return true;
+    /*console.log(this.stepper.selectedIndex);
+    console.log(this.stepper.steps);
+    if (this.stepper.selectedIndex === 0) {
+      return this.clientInfoForm.valid
+    }
+    return false;*/
+  }
+  
+  get nextButtonText(): string {
+    return 'dd'
+    /*if (this.stepper.selectedIndex !== this.stepper.steps.length-1) {
+      return this.translate.instant('actions.next');
+    } else {
+      return this.translate.instant('actions.create');
+    }*/
+  }
 
   get isFirstNameRequiredInput(): boolean {
     return true;
   }
 
   get canSubmit(): boolean {
-    if (!this.hasCarStep && )
-    return this.clientInfoForm.valid;
+    if (!this.hasCarStep && !this.hasAddressStep && this.clientInfoForm.valid) return true;
+    if (this.hasCarStep && this.clientInfoForm.valid && this.carInfoForm.valid) return true;
+    return this.hasAddressStep && this.clientInfoForm.valid && this.addressInfoForm.valid;
   }
 
   onToggleAddressChange(isChecked: boolean) {
@@ -60,8 +85,20 @@ export class CreateClientDialogComponent implements OnInit {
   onClose(): void {
     this.dialogRef.close();
   }
-
-  onSubmit(): void {
-
+  
+  onFirstSubmit(): void {
+  
+  }
+  
+  onSecondSubmit() {
+  
+  }
+  
+  onThirdSubmit() {
+  
+  }
+  
+  onSubmitStep() {
+  
   }
 }

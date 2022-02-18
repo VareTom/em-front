@@ -35,7 +35,7 @@ import {
   NbToastrModule,
   NbGlobalLogicalPosition,
   NbDatepickerModule,
-  NbToggleModule
+  NbToggleModule, NbStepperModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -71,6 +71,7 @@ const nebularToastrConfig = {
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbDatepickerModule.forRoot(),
+    NbStepperModule,
     NbEvaIconsModule,
     NbToggleModule,
     NbSpinnerModule,
@@ -102,6 +103,7 @@ const nebularToastrConfig = {
     NbToggleModule,
     NbEvaIconsModule,
     NbTreeGridModule,
+    NbStepperModule,
     NbSpinnerModule,
     NbAlertModule,
     NbCardModule,

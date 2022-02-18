@@ -7,6 +7,8 @@ import { SharedModule } from 'src/shared/shared.module';
 
 // Containers
 import { ClientsComponent } from './containers/clients/clients.component';
+
+// Components
 import { CreateClientDialogComponent } from './components/create-client-dialog/create-client-dialog.component';
 
 const routes: Routes = [
@@ -18,7 +20,9 @@ const routes: Routes = [
     
     // Containers
     ClientsComponent,
-         CreateClientDialogComponent
+    
+    // Components
+    CreateClientDialogComponent
   ],
   imports: [
     CommonModule,

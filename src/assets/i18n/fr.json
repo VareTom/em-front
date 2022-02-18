@@ -9,7 +9,8 @@
     "register": "Création de mon compte",
     "create": "Créer",
     "cancel": "Annuler",
-    "add": "Ajouter"
+    "add": "Ajouter",
+    "next": "Suivant"
   },
   "forms": {
     "email": "Adresse e-mail",
