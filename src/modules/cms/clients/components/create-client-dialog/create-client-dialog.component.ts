@@ -9,31 +9,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateClientDialogComponent implements OnInit {
 
-  hasAddress: boolean = false;
-  hasCar: boolean = false;
+  hasAddressStep: boolean = false;
+  hasCarStep: boolean = false;
 
-  clientForm: FormGroup = this.formBuilder.group({
-    client: this.formBuilder.group({
-      firstName: [null, Validators.required],
-      lastName: [null],
-      options: [null]
-    }),
+  clientInfoForm: FormGroup = this.formBuilder.group({
+    firstName: [null, Validators.required],
+    lastName: [null],
     hasAddress: [false],
-    address: this.formBuilder.group({
-      street: [null],
-      number: [null],
-      postalCode: [null],
-      locality: [null],
-      country: [null],
-      box: [null],
-    }),
-    hasCar: [false],
-    car: this.formBuilder.group({
-      merch: [null, Validators.required],
-      model: [null, Validators.required],
-      year: [null],
-      color: [null]
-    })
+    hasCar: [false]
+  })
+  addressInfoForm: FormGroup = this.formBuilder.group({
+    street: [null, Validators.required],
+    number: [null, Validators.required],
+    postalCode: [null, Validators.required],
+    locality: [null, Validators.required],
+    country: [null, Validators.required],
+    box: [null],
+  })
+  carInfoForm: FormGroup = this.formBuilder.group({
+    merch: [null, Validators.required],
+    model: [null, Validators.required],
+    year: [null],
+    color: [null]
   })
 
   constructor(protected dialogRef: NbDialogRef<CreateClientDialogComponent>,
@@ -45,14 +42,19 @@ export class CreateClientDialogComponent implements OnInit {
 
   get isFirstNameRequiredInput(): boolean {
     return true;
-  };
+  }
+
+  get canSubmit(): boolean {
+    if (!this.hasCarStep && )
+    return this.clientInfoForm.valid;
+  }
 
   onToggleAddressChange(isChecked: boolean) {
-    console.log(isChecked);
+    this.hasAddressStep = isChecked;
   }
 
   onToggleCarChange(isChecked: boolean) {
-    console.log(isChecked);
+    this.hasCarStep = isChecked;
   }
 
   onClose(): void {
