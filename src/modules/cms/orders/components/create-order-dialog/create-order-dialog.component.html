@@ -1,0 +1,74 @@
+<nb-card accent="info">
+    <nb-card-header>{{ 'order.creation'|translate }}</nb-card-header>
+    <nb-card-body>
+        <form class="container-form" [formGroup]="orderForm">
+
+            <div class="form-control-group">
+                <label class="label">{{ 'order.create-form.client'| translate }} *</label>
+                <nb-form-field>
+                    <nb-select [placeholder]="'order.create-form.select-client'| translate" formControlName="clientUuid">
+                        <nb-option *ngFor="let client of clients" [value]="client.value">{{client.name}}</nb-option>
+                    </nb-select>
+                    <ng-container *ngIf="isClientRequired">
+                        <p class="caption status-danger">
+                            {{ 'order.create-form.client-required'| translate }}
+                        </p>
+                    </ng-container>
+                </nb-form-field>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label">{{ 'order.create-form.service-prested'| translate }} *</label>
+                <nb-form-field>
+                    <nb-select multiple [placeholder]="'order.create-form.select-service'| translate" formControlName="servicesUuid">
+                        <nb-option *ngFor="let service of services" [value]="service.value">{{service.name}}</nb-option>
+                    </nb-select>
+                    <ng-container *ngIf="isServicesRequired">
+                        <p class="caption status-danger">
+                            {{ 'order.create-form.service-prested-required'| translate }}
+                        </p>
+                    </ng-container>
+                </nb-form-field>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="durationInMinute">{{ 'order.create-form.duration'| translate }}</label>
+                <nb-form-field>
+
+                    <input nbInput
+                           type="number"
+                           step="1"
+                           min="0"
+                           fullWidth
+                           id="durationInMinute"
+                           formControlName="durationInMinute"
+                           autofocus>
+                    <nb-icon nbPrefix icon="clock" pack="eva"></nb-icon>
+                </nb-form-field>
+            </div>
+
+            <div class="form-control-group">
+                <label class="label" for="performedAt">{{ 'order.create-form.performed-at'| translate }}</label>
+                <nb-form-field>
+                    <input [nbDatepicker]="datepicker"
+                           nbInput
+                           fullWidth
+                           id="performedAt"
+                           formControlName="performedAt"
+                           autofocus>
+                    <nb-icon nbPrefix icon="calendar" pack="eva"></nb-icon>
+                    <nb-datepicker #datepicker></nb-datepicker>
+                </nb-form-field>
+            </div>
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="info"
+                    [disabled]="!orderForm.valid"
+                    (click)="onSubmit()"> {{ 'actions.add'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

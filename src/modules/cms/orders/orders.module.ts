@@ -7,6 +7,7 @@ import { OrdersComponent } from './containers/orders/orders.component';
 
 // Custom Modules
 import { SharedModule } from 'src/shared/shared.module';
+import { CreateOrderDialogComponent } from './components/create-order-dialog/create-order-dialog.component';
 
 const routes: Routes = [
   { path: '', component: OrdersComponent }
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // Containers
-    OrdersComponent
+    OrdersComponent,
+    CreateOrderDialogComponent
   ],
   imports: [
     CommonModule,

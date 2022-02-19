@@ -15,6 +15,9 @@ import { TranslateService } from '@ngx-translate/core';
 // Models
 import { Order } from 'src/shared/models/order';
 import moment from 'moment';
+import {
+  CreateOrderDialogComponent
+} from 'src/modules/cms/orders/components/create-order-dialog/create-order-dialog.component';
 
 @Component({
   selector: 'app-orders',
@@ -75,5 +78,14 @@ export class OrdersComponent implements OnInit {
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
   }
-
+  
+  onCreate(): void {
+    this.dialogService.open(CreateOrderDialogComponent)
+      .onClose
+      .subscribe(result => {
+        if (result) {
+          console.log(result);
+        }
+      })
+  }
 }

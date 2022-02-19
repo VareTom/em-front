@@ -3,7 +3,8 @@
         <div class="container">
             <div class="header-title">
                 <h1>{{ 'sidebar.orders'|translate }}</h1>
-                <button nbButton hero status="info" size="large">
+                <button nbButton hero status="info" size="large"
+                        (click)="onCreate()">
                     {{'order.create'|translate }}
                 </button>
             </div>

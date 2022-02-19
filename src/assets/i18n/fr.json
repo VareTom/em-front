@@ -114,6 +114,8 @@
     "creation": "Encodage de votre nouvelle commande",
     "create": "Encoder une nouvelle commande",
     "retrieve-failed": "Impossible de récupérer les informations de vos commandes.",
+    "retrieve-clients-failed": "Impossible de récupérer la liste de vos clients.",
+    "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
     "columns": {
@@ -123,6 +125,16 @@
       "serviceNumber": "Nombre de service",
       "performedAt": "Date de la prestation",
       "isValidated": "Commande cloturée ?"
+    },
+    "create-form": {
+      "select-service": "Sélectionnez au moins un service",
+      "select-client": "Sélectionnez un client",
+      "client": "Client concerné",
+      "client-required": "Un client doit obligatoirement être sélectionné",
+      "service-prested": "Services prestés",
+      "service-prested-required": "Services prestés obligatoire",
+      "performed-at": "Date de la prestation",
+      "duration": "Durée de la prestation (en minutes)"
     }
   },
   "client": {

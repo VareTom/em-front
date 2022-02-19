@@ -32,7 +32,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
     return formControl.touched && formControl.getError('required');
   }
   
-  onClose():void {
+  onClose(): void {
     this.dialogRef.close();
   }
   
