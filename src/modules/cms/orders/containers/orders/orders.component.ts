@@ -85,6 +85,18 @@ export class OrdersComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           console.log(result);
+          const parameters = {
+            ...result,
+            entityUuid: this.store.value.currentEntity.uuid
+          }
+          this.orderService.create(parameters)
+            .subscribe({
+              next: (createdOrder) => {
+                this.refreshDataSource([createdOrder]);
+                this.toastrService.success(this.translate.instant('order.creation-succeed'))
+              },
+              error: () => this.toastrService.danger(this.translate.instant('order.creation-failed'), this.translate.instant('errors.title'))
+            })
         }
       })
   }
