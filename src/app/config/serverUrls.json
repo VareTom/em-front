@@ -6,5 +6,6 @@
   "expenditure": "expenditures",
   "service": "services",
   "client": "clients",
-  "order": "orders"
+  "order": "orders",
+  "statistic": "statistics"
 }
