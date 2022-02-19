@@ -3,7 +3,51 @@
         <div class="container">
             <h1>{{ 'sidebar.dashboard'|translate }}</h1>
             <div class="divider"></div>
-            <app-new-user *ngIf="isNewUser()"></app-new-user>
+            <app-new-user *ngIf="isNewUser"></app-new-user>
+            <div class="statistics" *ngIf="statistic; else noStats">
+                <div class="card-row">
+                    <nb-card size="tiny">
+                        <nb-card-header>
+                            {{'dashboard.cards.benefits'|translate}}
+                        </nb-card-header>
+                        <nb-card-body>
+                            <p class="card-content" [ngClass]="statistic.benefits < 0 ? 'red':''">
+                                {{statistic.benefits / 100 |currency:'EUR'}}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card size="tiny">
+                        <nb-card-header>
+                            {{'dashboard.cards.total-expenditures'|translate}}
+                        </nb-card-header>
+                        <nb-card-body class="card-content">
+                            {{statistic.totalExpendituresInCent / 100 |currency:'EUR'}}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card size="tiny">
+                        <nb-card-header>
+                            {{'dashboard.cards.total-incomes'|translate}}
+                        </nb-card-header>
+                        <nb-card-body class="card-content">
+                            {{statistic.totalIncomes / 100 |currency:'EUR'}}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card size="tiny">
+                        <nb-card-header>
+                            {{'dashboard.cards.actual-incomes'|translate}}
+                        </nb-card-header>
+                        <nb-card-body class="card-content">
+                            {{statistic.actualIncomes / 100 |currency:'EUR'}}
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+            <ng-template #noStats>
+                <div class="no-statistic">
+                    <h4>{{'dashboard.no-data-title'|translate}}</h4>
+                    <p>{{'dashboard.no-data-text'|translate}}</p>
+                </div>
+            </ng-template>
         </div>
+
     </nb-layout-column>
 </nb-layout>

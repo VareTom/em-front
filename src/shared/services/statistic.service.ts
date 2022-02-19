@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import Config from 'src/app/config/serverUrls.json';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+// Models
 import { Statistic } from 'src/shared/models/statistic';
 
 @Injectable({
@@ -19,7 +21,7 @@ export class StatisticService {
     this.baseRoute = environment.serverUrl + Config.prefix + Config.statistic;
   }
   
-  getAllForEntity (): Observable<any> {
+  getAllForEntity (): Observable<Statistic> {
     return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
       .pipe(
         map((results: any) => {

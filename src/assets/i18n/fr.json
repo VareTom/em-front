@@ -66,6 +66,15 @@
     "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!"
   },
   "dashboard": {
+    "no-data-title": "Aucune donnée disponible ＞﹏＜",
+    "no-data-text": "Ajoutez vos dépenses ainsi que vos commandes afin d'avoir des données dans votre dashboard!",
+    "retrieve-failed": "Impossible de récupérer les statistiques",
+    "cards": {
+      "total-expenditures": "Total des dépenses",
+      "benefits": "Bénéfices",
+      "total-incomes": "Revenus calculés",
+      "actual-incomes": "Revenus actuels"
+    },
     "new-user": {
       "title": "Bienvenue dans votre Entity Manager!",
       "content": "La première étape est de créer votre entité qui représentera votre business ou entreprise.",

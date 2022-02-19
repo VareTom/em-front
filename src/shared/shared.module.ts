@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 // Service
 import { AuthService } from './services/auth.service';
@@ -67,6 +68,10 @@ const nebularToastrConfig = {
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+  
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
 
     // Nebular
     NbThemeModule.forRoot({ name: 'cosmic' }),
@@ -97,6 +102,8 @@ const nebularToastrConfig = {
     TranslateModule,
     ReactiveFormsModule,
     FormsModule,
+  
+    NgxEchartsModule,
 
     // Nebular
     NbLayoutModule,

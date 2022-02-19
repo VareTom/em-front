@@ -5,6 +5,7 @@ import { Store } from 'src/store';
 import { StatisticService } from 'src/shared/services/statistic.service';
 import { NbToastrService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
+import { Statistic } from 'src/shared/models/statistic';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  
+  statistic: Statistic;
 
   constructor(private store: Store,
               private statisticService: StatisticService,
@@ -21,14 +24,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.statisticService.getAllForEntity()
       .subscribe({
-        next: (statistics) => {
-          console.log(statistics);
+        next: (statistic) => {
+          console.log(statistic);
+          this.statistic = statistic;
         },
-        error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
+        error: (error) => this.toastrService.danger(this.translate.instant('dashboard.retrieve-failed'), this.translate.instant('errors.title'))
       })
   }
   
-  isNewUser(): boolean {
+  get isNewUser(): boolean {
     return this.store.value.connectedUser.entities.length <= 0;
   }
 }

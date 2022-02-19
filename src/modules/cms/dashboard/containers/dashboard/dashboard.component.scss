@@ -1,0 +1,37 @@
+@import 'src/styles/colors';
+
+.container {
+  .statistics {
+    margin-top: 20px;
+    .card-row {
+      display: grid;
+      grid-template-columns: calc(25% - 5px) calc(25% - 10px) calc(25% - 10px) calc(25% - 5px);
+      column-gap: 10px;
+      row-gap: 15px;
+
+      .card-content {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-weight: bold;
+        font-size: 35px;
+        &.red {
+          color: $red;
+        }
+      }
+    }
+  }
+  .no-statistic {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px;
+    p {
+      margin-top: 20px;
+    }
+  }
+}
