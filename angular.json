@@ -31,7 +31,7 @@
 						],
 						"styles": [
 							"src/styles.scss",
-							"node_modules/@nebular/theme/styles/prebuilt/cosmic.css"
+							"node_modules/@nebular/theme/styles/prebuilt/cosmic.scss"
 						],
 						"scripts": []
 					},
@@ -99,7 +99,7 @@
 						],
 						"styles": [
 							"src/styles.scss",
-							"node_modules/@nebular/theme/styles/prebuilt/cosmic.css"
+							"node_modules/@nebular/theme/styles/prebuilt/cosmic.scss"
 						],
 						"scripts": []
 					}

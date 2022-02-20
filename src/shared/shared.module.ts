@@ -38,7 +38,8 @@ import {
   NbToastrModule,
   NbGlobalLogicalPosition,
   NbDatepickerModule,
-  NbToggleModule, NbStepperModule
+  NbToggleModule,
+  NbStepperModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -46,7 +47,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateEntityDialogComponent } from './components/create-entity-dialog/create-entity-dialog.component';
-
 
 
 const nebularToastrConfig = {
@@ -79,7 +79,6 @@ const nebularToastrConfig = {
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbDatepickerModule.forRoot(),
-    NbStepperModule,
     NbEvaIconsModule,
     NbSelectModule,
     NbToggleModule,
@@ -97,6 +96,7 @@ const nebularToastrConfig = {
     NbInputModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbStepperModule,
   ],
   exports: [
     TranslateModule,
@@ -114,7 +114,6 @@ const nebularToastrConfig = {
     NbToggleModule,
     NbEvaIconsModule,
     NbTreeGridModule,
-    NbStepperModule,
     NbSelectModule,
     NbSpinnerModule,
     NbAlertModule,
@@ -128,6 +127,7 @@ const nebularToastrConfig = {
     NbInputModule,
     NbMenuModule,
     NbDialogModule,
+    NbStepperModule,
 
     // Components
     FooterComponent,

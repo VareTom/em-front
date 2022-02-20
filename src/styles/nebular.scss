@@ -13,3 +13,11 @@
 .nb-theme-cosmic nb-layout .layout .layout-container .content .columns nb-layout-column {
   padding: 1.12rem 1.12rem 0.35rem !important;
 }
+
+.nb-theme-cosmic nb-stepper.horizontal .header .step {
+  padding: 0 50px;
+}
+
+.nb-theme-cosmic nb-stepper.horizontal .header .connector {
+  min-width: 40px;
+}

@@ -25,7 +25,7 @@ import {
 })
 export class ClientsComponent implements OnInit {
   
-  defaultColumns = [ 'firstName', 'lastName', 'options', 'locality' ];
+   defaultColumns = [ 'clientFullName', 'vehicleNumber', 'locality' ];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -66,9 +66,8 @@ export class ClientsComponent implements OnInit {
     clients.forEach(client => {
       this.data.push({
         data: {
-          firstName: client.firstName,
-          lastName: client.lastName,
-          options: client.options,
+          clientFullName: client.fullName,
+          vehicleNumber: client.cars.length,
           locality: client.address?.locality ?? '-'
         }
       })
@@ -81,15 +80,15 @@ export class ClientsComponent implements OnInit {
       .onClose
       .subscribe((result) => {
         if (result) {
-          const clientInput = {
-            client: {
-              entityUuid: ''
-            }
-          }
-          clientInput.client.entityUuid = this.store.value.currentEntity.uuid;
-           
-           // TODO:: add entityUuid in client object
-          this.clientService.create(clientInput)
+          result.client.entityUuid = this.store.value.currentEntity.uuid;
+          this.clientService.create(result)
+            .subscribe({
+              next: (createdClient) => {
+                this.refreshDataSource([createdClient]);
+                this.toastrService.success(this.translate.instant('client.creation-succeed'));
+              },
+              error: (error) => this.toastrService.danger(this.translate.instant('client.creation-failed'), this.translate.instant('errors.title'))
+            })
         }
       })
   }

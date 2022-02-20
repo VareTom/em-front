@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NbDialogRef, NbStepChangeEvent } from '@nebular/theme';
+import { NbDialogRef, NbStepChangeEvent  } from '@nebular/theme';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -21,7 +21,6 @@ export class CreateClientDialogComponent implements OnInit {
   })
   addressInfoForm: FormGroup = this.formBuilder.group({
     street: [null, Validators.required],
-    number: [null, Validators.required],
     postalCode: [null, Validators.required],
     locality: [null, Validators.required],
     country: [null, Validators.required],
@@ -41,37 +40,49 @@ export class CreateClientDialogComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  handleStepChange(event: NbStepChangeEvent) {
-    console.log(event);
-  }
-
-  get isNextButtonDisabled(): boolean {
-    return true;
-    /*console.log(this.stepper.selectedIndex);
-    console.log(this.stepper.steps);
-    if (this.stepper.selectedIndex === 0) {
-      return this.clientInfoForm.valid
-    }
-    return false;*/
+  get clientInfoStepNextButtonText(): string {
+    if (!this.hasAddressStep && !this.hasCarStep) return this.translate.instant('actions.finish');
+    return this.translate.instant('actions.next');
   }
   
-  get nextButtonText(): string {
-    return 'dd'
-    /*if (this.stepper.selectedIndex !== this.stepper.steps.length-1) {
-      return this.translate.instant('actions.next');
-    } else {
-      return this.translate.instant('actions.create');
-    }*/
+  get carStepNextButtonText(): string {
+    if (!this.hasAddressStep) return this.translate.instant('actions.finish');
+    return this.translate.instant('actions.next');
   }
 
   get isFirstNameRequiredInput(): boolean {
-    return true;
+    const formControl = this.clientInfoForm.get('firstName');
+    return formControl.touched && formControl.getError('required');
   }
-
-  get canSubmit(): boolean {
-    if (!this.hasCarStep && !this.hasAddressStep && this.clientInfoForm.valid) return true;
-    if (this.hasCarStep && this.clientInfoForm.valid && this.carInfoForm.valid) return true;
-    return this.hasAddressStep && this.clientInfoForm.valid && this.addressInfoForm.valid;
+  
+  get isMerchRequiredInput(): boolean {
+    const formControl = this.carInfoForm.get('merch');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isModelRequiredInput(): boolean {
+    const formControl = this.carInfoForm.get('model');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isStreetRequiredInput(): boolean {
+    const formControl = this.addressInfoForm.get('street');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isPostalCodeRequiredInput(): boolean {
+    const formControl = this.addressInfoForm.get('postalCode');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isLocalityRequiredInput(): boolean {
+    const formControl = this.addressInfoForm.get('locality');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isCountryRequiredInput(): boolean {
+    const formControl = this.addressInfoForm.get('country');
+    return formControl.touched && formControl.getError('required');
   }
 
   onToggleAddressChange(isChecked: boolean) {
@@ -86,19 +97,12 @@ export class CreateClientDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   
-  onFirstSubmit(): void {
-  
-  }
-  
-  onSecondSubmit() {
-  
-  }
-  
-  onThirdSubmit() {
-  
-  }
-  
-  onSubmitStep() {
-  
+  onSubmit() {
+    const parameters = {
+      address: this.addressInfoForm.getRawValue(),
+      car: this.carInfoForm.getRawValue(),
+      client: this.clientInfoForm.getRawValue()
+    }
+    this.dialogRef.close(parameters);
   }
 }

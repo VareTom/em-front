@@ -1,11 +1,11 @@
 <nb-card accent="info">
   <nb-card-header>{{ 'client.creation'|translate }}</nb-card-header>
   <nb-card-body>
-    <nb-stepper #stepper (stepChange)="handleStepChange($event)">
-      <nb-step [stepControl]="clientInfoForm" label="First step">
-        <form [formGroup]="clientInfoForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+    <nb-stepper>
+      <nb-step [stepControl]="clientInfoForm" [label]="'client.create-form.client-info-step'|translate">
+        <form [formGroup]="clientInfoForm" class="container-form">
           <div class="form-control-group">
-            <label class="label" for="firstName">{{ 'forms.client-first-name-name'| translate }}*</label>
+            <label class="label" for="firstName">{{ 'client.create-form.first-name'| translate }}*</label>
             <input nbInput
                    fullWidth
                    id="firstName"
@@ -13,12 +13,12 @@
                    autofocus>
             <ng-container *ngIf="isFirstNameRequiredInput">
               <p class="caption status-danger">
-                {{ 'forms.client-first-name-required'| translate }}
+                {{ 'client.create-form.first-name-required'| translate }}
               </p>
             </ng-container>
           </div>
           <div class="form-control-group">
-            <label class="label" for="lastName">{{ 'forms.client-last-name'| translate }}*</label>
+            <label class="label" for="lastName">{{ 'client.create-form.last-name'| translate }}</label>
             <input nbInput
                    fullWidth
                    id="lastName"
@@ -29,170 +29,148 @@
             <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleAddressChange($event)" formControlName="hasAddress">{{'client.create-form.has-address'|translate}}</nb-toggle>
             <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleCarChange($event)" formControlName="hasCar">{{'client.create-form.has-car'|translate}}</nb-toggle>
           </div>
-          <button nbButton
-                  hero
-                  (click)="onFirstSubmit()"
-                  [disabled]="!clientInfoForm.valid"
-                  nbStepperNext>next</button>
+          <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()">
+              {{ 'actions.cancel'|translate }}
+            </button>
+            <button nbButton hero status="info"
+                    [disabled]="!clientInfoForm.valid"
+                    nbStepperNext>
+              {{ clientInfoStepNextButtonText }}
+            </button>
+          </div>
         </form>
       </nb-step>
-      <nb-step [stepControl]="carInfoForm" label="Second step" *ngIf="hasCarStep">
-        <form [formGroup]="carInfoForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-          <p class="lorem">
-            Pellentesque we gonna chung tortor.
-            Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
-            Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
-          </p>
-          <div class="input-group">
-            <!--<input nbInput type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
-                   [ngClass]="{'form-control-danger': carInfoForm.invalid && (carInfoForm.dirty || carInfoForm.touched)}">-->
+      <nb-step [stepControl]="carInfoForm" [label]="'client.create-form.client-car-step'|translate" *ngIf="hasCarStep">
+        <form [formGroup]="carInfoForm" class="container-form">
+          <div class="form-control-group">
+            <label class="label" for="merch">{{ 'car.merch'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="merch"
+                   formControlName="merch"
+                   autofocus>
+            <ng-container *ngIf="isMerchRequiredInput">
+              <p class="caption status-danger">
+                {{ 'car.merch-required'| translate }}
+              </p>
+            </ng-container>
           </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <div class="form-control-group">
+            <label class="label" for="model">{{ 'car.model'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="model"
+                   formControlName="model"
+                   autofocus>
+            <ng-container *ngIf="isModelRequiredInput">
+              <p class="caption status-danger">
+                {{ 'car.model-required'| translate }}
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="color">{{ 'car.color'| translate }}</label>
+            <input nbInput
+                   fullWidth
+                   id="color"
+                   formControlName="color"
+                   autofocus>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="year">{{ 'car.year'| translate }}</label>
+            <input nbInput
+                   fullWidth
+                   id="year"
+                   formControlName="year"
+                   autofocus>
+          </div>
+          <div class="actions">
+            <button nbButton hero status="info" nbStepperPrevious>
+              {{ 'actions.previous'|translate }}
+            </button>
+            <button nbButton hero status="info"
+                    [disabled]="!carInfoForm.valid"
+                    nbStepperNext>
+              {{ carStepNextButtonText }}
+            </button>
+          </div>
         </form>
       </nb-step>
-      <nb-step [stepControl]="addressInfoForm" label="Third step">
-        <form [formGroup]="addressInfoForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-          <p class="lorem">
-            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-          </p>
-          <div class="input-group">
-            <!--<input nbInput type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': addressInfoForm.invalid && (addressInfoForm.dirty || addressInfoForm.touched)}">-->
+      <nb-step [stepControl]="addressInfoForm" [label]="'client.create-form.client-address-step'|translate" *ngIf="hasAddressStep">
+        <form [formGroup]="addressInfoForm" class="container-form">
+          <div class="form-control-group">
+            <label class="label" for="street">{{ 'address.street'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="street"
+                   formControlName="street"
+                   autofocus>
+            <ng-container *ngIf="isStreetRequiredInput">
+              <p class="caption status-danger">
+                {{ 'address.street-required'| translate }}
+              </p>
+            </ng-container>
           </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
+          <div class="form-control-group">
+            <label class="label" for="box">{{ 'address.box'| translate }}</label>
+            <input nbInput
+                   fullWidth
+                   id="box"
+                   formControlName="box"
+                   autofocus>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="postalCode">{{ 'address.postalCode'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="postalCode"
+                   formControlName="postalCode"
+                   autofocus>
+            <ng-container *ngIf="isPostalCodeRequiredInput">
+              <p class="caption status-danger">
+                {{ 'address.postalCode-required'| translate }}
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="locality">{{ 'address.locality'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="locality"
+                   formControlName="locality"
+                   autofocus>
+            <ng-container *ngIf="isLocalityRequiredInput">
+              <p class="caption status-danger">
+                {{ 'address.locality-required'| translate }}
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group">
+            <label class="label" for="country">{{ 'address.country'| translate }} *</label>
+            <input nbInput
+                   fullWidth
+                   id="country"
+                   formControlName="country"
+                   autofocus>
+            <ng-container *ngIf="isCountryRequiredInput">
+              <p class="caption status-danger">
+                {{ 'address.country-required'| translate }}
+              </p>
+            </ng-container>
+          </div>
+          <div class="actions">
+            <button nbButton hero status="info" nbStepperPrevious>
+              {{ 'actions.previous'|translate }}
+            </button>
+            <button nbButton hero status="info"
+                    [disabled]="!addressInfoForm.valid"
+                    (click)="onSubmit()">
+              {{ 'actions.finish'|translate }}
+            </button>
+          </div>
         </form>
       </nb-step>
     </nb-stepper>
-    <!--<form class="container-form" [formGroup]="clientForm">
-      <div class="" formGroupName="client">
-      &lt;!&ndash; TODO:: update with stepper &ndash;&gt;
-        <div class="form-control-group">
-          <label class="label" for="firstName">{{ 'forms.client-first-name-name'| translate }}*</label>
-          <input nbInput
-                 fullWidth
-                 id="firstName"
-                 formControlName="firstName"
-                 autofocus>
-          <ng-container *ngIf="isFirstNameRequiredInput">
-            <p class="caption status-danger">
-              {{ 'forms.client-first-name-required'| translate }}
-            </p>
-          </ng-container>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="lastName">{{ 'forms.client-last-name'| translate }}*</label>
-          <input nbInput
-                 fullWidth
-                 id="lastName"
-                 formControlName="lastName"
-                 autofocus>
-        </div>
-      </div>
-
-      <div class="form-control-group toggle-switch-spacing">
-        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleAddressChange($event)" formControlName="hasAddress">{{'client.create-form.has-address'|translate}}</nb-toggle>
-        <nb-toggle labelPosition="start" status="info" (checkedChange)="onToggleCarChange($event)" formControlName="hasCar">{{'client.create-form.has-car'|translate}}</nb-toggle>
-      </div>
-
-      <div class="addressForm" formGroupName="address" *ngIf="clientForm.value.hasAddress">
-        <div class="divider dark"></div>
-        <h6>{{'client.create-form.address-title'| translate}}</h6>
-        <div class="form-control-group">
-          <label class="label" for="street">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="street"
-                 formControlName="street"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="number">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="number"
-                 formControlName="number"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="box">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="box"
-                 formControlName="box"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="postalCode">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="postalCode"
-                 formControlName="postalCode"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="locality">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="locality"
-                 formControlName="locality"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="country">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="country"
-                 formControlName="country"
-                 autofocus>
-        </div>
-      </div>
-
-      <div class="carForm" formGroupName="car" *ngIf="clientForm.value.hasCar">
-        <div class="divider dark"></div>
-        <h6>{{'client.create-form.car-title'| translate}}</h6>
-        <div class="form-control-group">
-          <label class="label" for="merch">{{ 'client.create-form.car-merch'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="merch"
-                 formControlName="merch"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="model">{{ 'client.create-form.car-model'| translate }} *</label>
-          <input nbInput
-                 fullWidth
-                 id="model"
-                 formControlName="model"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="color">{{ 'client.create-form.car-color'| translate }}</label>
-          <input nbInput
-                 fullWidth
-                 id="color"
-                 formControlName="color"
-                 autofocus>
-        </div>
-        <div class="form-control-group">
-          <label class="label" for="year">{{ 'client.create-form.car-year'| translate }}</label>
-          <input nbInput
-                 fullWidth
-                 id="year"
-                 formControlName="year"
-                 autofocus>
-        </div>
-      </div>
-    </form>-->
   </nb-card-body>
-  <nb-card-footer>
-    <div class="actions">
-      <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
-      <button nbButton hero status="info" nbStepperNext
-              [disabled]="isNextButtonDisabled"
-              (click)="onSubmitStep()"> {{ nextButtonText }} </button>
-    </div>
-  </nb-card-footer>
 </nb-card>

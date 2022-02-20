@@ -10,7 +10,9 @@
     "create": "Créer",
     "cancel": "Annuler",
     "add": "Ajouter",
-    "next": "Suivant"
+    "next": "Suivant",
+    "previous": "Précédent",
+    "finish": "Finaliser"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -24,8 +26,6 @@
     "service-name": "Nom du service",
     "service-price": "Prix de la prestation",
     "service-code": "Code technique ou initiales",
-    "client-first-name": "Prénom",
-    "client-last-name": "Nom de famille",
 
     "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
@@ -152,17 +152,40 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
     "creation-succeed": "L'ajout de votre nouveau client a été un succès!",
     "creation-failed": "L'ajout de votre client a échoué.",
+
     "columns": {
-      "firstName": "Prénom",
-      "lastName": "Nom de famille",
-      "options": "Informations complémentaires",
+      "clientFullName": "Nom du client",
+      "vehicleNumber": "Nombre de véhicule",
       "locality": "Localité"
     },
     "create-form": {
       "has-address": "Une adresse ?",
       "has-car": "Un véhicule ?",
-      "car-title": "Informations sur le véhicule",
-      "address-title": "Informations sur l'adresse"
+      "client-info-step": "Informations générales",
+      "client-address-step": "Informations postales",
+      "client-car-step": "Véhicule",
+      "first-name": "Prénom",
+      "first-name-required": "Prénom obligatoire",
+      "last-name": "Nom de famille"
     }
+  },
+  "address": {
+    "street": "Rue et numéro",
+    "street-required": "Rue et numéro obligatoire",
+    "box": "Boîte",
+    "postalCode": "Code postale",
+    "postalCode-required": "Code postale obligatoire",
+    "locality": "Localité",
+    "locality-required": "Localité obligatoire",
+    "country": "Pays",
+    "country-required": "Pays obligatoire"
+  },
+  "car": {
+    "merch": "Marque",
+    "merch-required": "Marque obligatoire",
+    "model": "Modèle",
+    "model-required": "Modèle obligatoire",
+    "color": "Couleur",
+    "year": "Année"
   }
 }
