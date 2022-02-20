@@ -45,9 +45,17 @@ export class CreateClientDialogComponent implements OnInit {
     return this.translate.instant('actions.next');
   }
   
+  get isClientInfoLastStep(): boolean {
+    return !this.hasAddressStep && !this.hasCarStep;
+  }
+  
   get carStepNextButtonText(): string {
     if (!this.hasAddressStep) return this.translate.instant('actions.finish');
     return this.translate.instant('actions.next');
+  }
+  
+  get isCarLastStep(): boolean {
+    return !this.hasAddressStep;
   }
 
   get isFirstNameRequiredInput(): boolean {
@@ -99,9 +107,9 @@ export class CreateClientDialogComponent implements OnInit {
   
   onSubmit() {
     const parameters = {
-      address: this.addressInfoForm.getRawValue(),
-      car: this.carInfoForm.getRawValue(),
-      client: this.clientInfoForm.getRawValue()
+      client: this.clientInfoForm.getRawValue(),
+      address: this.hasAddressStep ? this.addressInfoForm.getRawValue(): null,
+      car: this.hasCarStep ? this.carInfoForm.getRawValue(): null
     }
     this.dialogRef.close(parameters);
   }

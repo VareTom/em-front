@@ -33,11 +33,17 @@
             <button nbButton hero status="danger" (click)="onClose()">
               {{ 'actions.cancel'|translate }}
             </button>
-            <button nbButton hero status="info"
-                    [disabled]="!clientInfoForm.valid"
-                    nbStepperNext>
+            <button nbButton hero status="info" *ngIf="isClientInfoLastStep;else clientInfoNotLastStep"
+                    [disabled]="!clientInfoForm.valid" (click)="onSubmit()">
               {{ clientInfoStepNextButtonText }}
             </button>
+            <ng-template #clientInfoNotLastStep>
+              <button nbButton hero status="info"
+                      [disabled]="!clientInfoForm.valid"
+                      nbStepperNext>
+                {{ clientInfoStepNextButtonText }}
+              </button>
+            </ng-template>
           </div>
         </form>
       </nb-step>
@@ -89,11 +95,17 @@
             <button nbButton hero status="info" nbStepperPrevious>
               {{ 'actions.previous'|translate }}
             </button>
-            <button nbButton hero status="info"
-                    [disabled]="!carInfoForm.valid"
-                    nbStepperNext>
+            <button nbButton hero status="info" *ngIf="isCarLastStep;else carNotLastStep"
+                    [disabled]="!carInfoForm.valid" (click)="onSubmit()">
               {{ carStepNextButtonText }}
             </button>
+            <ng-template #carNotLastStep>
+              <button nbButton hero status="info"
+                      [disabled]="!carInfoForm.valid"
+                      nbStepperNext>
+                {{ carStepNextButtonText }}
+              </button>
+            </ng-template>
           </div>
         </form>
       </nb-step>

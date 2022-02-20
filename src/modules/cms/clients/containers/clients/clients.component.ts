@@ -81,6 +81,9 @@ export class ClientsComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           result.client.entityUuid = this.store.value.currentEntity.uuid;
+          if (!result.car) delete result.car;
+          if (!result.address) delete result.address;
+          
           this.clientService.create(result)
             .subscribe({
               next: (createdClient) => {
