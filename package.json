@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration production",
-    "test": "ng test"
+    "test": "ng test",
+    "documentation:serve": "npx @compodoc/compodoc -p tsconfig.json --serve"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@auth0/angular-jwt": "^5.0.2",
+    "@compodoc/compodoc": "^1.1.18",
     "@nebular/eva-icons": "9.0.1",
     "@nebular/theme": "^9.0.1",
     "@ngx-translate/core": "^14.0.0",
