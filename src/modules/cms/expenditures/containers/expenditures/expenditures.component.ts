@@ -43,13 +43,15 @@ export class ExpendituresComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    this.expenditureService.getAllForEntity()
-      .subscribe({
-        next: (expenditures) => {
-          if (expenditures.length > 0) this.refreshDataSource(expenditures);
-        },
-        error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
-      })
+    if (this.store.value.currentEntity) {
+      this.expenditureService.getAllForEntity()
+        .subscribe({
+          next: (expenditures) => {
+            if (expenditures.length > 0) this.refreshDataSource(expenditures);
+          },
+          error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
+        })
+    }
   }
   
   changeSort(sortRequest: NbSortRequest): void {

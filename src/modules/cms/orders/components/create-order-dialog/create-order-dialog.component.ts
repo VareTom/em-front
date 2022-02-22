@@ -9,6 +9,7 @@ import { SelectViewModel } from 'src/shared/models/selectViewModel';
 // Services
 import { ServiceService } from 'src/shared/services/service.service';
 import { ClientService } from 'src/shared/services/client.service';
+import { Store } from 'src/store';
 
 @Component({
   selector: 'app-create-order-dialog',
@@ -31,36 +32,39 @@ export class CreateOrderDialogComponent implements OnInit {
   constructor(protected dialogRef: NbDialogRef<CreateOrderDialogComponent>,
               private translate: TranslateService,
               private toastrService: NbToastrService,
+              private store: Store,
               private readonly serviceService: ServiceService,
               private readonly clientService: ClientService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.clientService.getAllForEntity()
-      .subscribe(
-      {
-        next: (clients) => {
-          this.clients = clients.map(client => new SelectViewModel({
-            name: client.fullName,
-            value: client.uuid
-          }))
-        },
-        error: () => this.toastrService.danger(this.translate.instant('order.retrieve-client-failed'), this.translate.instant('errors.title'))
-      }
-    )
+    if (this.store.value.currentEntity) {
+      this.clientService.getAllForEntity()
+        .subscribe(
+          {
+            next: (clients) => {
+              this.clients = clients.map(client => new SelectViewModel({
+                name: client.fullName,
+                value: client.uuid
+              }))
+            },
+            error: () => this.toastrService.danger(this.translate.instant('order.retrieve-client-failed'), this.translate.instant('errors.title'))
+          }
+        )
   
-    this.serviceService.getAllForEntity()
-      .subscribe(
-        {
-          next: (services) => {
-            this.services = services.map(service => new SelectViewModel({
-              name: service.name,
-              value: service.uuid
-            }))
-          },
-          error: () => this.toastrService.danger(this.translate.instant('order.retrieve-service-failed'), this.translate.instant('errors.title'))
-        }
-      )
+      this.serviceService.getAllForEntity()
+        .subscribe(
+          {
+            next: (services) => {
+              this.services = services.map(service => new SelectViewModel({
+                name: service.name,
+                value: service.uuid
+              }))
+            },
+            error: () => this.toastrService.danger(this.translate.instant('order.retrieve-service-failed'), this.translate.instant('errors.title'))
+          }
+        )
+    }
   }
   
   get isServicesRequired(): boolean {

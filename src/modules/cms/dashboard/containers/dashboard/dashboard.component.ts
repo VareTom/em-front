@@ -22,14 +22,16 @@ export class DashboardComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.statisticService.getAllForEntity()
-      .subscribe({
-        next: (statistic) => {
-          console.log(statistic);
-          this.statistic = statistic;
-        },
-        error: (error) => this.toastrService.danger(this.translate.instant('dashboard.retrieve-failed'), this.translate.instant('errors.title'))
-      })
+    if (this.store.value.currentEntity) {
+      this.statisticService.getAllForEntity()
+        .subscribe({
+          next: (statistic) => {
+            console.log(statistic);
+            this.statistic = statistic;
+          },
+          error: (error) => this.toastrService.danger(this.translate.instant('dashboard.retrieve-failed'), this.translate.instant('errors.title'))
+        })
+    }
   }
   
   get isNewUser(): boolean {

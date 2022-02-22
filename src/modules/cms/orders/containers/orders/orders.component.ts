@@ -41,13 +41,15 @@ export class OrdersComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    this.orderService.getAllForEntity()
-      .subscribe({
-        next: (orders) => {
-          if (orders.length > 0) this.refreshDataSource(orders);
-        },
-        error: (error) => this.toastrService.danger(this.translate.instant('order.retrieve-failed'), this.translate.instant('errors.title'))
-      })
+    if (this.store.value.currentEntity) {
+      this.orderService.getAllForEntity()
+        .subscribe({
+          next: (orders) => {
+            if (orders.length > 0) this.refreshDataSource(orders);
+          },
+          error: (error) => this.toastrService.danger(this.translate.instant('order.retrieve-failed'), this.translate.instant('errors.title'))
+        })
+    }
   }
   
   changeSort(sortRequest: NbSortRequest): void {

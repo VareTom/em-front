@@ -40,13 +40,15 @@ export class ClientsComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
-    this.clientService.getAllForEntity()
-      .subscribe({
-        next: (clients) => {
-          if (clients.length > 0) this.refreshDataSource(clients);
-        },
-        error: (error) => this.toastrService.danger(this.translate.instant('client.retrieve-failed'), this.translate.instant('errors.title'))
-      })
+    if (this.store.value.currentEntity) {
+      this.clientService.getAllForEntity()
+        .subscribe({
+          next: (clients) => {
+            if (clients.length > 0) this.refreshDataSource(clients);
+          },
+          error: (error) => this.toastrService.danger(this.translate.instant('client.retrieve-failed'), this.translate.instant('errors.title'))
+        })
+    }
   }
   
   changeSort(sortRequest: NbSortRequest): void {
