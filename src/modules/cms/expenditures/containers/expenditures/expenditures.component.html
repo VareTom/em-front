@@ -12,15 +12,26 @@
 
             <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
 
-                <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="defaultColumns"></tr>
-                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: defaultColumns"></tr>
+                <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
                 <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
                     <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
                         {{ 'expenditure.columns.'+ column |translate }}
                     </th>
-
                     <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+                </ng-container>
+
+                <ng-container [nbTreeGridColumnDef]="customColumn">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
+                        <button nbButton hero status="info" size="small" (click)="onEdit(row.data)">
+                            <nb-icon icon="edit-outline"></nb-icon>
+                        </button>
+                        <button nbButton hero status="danger" size="small" (click)="onDelete(row.data)">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
+                    </td>
                 </ng-container>
 
             </table>

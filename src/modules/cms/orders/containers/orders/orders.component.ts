@@ -26,7 +26,9 @@ import {
 })
 export class OrdersComponent implements OnInit {
   
+  customColumn = 'actions';
   defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'isValidated' ];
+  allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -101,5 +103,13 @@ export class OrdersComponent implements OnInit {
             })
         }
       })
+  }
+  
+  onDelete(order: Order): void {
+    console.log(order);
+  }
+  
+  onEdit(order: Order): void {
+    console.log(order);
   }
 }

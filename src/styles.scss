@@ -67,6 +67,11 @@ html, body {
 
 .table {
   margin: 20px 0;
+  .actions-column {
+    button:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
 }
 
 .actions {

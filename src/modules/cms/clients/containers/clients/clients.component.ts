@@ -25,7 +25,9 @@ import {
 })
 export class ClientsComponent implements OnInit {
   
-   defaultColumns = [ 'clientFullName', 'vehicleNumber', 'locality' ];
+  customColumn = 'actions';
+  defaultColumns = [ 'clientFullName', 'vehicleNumber', 'locality' ];
+  allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -98,4 +100,11 @@ export class ClientsComponent implements OnInit {
       })
   }
   
+  onDelete(client: Client): void {
+    console.log(client);
+  }
+  
+  onEdit(client: Client): void {
+    console.log(client);
+  }
 }

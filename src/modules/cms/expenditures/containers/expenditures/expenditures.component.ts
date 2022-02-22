@@ -27,8 +27,9 @@ import {
   styleUrls: ['./expenditures.component.scss']
 })
 export class ExpendituresComponent implements OnInit {
-  
+  customColumn = 'actions';
   defaultColumns = [ 'name', 'boughtAt', 'priceInCent' ];
+  allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -103,5 +104,13 @@ export class ExpendituresComponent implements OnInit {
             })
         }
       })
+  }
+  
+  onDelete(expenditure: Expenditure): void {
+    console.log(expenditure);
+  }
+  
+  onEdit(expenditure: Expenditure): void {
+    console.log(expenditure);
   }
 }

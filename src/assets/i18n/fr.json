@@ -12,7 +12,8 @@
     "add": "Ajouter",
     "next": "Suivant",
     "previous": "Précédent",
-    "finish": "Finaliser"
+    "finish": "Finaliser",
+    "actions": "Actions"
   },
   "forms": {
     "email": "Adresse e-mail",

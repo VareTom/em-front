@@ -27,7 +27,9 @@ import {
 })
 export class ServicesComponent implements OnInit {
   
+  customColumn = 'actions';
   defaultColumns = [ 'name', 'code', 'description', 'priceInCent' ];
+  allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -105,5 +107,12 @@ export class ServicesComponent implements OnInit {
         }
       })
   }
-
+  
+  onDelete(service: Service): void {
+    console.log(service);
+  }
+  
+  onEdit(service: Service): void {
+    console.log(service);
+  }
 }
