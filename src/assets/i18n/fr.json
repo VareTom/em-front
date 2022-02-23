@@ -113,6 +113,7 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
     "creation-succeed": "La création de votre nouveau service a été un succès!",
     "creation-failed": "La création de votre service a échouée.",
+    "creation-failed-already-exist": "Un service ayant ce nom est déjà présent!",
     "columns": {
       "name": "Nom du service",
       "code": "Code ou initiales",

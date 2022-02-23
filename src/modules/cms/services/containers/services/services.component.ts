@@ -85,25 +85,9 @@ export class ServicesComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(CreateServiceDialogComponent)
       .onClose
-      .subscribe((result) => {
+      .subscribe((result: Service) => {
         if (result) {
-          const serviceInput = {
-            name: result.name,
-            priceInCent: result.priceInCent * 100,
-            code: result.code,
-            description: result.description,
-            entityUuid: this.store.value.currentEntity.uuid
-          }
-          this.serviceService.create(serviceInput)
-            .subscribe({
-              next: (serviceCreated) => {
-                this.refreshDataSource([serviceCreated])
-                this.toastrService.success(this.translate.instant('service.creation-succeed'))
-              },
-              error: (error) => {
-                this.toastrService.danger(this.translate.instant('service.creation-failed'), this.translate.instant('errors.title'))
-              }
-            })
+          this.refreshDataSource([result]);
         }
       })
   }
