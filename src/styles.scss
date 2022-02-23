@@ -101,3 +101,7 @@ html, body {
 ::-webkit-scrollbar-thumb:hover {
   background: #0095ff;
 }
+
+.break-line-text {
+  white-space: pre-line;
+}

@@ -7,6 +7,7 @@ import {
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
 import { Store } from 'src/store';
+import moment from 'moment';
 
 // Services
 import { OrderService } from 'src/shared/services/order.service';
@@ -14,10 +15,15 @@ import { TranslateService } from '@ngx-translate/core';
 
 // Models
 import { Order } from 'src/shared/models/order';
-import moment from 'moment';
+
+// Components
 import {
   CreateOrderDialogComponent
 } from 'src/modules/cms/orders/components/create-order-dialog/create-order-dialog.component';
+import { ConfirmationDeletionDialogComponent } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+import {
+  ConfirmationValidationDialogComponent
+} from 'src/modules/cms/orders/components/confirmation-validation-dialog/confirmation-validation-dialog.component';
 
 @Component({
   selector: 'app-orders',
@@ -25,7 +31,6 @@ import {
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  
   customColumn = 'actions';
   defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'isValidated' ];
   allColumns = [...this.defaultColumns, this.customColumn];
@@ -94,7 +99,18 @@ export class OrdersComponent implements OnInit {
   }
   
   onDelete(order: Order): void {
-    console.log(order);
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.orderService.delete(order.uuid)
+          .subscribe({
+            next: () => {
+              this.toastrService.success(this.translate.instant('order.deletion-succeed'), this.translate.instant('errors.title'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
   
   onEdit(order: Order): void {
@@ -102,6 +118,17 @@ export class OrdersComponent implements OnInit {
   }
   
   onValidate(order: Order): void {
-    console.log(order);
+    const dialogRef = this.dialogService.open(ConfirmationValidationDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.orderService.validate(order.uuid)
+          .subscribe({
+            next: () => {
+              this.toastrService.success(this.translate.instant('order.validation-succeed'), this.translate.instant('errors.title'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('order.validation-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
 }

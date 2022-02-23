@@ -40,4 +40,20 @@ export class OrderService {
         catchError(error => throwError(error))
       )
   }
+  
+  validate(orderUuid: string): Observable<void> {
+    return this.httpClient.get(`${this.baseRoute}/${orderUuid}/validate`)
+      .pipe(
+        map(() => { }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  delete(orderUuid: string): Observable<void> {
+    return this.httpClient.delete(`${this.baseRoute}/${orderUuid}`)
+      .pipe(
+        map(() => { }),
+        catchError(error => throwError(error))
+      )
+  }
 }

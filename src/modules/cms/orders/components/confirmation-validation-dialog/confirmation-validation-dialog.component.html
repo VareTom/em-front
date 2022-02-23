@@ -1,0 +1,14 @@
+<nb-card accent="success">
+    <nb-card-header>
+        {{'order.validation-dialog.title'|translate}}
+    </nb-card-header>
+    <nb-card-body class="break-line-text">
+        {{'order.validation-dialog.text'|translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="info" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="success" (click)="onConfirm()"> {{ 'actions.validate'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

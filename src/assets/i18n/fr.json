@@ -13,7 +13,10 @@
     "next": "Suivant",
     "previous": "Précédent",
     "finish": "Finaliser",
-    "actions": "Actions"
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "validate": "Valider",
+    "delete": "Supprimer"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -129,6 +132,8 @@
     "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
+    "validation-failed": "La validation a malheureusement échoué.",
+    "validation-succeed": "La validation de votre commande a été un succès!.",
     "validate": "Valider l'opération",
     "columns": {
       "client": "Nom du client",
@@ -147,6 +152,10 @@
       "service-prested-required": "Services prestés obligatoire",
       "performed-at": "Date de la prestation",
       "duration": "Durée de la prestation (en minutes)"
+    },
+    "validation-dialog": {
+      "title": "Validation de la commande",
+      "text": "Vous êtes sur le point de valider une commande, vous ne pourrez plus la modifier.\nÊtes-vous sûr de vouloir le faire ?"
     }
   },
   "client": {
@@ -190,5 +199,9 @@
     "model-required": "Modèle obligatoire",
     "color": "Couleur",
     "year": "Année"
+  },
+  "confirm-deletion-dialog": {
+    "title": "Confirmation de suppression",
+    "text": "Vous êtes sur le point de supprimer quelque chose, êtes-vous certain de vouloir le faire ?\nCette action sera irréversible."
   }
 }

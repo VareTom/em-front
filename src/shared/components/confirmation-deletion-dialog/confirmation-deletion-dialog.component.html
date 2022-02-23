@@ -1,0 +1,14 @@
+<nb-card accent="danger">
+    <nb-card-header>
+        {{'confirm-deletion-dialog.title'|translate}}
+    </nb-card-header>
+    <nb-card-body class="break-line-text">
+        {{'confirm-deletion-dialog.text'|translate}}
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="info" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="danger" (click)="onValidate()"> {{ 'actions.delete'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

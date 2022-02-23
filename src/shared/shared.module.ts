@@ -47,7 +47,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateEntityDialogComponent } from './components/create-entity-dialog/create-entity-dialog.component';
-
+import { ConfirmationDeletionDialogComponent } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
 const nebularToastrConfig = {
   position: NbGlobalLogicalPosition.BOTTOM_END,
@@ -61,7 +61,8 @@ const nebularToastrConfig = {
     // Components
     FooterComponent,
     HeaderComponent,
-    CreateEntityDialogComponent
+    CreateEntityDialogComponent,
+    ConfirmationDeletionDialogComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +96,7 @@ const nebularToastrConfig = {
     NbUserModule,
     NbInputModule,
     NbMenuModule.forRoot(),
-    NbDialogModule.forRoot(),
+    NbDialogModule.forRoot({context: true}),
     NbStepperModule,
   ],
   exports: [
@@ -132,7 +133,8 @@ const nebularToastrConfig = {
     // Components
     FooterComponent,
     HeaderComponent,
-    CreateEntityDialogComponent
+    CreateEntityDialogComponent,
+    ConfirmationDeletionDialogComponent
   ]
 })
 export class SharedModule {
