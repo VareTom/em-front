@@ -64,8 +64,8 @@ export class CreateServiceDialogComponent implements OnInit {
         },
         error: (error) => {
           this.isSubmitted = false;
-          if (error.statusCode === 400) {
-            this.toastrService.info(this.translate.instant('service.creation-failed-already-exist'), this.translate.instant('errors.title'))
+          if (error.error.statusCode === 400) {
+            this.toastrService.warning(this.translate.instant('service.creation-failed-already-exist'), this.translate.instant('errors.title'))
           } else {
             this.toastrService.danger(this.translate.instant('service.creation-failed'), this.translate.instant('errors.title'))
           }
