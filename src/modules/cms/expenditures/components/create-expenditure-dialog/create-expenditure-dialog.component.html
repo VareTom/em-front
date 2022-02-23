@@ -1,4 +1,6 @@
-<nb-card accent="info">
+<nb-card accent="info"
+         [nbSpinner]="isSubmitted"
+         nbSpinnerStatus="info">
     <nb-card-header>{{ 'expenditure.creation'|translate }}</nb-card-header>
     <nb-card-body>
         <form class="container-form" [formGroup]="expenditureForm">

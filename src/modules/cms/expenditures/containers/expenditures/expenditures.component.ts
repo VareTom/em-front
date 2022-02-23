@@ -84,24 +84,9 @@ export class ExpendituresComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(CreateExpenditureDialogComponent)
       .onClose
-      .subscribe((result) => {
+      .subscribe((result: Expenditure) => {
         if (result) {
-          const expenditureInput = {
-            name: result.name,
-            priceInCent: result.priceInCent * 100,
-            boughtAt: result.boughtAt,
-            entityUuid: this.store.value.currentEntity.uuid
-          }
-          this.expenditureService.create(expenditureInput)
-            .subscribe({
-              next: (expenditureCreated) => {
-                this.refreshDataSource([expenditureCreated])
-                this.toastrService.success(this.translate.instant('expenditure.creation-succeed'))
-              },
-              error: (error) => {
-                this.toastrService.danger(this.translate.instant('expenditure.creation-failed'), this.translate.instant('errors.title'))
-              }
-            })
+          this.refreshDataSource([result]);
         }
       })
   }
