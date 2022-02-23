@@ -82,20 +82,9 @@ export class ClientsComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(CreateClientDialogComponent)
       .onClose
-      .subscribe((result) => {
+      .subscribe((result: Client) => {
         if (result) {
-          result.client.entityUuid = this.store.value.currentEntity.uuid;
-          if (!result.car) delete result.car;
-          if (!result.address) delete result.address;
-          
-          this.clientService.create(result)
-            .subscribe({
-              next: (createdClient) => {
-                this.refreshDataSource([createdClient]);
-                this.toastrService.success(this.translate.instant('client.creation-succeed'));
-              },
-              error: (error) => this.toastrService.danger(this.translate.instant('client.creation-failed'), this.translate.instant('errors.title'))
-            })
+          this.refreshDataSource([result]);
         }
       })
   }

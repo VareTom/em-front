@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NbDialogRef, NbStepChangeEvent  } from '@nebular/theme';
+import { NbDialogRef, NbStepChangeEvent, NbToastrService } from '@nebular/theme';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from 'src/store';
+import { ClientService } from 'src/shared/services/client.service';
 
 @Component({
   selector: 'app-create-client-dialog',
@@ -32,9 +34,13 @@ export class CreateClientDialogComponent implements OnInit {
     year: [null],
     color: [null]
   })
+  isSubmitted: boolean = false;
 
   constructor(protected dialogRef: NbDialogRef<CreateClientDialogComponent>,
               private translate: TranslateService,
+              private store: Store,
+              private toastrService: NbToastrService,
+              private readonly clientService: ClientService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -106,11 +112,30 @@ export class CreateClientDialogComponent implements OnInit {
   }
   
   onSubmit() {
+    this.isSubmitted = true;
     const parameters = {
-      client: this.clientInfoForm.getRawValue(),
+      client: {
+        ...this.clientInfoForm.getRawValue(),
+        entityUuid: this.store.value.currentEntity.uuid
+      },
       address: this.hasAddressStep ? this.addressInfoForm.getRawValue(): null,
       car: this.hasCarStep ? this.carInfoForm.getRawValue(): null
     }
-    this.dialogRef.close(parameters);
+   
+    if (!parameters.car) delete parameters.car;
+    if (!parameters.address) delete parameters.address;
+  
+    this.clientService.create(parameters)
+      .subscribe({
+        next: (createdClient) => {
+          this.isSubmitted = false;
+          this.dialogRef.close(createdClient);
+          this.toastrService.success(this.translate.instant('client.creation-succeed'));
+        },
+        error: (error) => {
+          this.isSubmitted = false;
+          this.toastrService.danger(this.translate.instant('client.creation-failed'), this.translate.instant('errors.title'));
+        }
+      })
   }
 }

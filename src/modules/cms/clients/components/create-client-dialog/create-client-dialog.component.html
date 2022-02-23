@@ -1,4 +1,6 @@
-<nb-card accent="info">
+<nb-card accent="info"
+         [nbSpinner]="isSubmitted"
+         nbSpinnerStatus="info">
   <nb-card-header>{{ 'client.creation'|translate }}</nb-card-header>
   <nb-card-body>
     <nb-stepper>
