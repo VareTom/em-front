@@ -86,21 +86,9 @@ export class OrdersComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(CreateOrderDialogComponent)
       .onClose
-      .subscribe(result => {
+      .subscribe((result: Order) => {
         if (result) {
-          console.log(result);
-          const parameters = {
-            ...result,
-            entityUuid: this.store.value.currentEntity.uuid
-          }
-          this.orderService.create(parameters)
-            .subscribe({
-              next: (createdOrder) => {
-                this.refreshDataSource([createdOrder]);
-                this.toastrService.success(this.translate.instant('order.creation-succeed'))
-              },
-              error: () => this.toastrService.danger(this.translate.instant('order.creation-failed'), this.translate.instant('errors.title'))
-            })
+          this.refreshDataSource([result]);
         }
       })
   }
@@ -110,6 +98,10 @@ export class OrdersComponent implements OnInit {
   }
   
   onEdit(order: Order): void {
+    console.log(order);
+  }
+  
+  onValidate(order: Order): void {
     console.log(order);
   }
 }

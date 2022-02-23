@@ -10,6 +10,7 @@ import { SelectViewModel } from 'src/shared/models/selectViewModel';
 import { ServiceService } from 'src/shared/services/service.service';
 import { ClientService } from 'src/shared/services/client.service';
 import { Store } from 'src/store';
+import { OrderService } from 'src/shared/services/order.service';
 
 @Component({
   selector: 'app-create-order-dialog',
@@ -27,6 +28,7 @@ export class CreateOrderDialogComponent implements OnInit {
     durationInMinute: [null],
     performedAt: [null]
   });
+  isSubmitted: boolean = false;
   
 
   constructor(protected dialogRef: NbDialogRef<CreateOrderDialogComponent>,
@@ -35,6 +37,7 @@ export class CreateOrderDialogComponent implements OnInit {
               private store: Store,
               private readonly serviceService: ServiceService,
               private readonly clientService: ClientService,
+              private readonly orderService: OrderService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -82,6 +85,22 @@ export class CreateOrderDialogComponent implements OnInit {
   }
   
   onSubmit(): void {
-    this.dialogRef.close(this.orderForm.value);
+    this.isSubmitted = true;
+    const parameters = {
+      ...this.orderForm.value,
+      entityUuid: this.store.value.currentEntity.uuid
+    }
+    this.orderService.create(parameters)
+      .subscribe({
+        next: (createdOrder) => {
+          this.isSubmitted = false;
+          this.dialogRef.close(createdOrder);
+          this.toastrService.success(this.translate.instant('order.creation-succeed'));
+        },
+        error: () => {
+          this.isSubmitted = false;
+          this.toastrService.danger(this.translate.instant('order.creation-failed'), this.translate.instant('errors.title'));
+        }
+      })
   }
 }

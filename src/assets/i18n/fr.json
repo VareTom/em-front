@@ -129,6 +129,7 @@
     "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
+    "validate": "Valider l'opération",
     "columns": {
       "client": "Nom du client",
       "total": "Total",
