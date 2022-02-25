@@ -79,7 +79,7 @@ export class OrdersComponent implements OnInit {
           uuid: order.uuid,
           client: order.client.fullName,
           total: (order.totalInCent/100).toFixed(2) + '€',
-          duration: order.durationInMinute + 'mins',
+          duration: order.durationInMinute? order.durationInMinute + ' mins': '-',
           serviceNumber: order.services.length,
           performedAt: order.performedAt ? moment(order.performedAt).format('DD/MM/YYYY'): '-',
           validatedAt: order.validatedAt ? moment(order.validatedAt).format('DD/MM/YYYY'): '-',
@@ -88,6 +88,7 @@ export class OrdersComponent implements OnInit {
       })
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
+    console.log(this.dataSource);
   }
   
   onCreate(): void {
@@ -104,10 +105,11 @@ export class OrdersComponent implements OnInit {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        console.log(order);
         this.orderService.delete(order.uuid)
           .subscribe({
             next: () => {
+              const orders = this.data.filter(o => o.data.uuid !== order.uuid);
+              this.dataSource.setData(orders);
               this.toastrService.success(this.translate.instant('order.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))
