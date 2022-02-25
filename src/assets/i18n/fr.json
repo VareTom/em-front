@@ -132,8 +132,11 @@
     "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
+    "deletion-failed": "La suppression a malheureusement échoué.",
+    "deletion-succeed": "La suppression de votre commande a été un succès!",
     "validation-failed": "La validation a malheureusement échoué.",
-    "validation-succeed": "La validation de votre commande a été un succès!.",
+    "validation-failed-already-validate": "Impossible de valider une commande déjà validée.",
+    "validation-succeed": "La validation de votre commande a été un succès!",
     "validate": "Valider l'opération",
     "columns": {
       "client": "Nom du client",
@@ -141,7 +144,7 @@
       "duration": "Temps de la prestation",
       "serviceNumber": "Nombre de service",
       "performedAt": "Date de la prestation",
-      "isValidated": "Commande cloturée ?"
+      "validatedAt": "Date de la validation"
     },
     "create-form": {
       "select-service": "Sélectionnez au moins un service",

@@ -32,7 +32,7 @@ import {
 })
 export class OrdersComponent implements OnInit {
   customColumn = 'actions';
-  defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'isValidated' ];
+  defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'validatedAt' ];
   allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
@@ -76,12 +76,14 @@ export class OrdersComponent implements OnInit {
     orders.forEach(order => {
       this.data.push({
         data: {
+          uuid: order.uuid,
           client: order.client.fullName,
           total: (order.totalInCent/100).toFixed(2) + '€',
           duration: order.durationInMinute + 'mins',
           serviceNumber: order.services.length,
-          performedAt: order.performedAt? moment(order.performedAt).format('DD/MM/YYYY'): '-',
-          isValidated: order.validatedAt ? this.translate.instant('global.yes'): this.translate.instant('global.no')
+          performedAt: order.performedAt ? moment(order.performedAt).format('DD/MM/YYYY'): '-',
+          validatedAt: order.validatedAt ? moment(order.validatedAt).format('DD/MM/YYYY'): '-',
+          isValidated: !!order.validatedAt
         }
       })
     })
@@ -102,10 +104,11 @@ export class OrdersComponent implements OnInit {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
+        console.log(order);
         this.orderService.delete(order.uuid)
           .subscribe({
             next: () => {
-              this.toastrService.success(this.translate.instant('order.deletion-succeed'), this.translate.instant('errors.title'));
+              this.toastrService.success(this.translate.instant('order.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))
           })
@@ -124,9 +127,15 @@ export class OrdersComponent implements OnInit {
         this.orderService.validate(order.uuid)
           .subscribe({
             next: () => {
-              this.toastrService.success(this.translate.instant('order.validation-succeed'), this.translate.instant('errors.title'));
+              this.toastrService.success(this.translate.instant('order.validation-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('order.validation-failed'), this.translate.instant('errors.title'))
+            error: (error) => {
+              if (error.error.statusCode === 400) {
+                this.toastrService.danger(this.translate.instant('order.validation-failed-already-validate'), this.translate.instant('errors.title'))
+              } else {
+                this.toastrService.danger(this.translate.instant('order.validation-failed'), this.translate.instant('errors.title'))
+              }
+            }
           })
       }
     })
