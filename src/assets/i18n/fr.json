@@ -132,7 +132,7 @@
     "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
-    "deletion-failed": "La suppression a malheureusement échoué.",
+    "deletion-failed": "La suppression de votre commande a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre commande a été un succès!",
     "validation-failed": "La validation a malheureusement échoué.",
     "validation-failed-already-validate": "Impossible de valider une commande déjà validée.",
@@ -167,6 +167,8 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
     "creation-succeed": "L'ajout de votre nouveau client a été un succès!",
     "creation-failed": "L'ajout de votre client a échoué.",
+    "deletion-failed": "La suppression de votre client a malheureusement échoué.",
+    "deletion-succeed": "La suppression de votre client a été un succès!",
 
     "columns": {
       "clientFullName": "Nom du client",

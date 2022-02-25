@@ -17,6 +17,9 @@ import { Client } from 'src/shared/models/client';
 import {
   CreateClientDialogComponent
 } from 'src/modules/cms/clients/components/create-client-dialog/create-client-dialog.component';
+import {
+  ConfirmationDeletionDialogComponent
+} from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
 @Component({
   selector: 'app-clients',
@@ -70,6 +73,7 @@ export class ClientsComponent implements OnInit {
     clients.forEach(client => {
       this.data.push({
         data: {
+          uuid: client.uuid,
           clientFullName: client.fullName,
           vehicleNumber: client.cars.length,
           locality: client.address?.locality ?? '-'
@@ -90,7 +94,20 @@ export class ClientsComponent implements OnInit {
   }
   
   onDelete(client: Client): void {
-    console.log(client);
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.delete(client.uuid)
+          .subscribe({
+            next: () => {
+              const clients = this.data.filter(c => c.data.uuid !== client.uuid);
+              this.dataSource.setData(clients);
+              this.toastrService.success(this.translate.instant('client.deletion-succeed'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
   
   onEdit(client: Client): void {
