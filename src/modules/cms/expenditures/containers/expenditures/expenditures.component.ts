@@ -20,6 +20,9 @@ import { Expenditure } from 'src/shared/models/expenditure';
 import {
   CreateExpenditureDialogComponent
 } from 'src/modules/cms/expenditures/components/create-expenditure-dialog/create-expenditure-dialog.component';
+import {
+  ConfirmationDeletionDialogComponent
+} from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
 @Component({
   selector: 'app-expenditures',
@@ -72,6 +75,7 @@ export class ExpendituresComponent implements OnInit {
     expenditures.forEach(expenditure => {
       this.data.push({
         data: {
+          uuid: expenditure.uuid,
           name: expenditure.name,
           boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('DD/MM/YYYY'): '-',
           priceInCent: (expenditure.priceInCent / 100).toFixed(2) + ' €'
@@ -92,7 +96,20 @@ export class ExpendituresComponent implements OnInit {
   }
   
   onDelete(expenditure: Expenditure): void {
-    console.log(expenditure);
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.expenditureService.delete(expenditure.uuid)
+          .subscribe({
+            next: () => {
+              const expenditures = this.data.filter(ex => ex.data.uuid !== expenditure.uuid);
+              this.dataSource.setData(expenditures);
+              this.toastrService.success(this.translate.instant('expenditure.deletion-succeed'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('expenditure.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
   
   onEdit(expenditure: Expenditure): void {

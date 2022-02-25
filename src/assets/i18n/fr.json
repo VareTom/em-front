@@ -104,6 +104,8 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
     "creation-succeed": "La création de votre nouvelle dépense a été un succès!",
     "creation-failed": "La création de votre dépense a échouée.",
+    "deletion-failed": "La suppression de votre dépense a malheureusement échoué.",
+    "deletion-succeed": "La suppression de votre dépense a été un succès!",
     "columns": {
       "name": "Nom de la dépense",
       "boughtAt": "Date d'achat",
