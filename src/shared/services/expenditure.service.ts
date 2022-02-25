@@ -40,4 +40,12 @@ export class ExpenditureService {
         catchError(error => throwError(error))
       )
   }
+  
+  delete(expenditureUuid: string): Observable<void> {
+    return this.httpClient.delete(`${this.baseRoute}/${expenditureUuid}`)
+      .pipe(
+        map(() => { }),
+        catchError(error => throwError(error))
+      )
+  }
 }

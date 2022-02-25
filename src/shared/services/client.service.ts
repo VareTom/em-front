@@ -40,4 +40,12 @@ export class ClientService {
         catchError(error => throwError(error))
       )
   }
+  
+  delete(clientUuid: string): Observable<void> {
+    return this.httpClient.delete(`${this.baseRoute}/${clientUuid}`)
+      .pipe(
+        map(() => { }),
+        catchError(error => throwError(error))
+      )
+  }
 }
