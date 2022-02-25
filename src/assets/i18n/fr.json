@@ -119,6 +119,8 @@
     "creation-succeed": "La création de votre nouveau service a été un succès!",
     "creation-failed": "La création de votre service a échouée.",
     "creation-failed-already-exist": "Un service ayant ce nom est déjà présent!",
+    "deletion-failed": "La suppression de votre service a malheureusement échoué.",
+    "deletion-succeed": "La suppression de votre service a été un succès!",
     "columns": {
       "name": "Nom du service",
       "code": "Code ou initiales",

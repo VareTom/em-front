@@ -19,6 +19,9 @@ import { Service } from 'src/shared/models/service';
 import {
   CreateServiceDialogComponent
 } from 'src/modules/cms/services/components/create-service-dialog/create-service-dialog.component';
+import {
+  ConfirmationDeletionDialogComponent
+} from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
 @Component({
   selector: 'app-services',
@@ -72,6 +75,7 @@ export class ServicesComponent implements OnInit {
     services.forEach(service => {
       this.data.push({
         data: {
+          uuid: service.uuid,
           name: service.name,
           code: service.code ?? '-',
           description: service.description ?? '-',
@@ -93,7 +97,20 @@ export class ServicesComponent implements OnInit {
   }
   
   onDelete(service: Service): void {
-    console.log(service);
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.serviceService.delete(service.uuid)
+          .subscribe({
+            next: () => {
+              const services = this.data.filter(s => s.data.uuid !== service.uuid);
+              this.dataSource.setData(services);
+              this.toastrService.success(this.translate.instant('service.deletion-succeed'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('service.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
   
   onEdit(service: Service): void {
