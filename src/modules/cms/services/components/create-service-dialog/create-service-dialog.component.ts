@@ -7,12 +7,16 @@ import { Store } from 'src/store';
 import { TranslateService } from '@ngx-translate/core';
 import { ServiceService } from 'src/shared/services/service.service';
 
+// Models
+import { Service } from 'src/shared/models/service';
+
 @Component({
   selector: 'app-create-service-dialog',
   templateUrl: './create-service-dialog.component.html',
   styleUrls: ['./create-service-dialog.component.scss']
 })
 export class CreateServiceDialogComponent implements OnInit {
+  serviceToUpdate: Service
   
   serviceForm: FormGroup = this.formBuilder.group({
     name: [null, Validators.required],
@@ -30,6 +34,14 @@ export class CreateServiceDialogComponent implements OnInit {
               private formBuilder: FormBuilder) { }
   
   ngOnInit(): void {
+    if (this.serviceToUpdate) {
+      this.serviceForm.patchValue({
+        name: this.serviceToUpdate.name,
+        priceInCent: +this.serviceToUpdate.priceInCent.toString().split('€')[0],
+        code: this.serviceToUpdate.code,
+        description: this.serviceToUpdate.description
+      })
+    }
   }
   
   get isNameRequiredInput(): boolean {
@@ -55,7 +67,16 @@ export class CreateServiceDialogComponent implements OnInit {
       description: this.serviceForm.value.description,
       entityUuid: this.store.value.currentEntity.uuid
     }
-    this.serviceService.create(serviceInput)
+    
+    if (this.serviceToUpdate) {
+      this.onUpdate(serviceInput);
+    } else {
+      this.onCreate(serviceInput);
+    }
+  }
+  
+  onCreate(createInput: any): void {
+    this.serviceService.create(createInput)
       .subscribe({
         next: (serviceCreated) => {
           this.isSubmitted = false;
@@ -69,6 +90,22 @@ export class CreateServiceDialogComponent implements OnInit {
           } else {
             this.toastrService.danger(this.translate.instant('service.creation-failed'), this.translate.instant('errors.title'))
           }
+        }
+      })
+  }
+  
+  onUpdate(updateInput: any): void {
+    delete updateInput.entityUuid;
+    this.serviceService.update(this.serviceToUpdate.uuid,updateInput)
+      .subscribe({
+        next: (serviceUpdated) => {
+          this.isSubmitted = false;
+          this.toastrService.success(this.translate.instant('service.update-succeed'));
+          this.dialogRef.close(serviceUpdated);
+        },
+        error: (error) => {
+          this.isSubmitted = false;
+          this.toastrService.danger(this.translate.instant('service.update-failed'), this.translate.instant('errors.title'));
         }
       })
   }

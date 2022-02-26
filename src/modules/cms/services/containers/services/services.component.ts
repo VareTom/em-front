@@ -114,6 +114,18 @@ export class ServicesComponent implements OnInit {
   }
   
   onEdit(service: Service): void {
-    console.log(service);
+    this.dialogService.open(CreateServiceDialogComponent, {
+      context: {
+        serviceToUpdate: service
+      }
+    })
+      .onClose
+      .subscribe((result: Service) => {
+        if (result) {
+          console.log()
+          const serviceUpdated = ''
+          this.refreshDataSource([result]);
+        }
+      })
   }
 }

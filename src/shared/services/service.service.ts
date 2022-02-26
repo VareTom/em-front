@@ -48,4 +48,14 @@ export class ServiceService {
         catchError(error => throwError(error))
       )
   }
+  
+  update (serviceUuid: string, parameters: any): Observable<Service> {
+    return this.httpClient.put(`${this.baseRoute}/${serviceUuid}`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Service(result);
+        }),
+        catchError(error => throwError(error))
+      );
+  }
 }

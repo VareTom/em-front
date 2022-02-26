@@ -34,13 +34,13 @@ export class CreateExpenditureDialogComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.expenditureForm.patchValue({
-      name: this.expenditureToUpdate.name,
-      priceInCent: +this.expenditureToUpdate.priceInCent.toString().split('€')[0],
-      boughtAt: this.expenditureToUpdate.boughtAt !== '-' ? this.expenditureToUpdate.boughtAt: null,
-    });
-    
-    console.log(this.expenditureForm.value);
+    if (this.expenditureToUpdate) {
+      this.expenditureForm.patchValue({
+        name: this.expenditureToUpdate.name,
+        priceInCent: +this.expenditureToUpdate.priceInCent.toString().split('€')[0],
+        boughtAt: this.expenditureToUpdate.boughtAt !== '-' ? this.expenditureToUpdate.boughtAt: null,
+      });
+    }
   }
   
   get isNameRequiredInput(): boolean {
