@@ -39,6 +39,8 @@ export class ExpendituresComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  toggleFilterLabel: string = this.translate.instant('filters.monthly');
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -77,7 +79,7 @@ export class ExpendituresComponent implements OnInit {
         data: {
           uuid: expenditure.uuid,
           name: expenditure.name,
-          boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('DD/MM/YYYY'): '-',
+          boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('yyyy-MM-DD'): '-',
           priceInCent: (expenditure.priceInCent / 100).toFixed(2) + ' €'
         }
       })
@@ -114,5 +116,24 @@ export class ExpendituresComponent implements OnInit {
   
   onEdit(expenditure: Expenditure): void {
     console.log(expenditure);
+    this.dialogService.open(CreateExpenditureDialogComponent, {
+      context: {
+        expenditureToUpdate: expenditure
+      }
+    })
+      .onClose
+      .subscribe((result: Expenditure) => {
+        if (result) {
+          this.refreshDataSource([result]);
+        }
+      })
+  }
+  
+  onToggleFilters(event: boolean) {
+    if (event) {
+      this.toggleFilterLabel = this.translate.instant('filters.all-time');
+    } else {
+      this.toggleFilterLabel = this.translate.instant('filters.monthly');
+    }
   }
 }

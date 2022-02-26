@@ -41,11 +41,21 @@ export class ExpenditureService {
       )
   }
   
-  delete(expenditureUuid: string): Observable<void> {
+  delete (expenditureUuid: string): Observable<void> {
     return this.httpClient.delete(`${this.baseRoute}/${expenditureUuid}`)
       .pipe(
         map(() => { }),
         catchError(error => throwError(error))
       )
+  }
+  
+  update (expenditureUuid: string, parameters: any): Observable<Expenditure> {
+    return this.httpClient.put(`${this.baseRoute}/${expenditureUuid}`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Expenditure(result);
+        }),
+        catchError(error => throwError(error))
+      );
   }
 }

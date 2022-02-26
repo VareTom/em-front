@@ -4,6 +4,10 @@
     "yes": "Oui",
     "no": "Non"
   },
+  "filters": {
+    "monthly": "Ce mois-ci",
+    "all-time": "Depuis le début"
+  },
   "actions": {
     "login": "Connexion",
     "register": "Création de mon compte",
@@ -104,6 +108,8 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
     "creation-succeed": "La création de votre nouvelle dépense a été un succès!",
     "creation-failed": "La création de votre dépense a échouée.",
+    "update-succeed": "La mise à jour de votre dépense a été un succès!",
+    "update-failed": "La mise à jour de votre dépense a échouée.",
     "deletion-failed": "La suppression de votre dépense a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre dépense a été un succès!",
     "columns": {
