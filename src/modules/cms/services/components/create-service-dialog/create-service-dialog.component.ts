@@ -25,6 +25,7 @@ export class CreateServiceDialogComponent implements OnInit {
     description: [null]
   })
   isSubmitted: boolean = false;
+  submitButtonText: string = this.translate.instant('actions.create');
   
   constructor(protected dialogRef: NbDialogRef<CreateServiceDialogComponent>,
               private store: Store,
@@ -35,6 +36,7 @@ export class CreateServiceDialogComponent implements OnInit {
   
   ngOnInit(): void {
     if (this.serviceToUpdate) {
+      this.submitButtonText = this.translate.instant('actions.update');
       this.serviceForm.patchValue({
         name: this.serviceToUpdate.name,
         priceInCent: +this.serviceToUpdate.priceInCent.toString().split('€')[0],

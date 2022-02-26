@@ -10,6 +10,10 @@
             </div>
             <div class="divider"></div>
 
+            <div class="filters">
+                <nb-toggle status="info" (checkedChange)="onToggleFilters($event)" labelPosition="start">{{ toggleFilterLabel }}</nb-toggle>
+            </div>
+
             <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
 
                 <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>

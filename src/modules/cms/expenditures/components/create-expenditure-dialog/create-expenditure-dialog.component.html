@@ -61,7 +61,7 @@
             <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
             <button nbButton hero status="info"
                     [disabled]="!expenditureForm.valid"
-                    (click)="onSubmit()"> {{ 'actions.add'|translate }} </button>
+                    (click)="onSubmit()"> {{ submitButtonText }} </button>
         </div>
     </nb-card-footer>
 </nb-card>

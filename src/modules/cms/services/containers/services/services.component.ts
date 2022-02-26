@@ -39,6 +39,8 @@ export class ServicesComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  toggleFilterLabel: string = this.translate.instant('filters.monthly');
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -127,5 +129,13 @@ export class ServicesComponent implements OnInit {
           this.refreshDataSource([result]);
         }
       })
+  }
+  
+  onToggleFilters(event: boolean) {
+    if (event) {
+      this.toggleFilterLabel = this.translate.instant('filters.all-time');
+    } else {
+      this.toggleFilterLabel = this.translate.instant('filters.monthly');
+    }
   }
 }

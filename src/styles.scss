@@ -57,6 +57,12 @@ html, body {
       //height: 40px;
     }
   }
+
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+  }
 }
 
 .divider {

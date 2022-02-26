@@ -20,7 +20,8 @@
     "actions": "Actions",
     "confirm": "Confirmer",
     "validate": "Valider",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "update": "Mettre à jour"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -124,6 +125,8 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos dépenses.",
     "creation-succeed": "La création de votre nouveau service a été un succès!",
     "creation-failed": "La création de votre service a échouée.",
+    "update-succeed": "La mise à jour de votre service a été un succès!",
+    "update-failed": "La mise à jour de votre service a échouée.",
     "creation-failed-already-exist": "Un service ayant ce nom est déjà présent!",
     "deletion-failed": "La suppression de votre service a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre service a été un succès!",

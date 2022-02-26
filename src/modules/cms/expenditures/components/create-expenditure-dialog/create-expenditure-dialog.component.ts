@@ -9,7 +9,6 @@ import { ExpenditureService } from 'src/shared/services/expenditure.service';
 
 // Models
 import { Expenditure } from 'src/shared/models/expenditure';
-import moment from 'moment';
 
 @Component({
   selector: 'app-create-expenditure-dialog',
@@ -25,6 +24,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
     boughtAt: [null]
   })
   isSubmitted: boolean = false;
+  submitButtonText: string = this.translate.instant('actions.add');
   
   constructor(protected dialogRef: NbDialogRef<CreateExpenditureDialogComponent>,
               private translate: TranslateService,
@@ -35,6 +35,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.expenditureToUpdate) {
+      this.submitButtonText = this.translate.instant('actions.update');
       this.expenditureForm.patchValue({
         name: this.expenditureToUpdate.name,
         priceInCent: +this.expenditureToUpdate.priceInCent.toString().split('€')[0],
