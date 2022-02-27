@@ -111,8 +111,8 @@ export class OrdersComponent implements OnInit {
         this.orderService.delete(order.uuid)
           .subscribe({
             next: () => {
-              const orders = this.data.filter(o => o.data.uuid !== order.uuid);
-              this.dataSource.setData(orders);
+              this.data = this.data.filter(o => o.data.uuid !== order.uuid);
+              this.dataSource.setData(this.data);
               this.toastrService.success(this.translate.instant('order.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))

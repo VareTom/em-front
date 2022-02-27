@@ -105,8 +105,8 @@ export class ServicesComponent implements OnInit {
         this.serviceService.delete(service.uuid)
           .subscribe({
             next: () => {
-              const services = this.data.filter(s => s.data.uuid !== service.uuid);
-              this.dataSource.setData(services);
+              this.data = this.data.filter(s => s.data.uuid !== service.uuid);
+              this.dataSource.setData(this.data);
               this.toastrService.success(this.translate.instant('service.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('service.deletion-failed'), this.translate.instant('errors.title'))

@@ -100,8 +100,8 @@ export class ClientsComponent implements OnInit {
         this.clientService.delete(client.uuid)
           .subscribe({
             next: () => {
-              const clients = this.data.filter(c => c.data.uuid !== client.uuid);
-              this.dataSource.setData(clients);
+              this.data = this.data.filter(c => c.data.uuid !== client.uuid);
+              this.dataSource.setData(this.data);
               this.toastrService.success(this.translate.instant('client.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
