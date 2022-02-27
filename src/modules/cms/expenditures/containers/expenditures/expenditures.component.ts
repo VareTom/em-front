@@ -124,6 +124,7 @@ export class ExpendituresComponent implements OnInit {
       .onClose
       .subscribe((result: Expenditure) => {
         if (result) {
+          this.data = this.data.filter(e => e.data.uuid !== result.uuid);
           this.refreshDataSource([result]);
         }
       })

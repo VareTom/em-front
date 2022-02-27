@@ -124,8 +124,7 @@ export class ServicesComponent implements OnInit {
       .onClose
       .subscribe((result: Service) => {
         if (result) {
-          console.log(result);
-          const serviceUpdated = ''
+          this.data = this.data.filter(s => s.data.uuid !== result.uuid);
           this.refreshDataSource([result]);
         }
       })

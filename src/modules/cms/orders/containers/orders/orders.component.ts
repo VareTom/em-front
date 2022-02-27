@@ -130,6 +130,7 @@ export class OrdersComponent implements OnInit {
       .onClose
       .subscribe((result: Order) => {
         if (result) {
+          this.data = this.data.filter(o => o.data.uuid !== result.uuid);
           this.refreshDataSource([result]);
         }
       })

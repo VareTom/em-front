@@ -78,7 +78,7 @@ export class CreateOrderDialogComponent implements OnInit {
         performedAt: this.orderToUpdate.performedAt !== '-' ? this.orderToUpdate.performedAt: null,
         clientUuid: this.orderToUpdate.client.uuid ?? null,
         servicesUuid: this.orderToUpdate.services.map(service => service.uuid)
-      })
+      });
     }
   }
   
