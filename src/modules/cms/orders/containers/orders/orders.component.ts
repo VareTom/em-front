@@ -32,13 +32,15 @@ import {
 })
 export class OrdersComponent implements OnInit {
   customColumn = 'actions';
-  defaultColumns = [ 'client', 'total', 'duration', 'serviceNumber', 'performedAt', 'validatedAt' ];
+  defaultColumns = [ 'clientName', 'total', 'duration', 'serviceNumber', 'performedAt', 'validatedAt' ];
   allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
+  
+  toggleFilterLabel: string = this.translate.instant('filters.monthly');
   
   constructor(private dialogService: NbDialogService,
               private store: Store,
@@ -77,18 +79,19 @@ export class OrdersComponent implements OnInit {
       this.data.push({
         data: {
           uuid: order.uuid,
-          client: order.client.fullName,
+          client: order.client,
+          clientName: order.client.fullName,
           total: (order.totalInCent/100).toFixed(2) + '€',
-          duration: order.durationInMinute? order.durationInMinute + ' mins': '-',
+          duration: order.duration? order.duration + ' mins': '-',
           serviceNumber: order.services.length,
-          performedAt: order.performedAt ? moment(order.performedAt).format('DD/MM/YYYY'): '-',
-          validatedAt: order.validatedAt ? moment(order.validatedAt).format('DD/MM/YYYY'): '-',
+          services: order.services,
+          performedAt: order.performedAt ? moment(order.performedAt).format('yyyy-MM-DD'): '-',
+          validatedAt: order.validatedAt ? moment(order.validatedAt).format('yyyy-MM-DD'): '-',
           isValidated: !!order.validatedAt
         }
       })
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
-    console.log(this.dataSource);
   }
   
   onCreate(): void {
@@ -119,7 +122,17 @@ export class OrdersComponent implements OnInit {
   }
   
   onEdit(order: Order): void {
-    console.log(order);
+    this.dialogService.open(CreateOrderDialogComponent,{
+      context: {
+        orderToUpdate: order
+      }
+    })
+      .onClose
+      .subscribe((result: Order) => {
+        if (result) {
+          this.refreshDataSource([result]);
+        }
+      })
   }
   
   onValidate(order: Order): void {
@@ -141,5 +154,13 @@ export class OrdersComponent implements OnInit {
           })
       }
     })
+  }
+  
+  onToggleFilters(event: boolean): void {
+    if (event) {
+      this.toggleFilterLabel = this.translate.instant('filters.all-time');
+    } else {
+      this.toggleFilterLabel = this.translate.instant('filters.monthly');
+    }
   }
 }

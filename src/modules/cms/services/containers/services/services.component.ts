@@ -124,14 +124,14 @@ export class ServicesComponent implements OnInit {
       .onClose
       .subscribe((result: Service) => {
         if (result) {
-          console.log()
+          console.log(result);
           const serviceUpdated = ''
           this.refreshDataSource([result]);
         }
       })
   }
   
-  onToggleFilters(event: boolean) {
+  onToggleFilters(event: boolean): void {
     if (event) {
       this.toggleFilterLabel = this.translate.instant('filters.all-time');
     } else {

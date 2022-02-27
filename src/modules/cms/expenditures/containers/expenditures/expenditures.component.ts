@@ -129,7 +129,7 @@ export class ExpendituresComponent implements OnInit {
       })
   }
   
-  onToggleFilters(event: boolean) {
+  onToggleFilters(event: boolean): void {
     if (event) {
       this.toggleFilterLabel = this.translate.instant('filters.all-time');
     } else {

@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from 'src/store';
 
 // Models
 import { SelectViewModel } from 'src/shared/models/selectViewModel';
+import { Order } from 'src/shared/models/order';
 
 // Services
 import { ServiceService } from 'src/shared/services/service.service';
 import { ClientService } from 'src/shared/services/client.service';
-import { Store } from 'src/store';
 import { OrderService } from 'src/shared/services/order.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { OrderService } from 'src/shared/services/order.service';
   styleUrls: ['./create-order-dialog.component.scss']
 })
 export class CreateOrderDialogComponent implements OnInit {
+  orderToUpdate: Order;
   
   services: SelectViewModel[];
   clients: SelectViewModel[];
@@ -29,7 +31,7 @@ export class CreateOrderDialogComponent implements OnInit {
     performedAt: [null]
   });
   isSubmitted: boolean = false;
-  
+  submitButtonText: string = this.translate.instant('actions.add');
 
   constructor(protected dialogRef: NbDialogRef<CreateOrderDialogComponent>,
               private translate: TranslateService,
@@ -68,6 +70,16 @@ export class CreateOrderDialogComponent implements OnInit {
           }
         )
     }
+    
+    if (this.orderToUpdate) {
+      this.submitButtonText = this.translate.instant('actions.update');
+      this.orderForm.patchValue({
+        durationInMinute: this.orderToUpdate.duration.toString() !== '-' ?this.orderToUpdate.duration.toString().split(' ')[0]: null,
+        performedAt: this.orderToUpdate.performedAt !== '-' ? this.orderToUpdate.performedAt: null,
+        clientUuid: this.orderToUpdate.client.uuid ?? null,
+        servicesUuid: this.orderToUpdate.services.map(service => service.uuid)
+      })
+    }
   }
   
   get isServicesRequired(): boolean {
@@ -90,16 +102,41 @@ export class CreateOrderDialogComponent implements OnInit {
       ...this.orderForm.value,
       entityUuid: this.store.value.currentEntity.uuid
     }
-    this.orderService.create(parameters)
+    
+    if (this.orderToUpdate) {
+      this.onUpdate(parameters);
+    } else {
+      this.onCreate(parameters);
+    }
+  }
+  
+  onCreate(createInput: any): void {
+    this.orderService.create(createInput)
       .subscribe({
         next: (createdOrder) => {
           this.isSubmitted = false;
-          this.dialogRef.close(createdOrder);
           this.toastrService.success(this.translate.instant('order.creation-succeed'));
+          this.dialogRef.close(createdOrder);
         },
         error: () => {
           this.isSubmitted = false;
           this.toastrService.danger(this.translate.instant('order.creation-failed'), this.translate.instant('errors.title'));
+        }
+      })
+  }
+  
+  onUpdate(updateInput: any): void {
+    delete updateInput.entityUuid;
+    this.orderService.update(this.orderToUpdate.uuid, updateInput)
+      .subscribe({
+        next: (orderUpdated) => {
+          this.isSubmitted = false;
+          this.toastrService.success(this.translate.instant('order.update-succeed'));
+          this.dialogRef.close(orderUpdated);
+        },
+        error: () => {
+          this.isSubmitted = false;
+          this.toastrService.danger(this.translate.instant('order.update-failed'), this.translate.instant('errors.title'));
         }
       })
   }

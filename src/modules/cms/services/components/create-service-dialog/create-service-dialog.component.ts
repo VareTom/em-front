@@ -82,8 +82,8 @@ export class CreateServiceDialogComponent implements OnInit {
       .subscribe({
         next: (serviceCreated) => {
           this.isSubmitted = false;
-          this.dialogRef.close(serviceCreated);
           this.toastrService.success(this.translate.instant('service.creation-succeed'))
+          this.dialogRef.close(serviceCreated);
         },
         error: (error) => {
           this.isSubmitted = false;
@@ -98,7 +98,7 @@ export class CreateServiceDialogComponent implements OnInit {
   
   onUpdate(updateInput: any): void {
     delete updateInput.entityUuid;
-    this.serviceService.update(this.serviceToUpdate.uuid,updateInput)
+    this.serviceService.update(this.serviceToUpdate.uuid, updateInput)
       .subscribe({
         next: (serviceUpdated) => {
           this.isSubmitted = false;

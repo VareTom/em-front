@@ -145,6 +145,8 @@
     "retrieve-services-failed": "Impossible de récupérer la liste de vos services.",
     "creation-succeed": "L'encodage de votre nouvelle commande a été un succès!",
     "creation-failed": "L'encodage de votre commande a échoué.",
+    "update-succeed": "La mise à jour de votre commande a été un succès!",
+    "update-failed": "La mise à jour de votre commande a échoué.",
     "deletion-failed": "La suppression de votre commande a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre commande a été un succès!",
     "validation-failed": "La validation a malheureusement échoué.",
@@ -152,7 +154,7 @@
     "validation-succeed": "La validation de votre commande a été un succès!",
     "validate": "Valider l'opération",
     "columns": {
-      "client": "Nom du client",
+      "clientName": "Nom du client",
       "total": "Total",
       "duration": "Temps de la prestation",
       "serviceNumber": "Nombre de service",

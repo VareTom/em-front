@@ -3,7 +3,7 @@ import { Service } from 'src/shared/models/service';
 
 export class Order {
   uuid: string;
-  durationInMinute: number;
+  duration: number;
   totalInCent: number;
   performedAt: string;
   validatedAt: string;
@@ -14,7 +14,7 @@ export class Order {
   
   constructor(json: any) {
     this.uuid = json.uuid;
-    this.durationInMinute = json.durationInMinute;
+    this.duration = json.durationInMinute;
     this.totalInCent = json.totalInCent;
     this.performedAt = json.performedAt;
     this.validatedAt = json.validatedAt;

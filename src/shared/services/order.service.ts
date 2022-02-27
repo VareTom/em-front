@@ -41,7 +41,7 @@ export class OrderService {
       )
   }
   
-  validate(orderUuid: string): Observable<void> {
+  validate (orderUuid: string): Observable<void> {
     return this.httpClient.get(`${this.baseRoute}/${orderUuid}/validate`)
       .pipe(
         map(() => { }),
@@ -49,10 +49,20 @@ export class OrderService {
       )
   }
   
-  delete(orderUuid: string): Observable<void> {
+  delete (orderUuid: string): Observable<void> {
     return this.httpClient.delete(`${this.baseRoute}/${orderUuid}`)
       .pipe(
         map(() => { }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  update (orderUuid: string, parameters: any): Observable<Order> {
+    return this.httpClient.put(`${this.baseRoute}/${orderUuid}`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Order(result);
+        }),
         catchError(error => throwError(error))
       )
   }
