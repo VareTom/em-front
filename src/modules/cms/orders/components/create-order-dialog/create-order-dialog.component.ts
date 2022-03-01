@@ -99,7 +99,10 @@ export class CreateOrderDialogComponent implements OnInit {
   onSubmit(): void {
     this.isSubmitted = true;
     const parameters = {
-      ...this.orderForm.value,
+      durationInMinute: +this.orderForm.value.durationInMinute,
+      performedAt: this.orderForm.value.performedAt,
+      clientUuid: this.orderForm.value.clientUuid,
+      servicesUuid: this.orderForm.value.servicesUuid,
       entityUuid: this.store.value.currentEntity.uuid
     }
     
@@ -127,6 +130,7 @@ export class CreateOrderDialogComponent implements OnInit {
   
   onUpdate(updateInput: any): void {
     delete updateInput.entityUuid;
+    console.log(this.orderToUpdate);
     this.orderService.update(this.orderToUpdate.uuid, updateInput)
       .subscribe({
         next: (orderUpdated) => {

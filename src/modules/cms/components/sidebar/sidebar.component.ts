@@ -34,6 +34,11 @@ export class SidebarComponent implements OnInit {
       title: this.translate.instant('sidebar.orders'),
       icon: 'shopping-cart-outline',
       link: 'orders'
+    },
+    {
+      title: this.translate.instant('sidebar.contact'),
+      icon: 'message-square-outline',
+      link: 'contact'
     }
   ];
 

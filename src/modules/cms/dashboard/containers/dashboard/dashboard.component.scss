@@ -4,10 +4,9 @@
   .statistics {
     margin-top: 20px;
     .card-row {
-      display: grid;
-      grid-template-columns: calc(25% - 5px) calc(25% - 10px) calc(25% - 10px) calc(25% - 5px);
-      column-gap: 10px;
-      row-gap: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
 
       .card-content {
         flex-direction: column;

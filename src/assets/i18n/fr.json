@@ -21,7 +21,8 @@
     "confirm": "Confirmer",
     "validate": "Valider",
     "delete": "Supprimer",
-    "update": "Mettre à jour"
+    "update": "Mettre à jour",
+    "send": "Envoyer"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -61,7 +62,8 @@
     "services": "Mes services",
     "clients": "Mes clients",
     "orders": "Mes commandes",
-    "expenditures": "Mes dépenses"
+    "expenditures": "Mes dépenses",
+    "contact": "Contact"
   },
   "header": {
     "settings": "Gérer mes entités",
@@ -223,5 +225,21 @@
   "confirm-deletion-dialog": {
     "title": "Confirmation de suppression",
     "text": "Vous êtes sur le point de supprimer quelque chose, êtes-vous certain de vouloir le faire ?\nCette action sera irréversible."
+  },
+  "contact": {
+    "text": "N'hésitez pas à nous envoyer un message via ce formulaire avec vos intérrogations.\nNous essayerons d'y répondre au plus vite!",
+    "fields": {
+      "email": "Votre adresse mail",
+      "email-required": "Votre adresse mail est requise",
+      "email-invalid": "Votre adresse mail est invalide",
+      "object": "Sujet de votre message",
+      "object-required": "Sujet de votre message requis",
+      "message": "Votre message... (maximum 255 caractères)",
+      "message-required": "Votre message est requis",
+      "message-invalid": "Votre message est invalid",
+      "message-placeholder": "J'adore votre plateforme!"
+    },
+    "confirm-sended-title": "Merci",
+    "confirm-sended-text": "Nous avons bien reçu votre message."
   }
 }

@@ -1,0 +1,83 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <div class="header-title">
+                <h1>{{ 'sidebar.contact'|translate }}</h1>
+            </div>
+            <div class="divider"></div>
+
+            <div class="contact-card">
+                <nb-card>
+                    <nb-card-body>
+                        <div class="subtitle">
+                            <h6>{{'contact.text'| translate}}</h6>
+                        </div>
+
+                        <div class="contact-form">
+                            <form [formGroup]="contactForm" class="container-form">
+                                <div class="form-control-group">
+                                    <label class="label" for="email">{{ 'contact.fields.email'| translate }} *</label>
+                                    <input nbInput
+                                           fullWidth
+                                           id="email"
+                                           type="email"
+                                           formControlName="email"
+                                           autofocus>
+                                    <ng-container *ngIf="isEmailRequiredInput">
+                                        <p class="caption status-danger">
+                                            {{ 'contact.fields.email-required'| translate }}
+                                        </p>
+                                    </ng-container>
+                                    <ng-container *ngIf="isEmailInvalidInput">
+                                        <p class="caption status-danger">
+                                            {{ 'contact.fields.email-invalid'| translate }}
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="form-control-group">
+                                    <label class="label" for="object">{{ 'contact.fields.object'| translate }} *</label>
+                                    <input nbInput
+                                           fullWidth
+                                           id="object"
+                                           formControlName="object"
+                                           autofocus>
+                                    <ng-container *ngIf="isObjectRequiredInput">
+                                        <p class="caption status-danger">
+                                            {{ 'contact.fields.object-required'| translate }}
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="form-control-group">
+                                    <label class="label" for="message">{{ 'contact.fields.message'| translate }} *</label>
+                                    <textarea nbInput
+                                              fullWidth
+                                              id="message"
+                                              formControlName="message"
+                                              [placeholder]="'contact.fields.message-placeholder'|translate"
+                                              autofocus></textarea>
+                                    <ng-container *ngIf="isMessageRequiredInput">
+                                        <p class="caption status-danger">
+                                            {{ 'contact.fields.message-required'| translate }}
+                                        </p>
+                                    </ng-container>
+                                    <ng-container *ngIf="isMessageInvalidInput">
+                                        <p class="caption status-danger">
+                                            {{ 'contact.fields.message-invalid'| translate }}
+                                        </p>
+                                    </ng-container>
+                                </div>
+                            </form>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <button nbButton fullWidth hero status="info"
+                                [disabled]="!contactForm.valid"
+                                (click)="onSubmit()">
+                            {{ 'actions.send'|translate }}
+                        </button>
+                    </nb-card-footer>
+                </nb-card>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>
