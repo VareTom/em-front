@@ -25,14 +25,12 @@ export class EntityService {
     return this.httpClient.post(`${this.baseRoute}/`, parameters)
       .pipe(
         map((result: any) => {
-          if (!this.store.value.connectedUser.entities) {
-            this.store.set('currentEntity',new Entity(result));
-            this.store.value.connectedUser.entities = [new Entity(result)];
-          } else {
-            this.store.value.connectedUser.entities.push(new Entity(result));
-          }
-  
-          return new Entity(result);
+          const entity = new Entity(result);
+          
+          this.store.set('currentEntity',entity);
+          this.store.value.connectedUser.entity = entity;
+          
+          return entity;
         }),
         catchError(error => throwError(error))
       );

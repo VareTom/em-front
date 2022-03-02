@@ -35,6 +35,6 @@ export class DashboardComponent implements OnInit {
   }
   
   get isNewUser(): boolean {
-    return this.store.value.connectedUser.entities.length <= 0;
+    return !this.store.value.currentEntity;
   }
 }

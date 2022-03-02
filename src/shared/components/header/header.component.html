@@ -6,11 +6,9 @@
 
     <div class="menu" *ngIf="(connectedUser$| async)">
         <nb-actions [size]="menuSize">
-            <nb-action *ngIf="(connectedUser$| async).entities.length > 0; else noEntity">
+            <nb-action *ngIf="(connectedUser$| async).entity; else noEntity">
                 <nb-user [name]="(connectedUser$| async).email | uppercase"
-                         [title]="(currentEntity$| async)?.name"
-                         nbContextMenuTag="entity-context-menu"
-                         [nbContextMenu]="menuEntities">
+                         [title]="(currentEntity$| async)?.name">
                 </nb-user>
             </nb-action>
             <ng-template #noEntity>
@@ -20,10 +18,13 @@
                     </button>
                 </nb-action>
             </ng-template>
-            <nb-action (click)="onSettings()" class="press-action"
+            <nb-action (click)="onSettings()" class="press-action" *ngIf="(currentEntity$|async)"
                        [nbTooltip]="'header.settings'|translate | uppercase"
                        nbTooltipPlacement="bottom">
                 <nb-icon icon="settings-2-outline"></nb-icon>
+            </nb-action>
+            <nb-action (click)="onAdminSide()" class="press-action" *ngIf="(connectedUser$| async).isSuperAdmin">
+                <nb-icon icon="smiling-face"></nb-icon>
             </nb-action>
             <nb-action (click)="onLogout()" class="press-action"
                        [nbTooltip]="'header.logout'|translate | uppercase"

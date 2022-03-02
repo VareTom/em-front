@@ -3,18 +3,22 @@ import { Entity } from 'src/shared/models/entity';
 export class User {
   uuid: string;
   email: string;
-  activeEntityUuid?: string;
   createdAt: string;
-  entities?: Entity[] = [];
+  updatedAt: string;
+  deletedAt: string;
+  isSuperAdmin: boolean;
+  entity?: Entity;
 
   constructor(json: any) {
     this.uuid = json.uuid;
     this.email = json.email;
     this.createdAt = json.createdAt;
-    this.activeEntityUuid = json.activeEntityUuid ?? null;
+    this.updatedAt = json.updatedAt;
+    this.deletedAt = json.deletedAt;
+    this.isSuperAdmin = json.isSuperAdmin;
 
-    if (json.entities && json.entities.length > 0) {
-      this.entities = json.entities.map((entity: any) => new Entity(entity));
+    if (json.entity) {
+      this.entity = new Entity(json.entity);
     }
   }
 }

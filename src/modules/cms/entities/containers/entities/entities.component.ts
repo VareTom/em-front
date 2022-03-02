@@ -64,28 +64,6 @@ export class EntitiesComponent implements OnInit {
     return NbSortDirection.NONE;
   }
   
-  onCreate(): void {
-    this.dialogService.open(CreateEntityDialogComponent, {
-      dialogClass: 'medium-dialog'
-    }).onClose.subscribe((result) => {
-      if (result) {
-        this.isSubmitted = true;
-        this.entityService.create(result).subscribe({
-          next: (result) => {
-            this.refreshDataSource([result]);
-            this.isSubmitted = false;
-            this.toastrService.success(this.translate.instant('entity.creation-succeed'));
-          },
-          error: () => {
-            this.isSubmitted = false;
-            this.toastrService.danger(this.translate.instant('errors.basic-failed'), this.translate.instant('errors.title'));
-          }
-        });
-      }
-    });
-    
-  }
-  
   private refreshDataSource(entities: Entity[]): void {
     entities.forEach((entity, index) => {
       this.data.push({

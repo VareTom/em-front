@@ -27,9 +27,6 @@ export class HeaderComponent implements OnInit {
   currentEntity$: Observable<Entity>;
 
   menuSize: NbComponentSize = 'small';
-  menuEntities: any[] = [
-    { title: 'empty entity' }
-  ];
 
   constructor(private store: Store,
               private router: Router,
@@ -43,26 +40,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.connectedUser$ = this.store.select<User>('connectedUser');
     this.currentEntity$ = this.store.select<Entity>('currentEntity');
-
-    // > 1 to show entity menu switch only when you have the multiple entities
-    if (this.store.value.connectedUser &&
-      this.store.value.connectedUser.entities &&
-      this.store.value.connectedUser.entities.length > 1) {
-        this.menuEntities = [];
-        this.store.value.connectedUser.entities.forEach(entity => {
-          this.menuEntities.push({
-            title: entity.name,
-            queryParams: { uuid: entity.uuid }
-          });
-        })
-    }
-
-    this.nbMenuService.onItemClick()
-      .pipe(
-        filter(({tag}) => tag === 'entity-context-menu'),
-        map(({ item: {queryParams}}) => queryParams),
-      )
-      .subscribe(queryParams => this.onEntitySwitch(queryParams));
   }
 
   onLogout(): void {
@@ -89,10 +66,8 @@ export class HeaderComponent implements OnInit {
         }
     });
   }
-
-  private onEntitySwitch(selectedEntity: Params): void {
-    console.log(selectedEntity)
-    // TODO:: update user activeEntityUuid
-    // TODO:: find from user entities where name ===
+  
+  onAdminSide(): void {
+    this.router.navigateByUrl('admins');
   }
 }
