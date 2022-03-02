@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from 'src/store';
 
 @Component({
   selector: 'app-contact',
@@ -13,9 +14,11 @@ export class ContactComponent implements OnInit {
     object: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private store: Store) { }
 
   ngOnInit(): void {
+    this.contactForm.patchValue({email: this.store.value.connectedUser.email});
   }
   
   get isEmailRequiredInput(): boolean {

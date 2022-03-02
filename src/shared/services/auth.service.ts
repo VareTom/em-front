@@ -30,7 +30,6 @@ export class AuthService {
     this.store.set('currentEntity', undefined);
     this.store.set('connectedUser', undefined);
     localStorage.removeItem('token');
-    localStorage.removeItem('userUuid');
     this.router.navigateByUrl('login')
   }
 
