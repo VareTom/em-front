@@ -3,7 +3,7 @@
                       nbSpinnerStatus="info">
         <div class="container">
             <div class="header-title">
-                <h1>{{ 'sidebar.entities'|translate }}</h1>
+                <h1>{{ 'sidebar.entity'|translate }}</h1>
             </div>
             <div class="divider"></div>
             <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
@@ -11,25 +11,23 @@
                 <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
                 <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
-                <ng-container [nbTreeGridColumnDef]="customColumn">
-                    <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
-                        {{ 'entity.columns.'+ customColumn |translate }}
-                    </th>
-
-                    <td nbTreeGridCell *nbTreeGridCellDef="let row" >
-                        <nb-icon *ngIf="row.hasChildren()" status="info" [icon]="row.expanded ? 'chevron-down-outline' : 'chevron-right-outline'"
-                                 aria-hidden="true">
-                        </nb-icon>
-                        {{row.data.name}}
-                    </td>
-                </ng-container>
-
                 <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
                     <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
                         {{ 'entity.columns.'+ column |translate }}
                     </th>
 
                     <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+                </ng-container>
+
+                <ng-container [nbTreeGridColumnDef]="customColumn">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
+                        <button nbButton hero status="danger" size="small"
+                                *ngIf="row.data.uuid === (currentEntity$|async).authorUuid && row.data.uuid !== (connectedUser$|async).uuid"
+                                (click)="onDelete(row.data)">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
+                    </td>
                 </ng-container>
 
             </table>

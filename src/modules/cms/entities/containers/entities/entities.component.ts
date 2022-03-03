@@ -9,12 +9,13 @@ import {
 import { Store } from 'src/store';
 import moment from 'moment';
 
-// Components
-import { CreateEntityDialogComponent } from 'src/shared/components/create-entity-dialog/create-entity-dialog.component';
-
 // Services
 import { EntityService } from 'src/shared/services/entity.service';
 import { TranslateService } from '@ngx-translate/core';
+
+// Models
+import { User } from 'src/shared/models/user';
+import { Observable } from 'rxjs';
 import { Entity } from 'src/shared/models/entity';
 
 @Component({
@@ -24,9 +25,9 @@ import { Entity } from 'src/shared/models/entity';
 })
 export class EntitiesComponent implements OnInit {
   
-  customColumn = 'name';
-  defaultColumns = ['description', 'createdAt'];
-  allColumns = [this.customColumn, ...this.defaultColumns]
+  customColumn = 'actions';
+  defaultColumns = ['email', 'createdAt', 'isAdmin'];
+  allColumns = [...this.defaultColumns, this.customColumn]
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -34,6 +35,9 @@ export class EntitiesComponent implements OnInit {
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
   isSubmitted: boolean = false;
+  
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
 
   constructor(private dialogService: NbDialogService,
               private store: Store,
@@ -43,9 +47,12 @@ export class EntitiesComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
 
   ngOnInit(): void {
-    this.entityService.getAllForUser().subscribe({
-      next: (entities) => {
-        this.refreshDataSource(entities);
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
+    this.entityService.getMembers().subscribe({
+      next: (members) => {
+        this.refreshDataSource(members);
       },
       error: () => this.toastrService.danger(this.translate.instant('entity.retrieve-failed'), this.translate.instant('errors.title'))
     })
@@ -64,28 +71,21 @@ export class EntitiesComponent implements OnInit {
     return NbSortDirection.NONE;
   }
   
-  private refreshDataSource(entities: Entity[]): void {
-    entities.forEach((entity, index) => {
+  private refreshDataSource(members: User[]): void {
+    members.forEach((member) => {
       this.data.push({
         data: {
-          name: entity.name,
-          description: entity.description ?? '-',
-          createdAt: moment(entity.createdAt).format('DD-MM-YYYY HH:mm')
-        },
-        children: []
+          uuid: member.uuid,
+          email: member.email,
+          isAdmin: this.store.value.currentEntity.authorUuid === member.uuid ? this.translate.instant('global.yes') : this.translate.instant('global.no'),
+          createdAt: moment(member.createdAt).format('DD-MM-YYYY HH:mm')
+        }
       })
-      if (entity.members && entity.members.length > 0) {
-        entity.members.forEach(member => {
-          this.data[index].children.push({
-            data: {
-              name: member.email,
-              description: '-',
-              createdAt: moment(member.addAt).format('DD-MM-YYYY HH:mm'),
-            }
-          })
-        })
-      }
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
+  }
+  
+  onDelete(member: any) {
+  
   }
 }

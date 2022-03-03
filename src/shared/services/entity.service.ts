@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 // Models
 import { Entity } from 'src/shared/models/entity';
+import { User } from 'src/shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +37,12 @@ export class EntityService {
       );
   }
   
-  getAllForUser(): Observable<Entity[]> {
-    return this.httpClient.get(`${this.baseRoute}/${this.store.value.connectedUser.uuid}`)
+  getMembers(): Observable<User[]> {
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/members`)
       .pipe(
         map((result: any) => {
           if (result) {
-            return result.map((entity: any) => new Entity(entity));
+            return result.map((member: any) => new User(member));
           }
         })
       )

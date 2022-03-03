@@ -58,7 +58,7 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "entities": "Mes entités",
+    "entity": "Mon entité",
     "services": "Mes services",
     "clients": "Mes clients",
     "orders": "Mes commandes",
@@ -66,7 +66,7 @@
     "contact": "Contact"
   },
   "header": {
-    "settings": "Gérer mes entités",
+    "settings": "Gérer mon entité",
     "create-first-entity": "Créer ma première entité",
     "logout": "Se déconnecter"
   },
@@ -96,13 +96,13 @@
   "entity": {
     "creation": "Création de votre entité",
     "create": "Créer une nouvelle entité",
-    "retrieve-failed": "Impossible de récupérer les informations de vos entités.",
+    "retrieve-failed": "Impossible de récupérer les informations de votre entité.",
     "creation-succeed": "La création de votre nouvelle entité a été un succès!",
     "creation-failed": "La création de votre entité a échouée.",
     "columns": {
-      "name": "Nom de l'entité",
-      "description": "Description",
-      "createdAt": "Date de création"
+      "email": "Email du membre",
+      "isAdmin": "Gérant ?",
+      "createdAt": "Date d'invitation"
     }
   },
   "expenditure": {
