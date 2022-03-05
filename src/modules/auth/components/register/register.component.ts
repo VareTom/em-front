@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from 'src/store';
 
 // Services
@@ -29,12 +29,21 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private store: Store,
+              private route: ActivatedRoute,
               private toastrService: NbToastrService,
               private translate: TranslateService,
               private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    if (this.route.snapshot.queryParamMap.get('code')
+      && this.route.snapshot.queryParamMap.get('email')) {
+        this.registerForm.patchValue({
+          code: this.route.snapshot.queryParamMap.get('code'),
+          email: this.route.snapshot.queryParamMap.get('email')
+        })
+      this.validateInvitationCode(this.registerForm.value.code);
+    }
   }
   
   get isEmailInvalid(): boolean {
