@@ -7,7 +7,7 @@
                 <button nbButton hero status="info" size="large"
                         *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
                         (click)="onInvite()">
-                    {{'actions.invite'|translate }}
+                    {{'entity.invite-member'|translate }}
                 </button>
             </div>
             <div class="divider"></div>
@@ -24,11 +24,10 @@
                     <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
                 </ng-container>
 
-                <ng-container [nbTreeGridColumnDef]="customColumn">
+                <ng-container [nbTreeGridColumnDef]="customColumn" *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid">
                     <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
                     <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
-                        <button nbButton hero status="danger" size="small"
-                                *ngIf="row.data.uuid === (currentEntity$|async).authorUuid && row.data.uuid !== (connectedUser$|async).uuid"
+                        <button nbButton hero status="danger" size="small" *ngIf="row.data.uuid !== (connectedUser$|async).uuid"
                                 (click)="onDelete(row.data)">
                             <nb-icon icon="trash-2-outline"></nb-icon>
                         </button>

@@ -100,6 +100,7 @@
   },
   "entity": {
     "creation": "Création de votre entité",
+    "invite-member": "Inviter un nouveau membre",
     "invitation": "Invitation de votre nouveau membre",
     "create": "Créer une nouvelle entité",
     "retrieve-failed": "Impossible de récupérer les informations de votre entité.",
@@ -242,14 +243,15 @@
       "email": "Votre adresse mail",
       "email-required": "Votre adresse mail est requise",
       "email-invalid": "Votre adresse mail est invalide",
-      "object": "Sujet de votre message",
-      "object-required": "Sujet de votre message requis",
+      "subject": "Sujet de votre message",
+      "subject-required": "Sujet de votre message requis",
       "message": "Votre message... (maximum 255 caractères)",
       "message-required": "Votre message est requis",
       "message-invalid": "Votre message est invalid",
       "message-placeholder": "J'adore votre plateforme!"
     },
-    "confirm-sended-title": "Merci",
-    "confirm-sended-text": "Nous avons bien reçu votre message."
+    "confirm-sended-title": "Merci!",
+    "confirm-sended-text": "Nous avons bien reçu votre message.",
+    "send-failed": "L'envoi de votre message à échoué"
   }
 }

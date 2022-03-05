@@ -37,7 +37,7 @@ export class EntitiesComponent implements OnInit {
   
   customColumn = 'actions';
   defaultColumns = ['email', 'createdAt', 'isAdmin'];
-  allColumns = [...this.defaultColumns, this.customColumn]
+  allColumns = [...this.defaultColumns]
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -66,6 +66,8 @@ export class EntitiesComponent implements OnInit {
       },
       error: () => this.toastrService.danger(this.translate.instant('entity.retrieve-failed'), this.translate.instant('errors.title'))
     })
+    
+    if (this.store.value.currentEntity.authorUuid === this.store.value.connectedUser.uuid) this.allColumns.push(this.customColumn);
   }
   
   changeSort(sortRequest: NbSortRequest): void {

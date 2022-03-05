@@ -7,5 +7,6 @@
   "service": "services",
   "client": "clients",
   "order": "orders",
-  "statistic": "statistics"
+  "statistic": "statistics",
+  "contact": "mails"
 }

@@ -7,7 +7,8 @@
             <div class="divider"></div>
 
             <div class="contact-card">
-                <nb-card>
+                <nb-card [nbSpinner]="isSubmitted"
+                         nbSpinnerStatus="info">
                     <nb-card-body>
                         <div class="subtitle">
                             <h6>{{'contact.text'| translate}}</h6>
@@ -35,15 +36,15 @@
                                     </ng-container>
                                 </div>
                                 <div class="form-control-group">
-                                    <label class="label" for="object">{{ 'contact.fields.object'| translate }} *</label>
+                                    <label class="label" for="subject">{{ 'contact.fields.subject'| translate }} *</label>
                                     <input nbInput
                                            fullWidth
-                                           id="object"
-                                           formControlName="object"
+                                           id="subject"
+                                           formControlName="subject"
                                            autofocus>
-                                    <ng-container *ngIf="isObjectRequiredInput">
+                                    <ng-container *ngIf="isSubjectRequiredInput">
                                         <p class="caption status-danger">
-                                            {{ 'contact.fields.object-required'| translate }}
+                                            {{ 'contact.fields.subject-required'| translate }}
                                         </p>
                                     </ng-container>
                                 </div>

@@ -15,6 +15,7 @@ import { ExpenditureService } from 'src/shared/services/expenditure.service';
 import { ServiceService } from 'src/shared/services/service.service';
 import { OrderService } from 'src/shared/services/order.service';
 import { StatisticService } from 'src/shared/services/statistic.service';
+import { ContactService } from 'src/shared/services/contact.service';
 
 // Modules Nebular
 import {
@@ -156,6 +157,7 @@ export class SharedModule {
         UserService,
         OrderService,
         StatisticService,
+        ContactService,
 
         // Guards
         AuthGuardService
