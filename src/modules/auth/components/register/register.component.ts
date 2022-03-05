@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
         next: (isValid) => {
           if (isValid) {
             this.registerForm.patchValue({
-              code: code
+              code: +code
             })
           } else {
             this.toastrService.danger(this.translate.instant('errors.code-not-valid'), this.translate.instant('errors.title'));
