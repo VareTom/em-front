@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   showConfirmPassword: boolean = false;
   registerForm: FormGroup = this.fb.group({
     email: ['', [ Validators.email, Validators.required ]],
+    code: [null, Validators.required],
     password: ['', Validators.required],
     confirmPassword: ['', [Validators.required ]]
   });
@@ -44,6 +45,29 @@ export class RegisterComponent implements OnInit {
   get isEmailRequired(): boolean {
     const formControl = this.registerForm.get('email');
     return formControl.touched && formControl.getError('required');
+  }
+  
+  get isCodeRequired(): boolean {
+    const formControl = this.registerForm.get('code');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  validateInvitationCode(code: string) {
+    this.authService.isValidCode(+code)
+      .subscribe({
+        next: (isValid) => {
+          if (isValid) {
+            this.registerForm.patchValue({
+              code: code
+            })
+          } else {
+            this.toastrService.danger(this.translate.instant('errors.code-not-valid'), this.translate.instant('errors.title'));
+          }
+        },
+        error: () => {
+          this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
+        }
+      })
   }
   
   onPasswordChange(): void {

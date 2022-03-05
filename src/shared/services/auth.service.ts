@@ -60,4 +60,13 @@ export class AuthService {
         catchError(error => throwError(error))
       )
   }
+  
+  isValidCode (code: number): Observable<boolean> {
+    return this.httpClient.post(`${this.baseRoute}/valid/code`, {code: code})
+      .pipe(
+        map((result) => {
+          return !!result;
+        })
+      )
+  }
 }

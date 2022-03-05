@@ -11,7 +11,7 @@
                            fullWidth
                            id="input-email"
                            formControlName="email"
-                           pattern=".+@.+\..+"
+                           type="email"
                            autofocus>
                     <ng-container *ngIf="isEmailRequired">
                         <p class="caption status-danger">
@@ -21,6 +21,17 @@
                     <ng-container *ngIf="isEmailInvalid">
                         <p class="caption status-danger">
                             {{ 'forms.email-invalid'| translate }}
+                        </p>
+                    </ng-container>
+                </div>
+
+                <div class="form-control-group">
+                    <label class="label" for="code">{{ 'forms.invitation-code'| translate }}</label>
+                    <code-input id="code" (codeCompleted)="validateInvitationCode($event)">
+                    </code-input>
+                    <ng-container *ngIf="isCodeRequired">
+                        <p class="caption status-danger">
+                            {{ 'forms.code-required'| translate }}
                         </p>
                     </ng-container>
                 </div>

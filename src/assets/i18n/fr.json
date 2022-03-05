@@ -37,6 +37,7 @@
     "service-name": "Nom du service",
     "service-price": "Prix de la prestation",
     "service-code": "Code technique ou initiales",
+    "invitation-code": "Code d'invitation",
 
     "entity-name-required": "Nom de votre entité obligatoire!",
     "email-required": "Adresse e-mail obligatoire!",
@@ -45,7 +46,9 @@
     "confirm-password-required": "La confirmation du mot de passe est obligatoire!",
     "confirm-password-not-match": "Les mots de passe ne coincident pas!",
     "price-required": "Le prix est obligatoire",
-    "service-name-required": "Le nom du service est obligatoire"
+    "service-name-required": "Le nom du service est obligatoire",
+    "invitation-code-required": "Le code d'invitation est obligatoire",
+    "invitation-code-invalid": "Le code d'invitation est invalide"
   },
   "login": {
     "not-account": "Pas encore de compte ?",
@@ -75,7 +78,8 @@
     "http-not-found": "Une erreur est survenue due à l'incapacité de notre collègue à faire du bon travail... Nous nous excusons pour lui.",
     "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
     "title": "Ah shit, here we go again.",
-    "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!"
+    "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!",
+    "code-not-valid": "Le code inséré n'est pas valide!"
   },
   "dashboard": {
     "no-data-title": "Aucune donnée disponible ＞﹏＜",

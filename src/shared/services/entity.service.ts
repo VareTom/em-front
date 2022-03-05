@@ -49,7 +49,7 @@ export class EntityService {
   }
   
   invite (parameters: any): Observable<User> {
-    return this.httpClient.post(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/invit`, parameters)
+    return this.httpClient.post(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/invite`, parameters)
       .pipe(
         map((result: any) => {
           return new User(result);

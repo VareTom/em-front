@@ -111,3 +111,24 @@ html, body {
 .break-line-text {
   white-space: pre-line;
 }
+
+// CODE - INPUT
+code-input {
+  --item-height: 40px !important;
+
+  .empty {
+    padding-left: 0 !important;
+  }
+  input {
+    color: white !important;
+    border-color: #13132b !important;
+    background: #252547 !important;
+    &:hover{
+      background: #1b1b38 !important;
+    }
+    &:focus {
+      box-shadow: none !important;
+      border-color: #a16eff !important;
+    }
+  }
+}

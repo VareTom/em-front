@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { CodeInputModule } from 'angular-code-input';
 
 // Service
 import { AuthService } from './services/auth.service';
@@ -69,6 +70,9 @@ const nebularToastrConfig = {
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+    CodeInputModule.forRoot({
+      codeLength: 6
+    }),
   
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
@@ -103,6 +107,7 @@ const nebularToastrConfig = {
     TranslateModule,
     ReactiveFormsModule,
     FormsModule,
+    CodeInputModule,
   
     NgxEchartsModule,
 
