@@ -22,7 +22,8 @@
     "validate": "Valider",
     "delete": "Supprimer",
     "update": "Mettre à jour",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "invite": "Inviter"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -95,10 +96,15 @@
   },
   "entity": {
     "creation": "Création de votre entité",
+    "invitation": "Invitation de votre nouveau membre",
     "create": "Créer une nouvelle entité",
     "retrieve-failed": "Impossible de récupérer les informations de votre entité.",
     "creation-succeed": "La création de votre nouvelle entité a été un succès!",
     "creation-failed": "La création de votre entité a échouée.",
+    "deletion-failed": "La suppression de ce membre a malheureusement échoué.",
+    "deletion-succeed": "La suppression de ce membre a été un succès!",
+    "invitation-succeed": "Invitation envoyée, votre nouveau membre recevra un mail dans un instant!",
+    "invitation-failed": "L'invitation de votre nouveau membre a échoué.",
     "columns": {
       "email": "Email du membre",
       "isAdmin": "Gérant ?",
