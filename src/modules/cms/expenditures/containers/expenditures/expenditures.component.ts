@@ -69,7 +69,11 @@ export class ExpendituresComponent implements OnInit {
     this.expenditureService.getAllForEntity(filters)
       .subscribe({
         next: (expenditures) => {
-          if (expenditures.length > 0) this.refreshDataSource(expenditures);
+          if (expenditures.length > 0) {
+            this.refreshDataSource(expenditures);
+          } else {
+            this.dataSource.setData([]);
+          }
         },
         error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
       })
