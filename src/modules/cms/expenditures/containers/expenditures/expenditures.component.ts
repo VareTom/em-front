@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   NbDialogService,
   NbSortDirection,
-  NbSortRequest, NbToastrService,
+  NbSortRequest,
+  NbToastrService,
   NbTreeGridDataSource,
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
@@ -24,6 +25,12 @@ import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
+// Enums
+import { ToggleFilterValues } from 'src/shared/enums/ToggleFilterValues';
+
+// Interfaces
+import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
+
 @Component({
   selector: 'app-expenditures',
   templateUrl: './expenditures.component.html',
@@ -39,6 +46,7 @@ export class ExpendituresComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  toggleFilterValue: ToggleFilterValues = ToggleFilterValues.MONTHLY;
   toggleFilterLabel: string = this.translate.instant('filters.monthly');
   
   constructor(private dialogService: NbDialogService,
@@ -50,14 +58,21 @@ export class ExpendituresComponent implements OnInit {
   
   ngOnInit(): void {
     if (this.store.value.currentEntity) {
-      this.expenditureService.getAllForEntity()
-        .subscribe({
-          next: (expenditures) => {
-            if (expenditures.length > 0) this.refreshDataSource(expenditures);
-          },
-          error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
-        })
+      this.getExpenditures();
     }
+  }
+  
+  private getExpenditures(): void{
+    const filters: FiltersInterface = {
+      period: this.toggleFilterValue
+    }
+    this.expenditureService.getAllForEntity(filters)
+      .subscribe({
+        next: (expenditures) => {
+          if (expenditures.length > 0) this.refreshDataSource(expenditures);
+        },
+        error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -74,6 +89,7 @@ export class ExpendituresComponent implements OnInit {
   }
   
   private refreshDataSource(expenditures: Expenditure[]): void {
+    this.data = [];
     expenditures.forEach(expenditure => {
       this.data.push({
         data: {
@@ -133,8 +149,11 @@ export class ExpendituresComponent implements OnInit {
   onToggleFilters(event: boolean): void {
     if (event) {
       this.toggleFilterLabel = this.translate.instant('filters.all-time');
+      this.toggleFilterValue = ToggleFilterValues.ALL_TIME;
     } else {
       this.toggleFilterLabel = this.translate.instant('filters.monthly');
+      this.toggleFilterValue = ToggleFilterValues.MONTHLY;
     }
+    this.getExpenditures();
   }
 }

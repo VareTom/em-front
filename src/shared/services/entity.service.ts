@@ -58,7 +58,7 @@ export class EntityService {
   }
   
   removeMember (userUuid: string): Observable<User> {
-    return this.httpClient.delete(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/${userUuid}`)
+    return this.httpClient.delete(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/user/${userUuid}`)
       .pipe(
         map((result: any) => {
           return new User(result);

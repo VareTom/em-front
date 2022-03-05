@@ -9,6 +9,9 @@ import { catchError, map } from 'rxjs/operators';
 // Models
 import { Expenditure } from 'src/shared/models/expenditure';
 
+// Interfacex
+import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,8 +34,11 @@ export class ExpenditureService {
       );
   }
   
-  getAllForEntity (): Observable<Expenditure[]> {
-    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
+  getAllForEntity (filters: FiltersInterface): Observable<Expenditure[]> {
+    let queryParams: string = '?';
+    if (filters.period) queryParams += `period=${filters.period}`;
+    
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}${queryParams}`)
       .pipe(
         map((results: any) => {
           return results.map((expenditure: any) => new Expenditure(expenditure));
