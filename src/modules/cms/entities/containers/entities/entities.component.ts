@@ -17,6 +17,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/shared/models/user';
 import { Observable } from 'rxjs';
 import { Entity } from 'src/shared/models/entity';
+import {
+  ConfirmationDeletionDialogComponent
+} from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+import {
+  CreateServiceDialogComponent
+} from 'src/modules/cms/services/components/create-service-dialog/create-service-dialog.component';
+import { Service } from 'src/shared/models/service';
+import {
+  InviteMemberDialogComponent
+} from 'src/modules/cms/entities/components/invite-member-dialog/invite-member-dialog.component';
 
 @Component({
   selector: 'app-entities',
@@ -77,6 +87,7 @@ export class EntitiesComponent implements OnInit {
         data: {
           uuid: member.uuid,
           email: member.email,
+          isConfirmed: member.isConfirmed,
           isAdmin: this.store.value.currentEntity.authorUuid === member.uuid ? this.translate.instant('global.yes') : this.translate.instant('global.no'),
           createdAt: moment(member.createdAt).format('DD-MM-YYYY HH:mm')
         }
@@ -85,7 +96,30 @@ export class EntitiesComponent implements OnInit {
     this.dataSource = this.dataSourceBuilder.create(this.data);
   }
   
-  onDelete(member: any) {
+  onDelete(member: any): any {
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.entityService.removeMember(member.uuid)
+          .subscribe({
+            next: () => {
+              this.data = this.data.filter(m => m.data.uuid !== member.uuid);
+              this.dataSource.setData(this.data);
+              this.toastrService.success(this.translate.instant('entity.deletion-succeed'));
+            },
+            error: () => this.toastrService.danger(this.translate.instant('entity.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
+  }
   
+  onInvite(): any {
+    this.dialogService.open(InviteMemberDialogComponent)
+      .onClose
+      .subscribe((result: User) => {
+        if (result) {
+          this.refreshDataSource([result]);
+        }
+      })
   }
 }

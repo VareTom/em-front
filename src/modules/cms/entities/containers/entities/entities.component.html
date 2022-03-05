@@ -4,6 +4,11 @@
         <div class="container">
             <div class="header-title">
                 <h1>{{ 'sidebar.entity'|translate }}</h1>
+                <button nbButton hero status="info" size="large"
+                        *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                        (click)="onInvite()">
+                    {{'actions.invite'|translate }}
+                </button>
             </div>
             <div class="divider"></div>
             <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>

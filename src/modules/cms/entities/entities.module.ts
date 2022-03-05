@@ -8,6 +8,9 @@ import { EntitiesComponent } from './containers/entities/entities.component';
 // Custom Modules
 import { SharedModule } from 'src/shared/shared.module';
 
+// Components
+import { InviteMemberDialogComponent } from './components/invite-member-dialog/invite-member-dialog.component';
+
 const routes: Routes = [
   { path: '', component: EntitiesComponent}
 ]
@@ -15,7 +18,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     // Containers
-    EntitiesComponent
+    EntitiesComponent,
+    
+    // Components
+    InviteMemberDialogComponent
   ],
   imports: [
     CommonModule,

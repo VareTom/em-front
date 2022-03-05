@@ -37,13 +37,31 @@ export class EntityService {
       );
   }
   
-  getMembers(): Observable<User[]> {
+  getMembers (): Observable<User[]> {
     return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/members`)
       .pipe(
         map((result: any) => {
           if (result) {
             return result.map((member: any) => new User(member));
           }
+        })
+      )
+  }
+  
+  invite (parameters: any): Observable<User> {
+    return this.httpClient.post(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/invit`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new User(result);
+        })
+      )
+  }
+  
+  removeMember (userUuid: string): Observable<User> {
+    return this.httpClient.delete(`${this.baseRoute}/${this.store.value.currentEntity.uuid}/${userUuid}`)
+      .pipe(
+        map((result: any) => {
+          return new User(result);
         })
       )
   }
