@@ -68,6 +68,6 @@ export class HeaderComponent implements OnInit {
   }
   
   onAdminSide(): void {
-    this.router.navigateByUrl('admins');
+    this.router.navigateByUrl('admin');
   }
 }

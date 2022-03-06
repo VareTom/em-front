@@ -23,7 +23,8 @@ const routes: Routes = [
       { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
       { path: 'services', loadChildren: () => import('./services/services.module').then(m => m.ServicesModule) },
       { path: 'clients', loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule) },
-      { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) }
+      { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
+      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
     ]
   }
 ]
