@@ -10,6 +10,7 @@ import { ClientsComponent } from './containers/clients/clients.component';
 
 // Components
 import { CreateClientDialogComponent } from './components/create-client-dialog/create-client-dialog.component';
+import { ClientDetailsComponent } from './containers/client-details/client-details.component';
 
 const routes: Routes = [
   { path: '', component: ClientsComponent}
@@ -22,7 +23,8 @@ const routes: Routes = [
     ClientsComponent,
     
     // Components
-    CreateClientDialogComponent
+    CreateClientDialogComponent,
+          ClientDetailsComponent
   ],
   imports: [
     CommonModule,

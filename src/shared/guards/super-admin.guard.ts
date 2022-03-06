@@ -15,9 +15,7 @@ export class SuperAdminGuard implements CanActivate {
               private router: Router) { }
   
   canActivate(): boolean {
-    console.log('try super admin guard');
     if (this.store.value.connectedUser && this.store.value.currentEntity) {
-      console.log('connected');
       return this.store.value.currentEntity.authorUuid === this.store.value.connectedUser.uuid;
     }
     return false;
