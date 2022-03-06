@@ -18,7 +18,7 @@ import { Client } from 'src/shared/models/client';
 export class ClientDetailsComponent implements OnInit {
 
   client: Client;
-  // TODO:: get by uuid + backButton
+  
   constructor(
     private store: Store,
     private router: Router,
@@ -30,7 +30,7 @@ export class ClientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.get('uuid')) {
-      this.getClient(this.route.snapshot.queryParamMap.get('uuid'));
+      this.getClient(this.route.snapshot.paramMap.get('uuid'));
     } else {
       this.toastrService.danger(this.translate.instant('client.details.no-client'), this.translate.instant('errors.title'));
       this.router.navigateByUrl('clients');
