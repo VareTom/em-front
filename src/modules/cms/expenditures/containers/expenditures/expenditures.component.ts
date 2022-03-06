@@ -30,6 +30,9 @@ import { ToggleFilterValues } from 'src/shared/enums/ToggleFilterValues';
 
 // Interfaces
 import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
+import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-expenditures',
@@ -38,7 +41,7 @@ import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 })
 export class ExpendituresComponent implements OnInit {
   customColumn = 'actions';
-  defaultColumns = [ 'name', 'boughtAt', 'priceInCent' ];
+  defaultColumns = [ 'name', 'boughtAt', 'priceInCent', 'createdAt' ];
   allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
@@ -49,6 +52,9 @@ export class ExpendituresComponent implements OnInit {
   toggleFilterValue: ToggleFilterValues = ToggleFilterValues.MONTHLY;
   toggleFilterLabel: string = this.translate.instant('filters.monthly');
   
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -57,6 +63,9 @@ export class ExpendituresComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
     if (this.store.value.currentEntity) {
       this.getExpenditures();
     }
@@ -95,16 +104,21 @@ export class ExpendituresComponent implements OnInit {
   private refreshDataSource(expenditures: Expenditure[]): void {
     this.data = [];
     expenditures.forEach(expenditure => {
-      this.data.push({
-        data: {
-          uuid: expenditure.uuid,
-          name: expenditure.name,
-          boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('yyyy-MM-DD'): '-',
-          priceInCent: (expenditure.priceInCent / 100).toFixed(2) + ' €'
-        }
-      })
+      this.data.push(this.createDataObject(expenditure));
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
+  }
+  
+  private createDataObject(expenditure: Expenditure): any {
+    return {
+      data: {
+        uuid: expenditure.uuid,
+        name: expenditure.name,
+        createdAt: moment(expenditure.createdAt).format('yyyy-MM-DD'),
+        boughtAt: expenditure.boughtAt ? moment(expenditure.boughtAt).format('yyyy-MM-DD'): '-',
+        priceInCent: (expenditure.priceInCent / 100).toFixed(2) + ' €'
+      }
+    }
   }
   
   onCreate(): void {
@@ -112,7 +126,8 @@ export class ExpendituresComponent implements OnInit {
       .onClose
       .subscribe((result: Expenditure) => {
         if (result) {
-          this.refreshDataSource([result]);
+          this.data.push(this.createDataObject(result));
+          this.dataSource = this.dataSourceBuilder.create(this.data);
         }
       })
   }
@@ -144,8 +159,9 @@ export class ExpendituresComponent implements OnInit {
       .onClose
       .subscribe((result: Expenditure) => {
         if (result) {
-          this.data = this.data.filter(e => e.data.uuid !== result.uuid);
-          this.refreshDataSource([result]);
+          this.data = this.data.filter(o => o.data.uuid !== result.uuid);
+          this.data.push(this.createDataObject(result));
+          this.dataSource = this.dataSourceBuilder.create(this.data);
         }
       })
   }

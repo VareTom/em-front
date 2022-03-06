@@ -33,11 +33,13 @@
                         <button *ngIf="!row.data.isValidated" nbButton hero status="info" size="small" (click)="onEdit(row.data)">
                             <nb-icon icon="edit-outline"></nb-icon>
                         </button>
-                        <button *ngIf="!row.data.isValidated" nbButton hero status="success" size="small" [nbTooltip]="'order.validate'|translate"
+                        <button *ngIf="!row.data.isValidated && (currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                                nbButton hero status="success" size="small" [nbTooltip]="'order.validate'|translate"
                                 nbTooltipPlacement="bottom" nbTooltipStatus="success" (click)="onValidate(row.data)">
                             <nb-icon icon="checkmark-circle"></nb-icon>
                         </button>
-                        <button nbButton hero status="danger" size="small" (click)="onDelete(row.data)">
+                        <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                                nbButton hero status="danger" size="small" (click)="onDelete(row.data)">
                             <nb-icon icon="trash-2-outline"></nb-icon>
                         </button>
                     </td>

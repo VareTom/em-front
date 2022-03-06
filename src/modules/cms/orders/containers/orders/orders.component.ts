@@ -8,6 +8,7 @@ import {
 } from '@nebular/theme';
 import { Store } from 'src/store';
 import moment from 'moment';
+import { Observable } from 'rxjs';
 
 // Services
 import { OrderService } from 'src/shared/services/order.service';
@@ -15,6 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 // Models
 import { Order } from 'src/shared/models/order';
+import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
 
 // Components
 import {
@@ -24,7 +27,11 @@ import { ConfirmationDeletionDialogComponent } from 'src/shared/components/confi
 import {
   ConfirmationValidationDialogComponent
 } from 'src/modules/cms/orders/components/confirmation-validation-dialog/confirmation-validation-dialog.component';
+
+// Enums
 import { ToggleFilterValues } from 'src/shared/enums/ToggleFilterValues';
+
+// Interfaces
 import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 
 @Component({
@@ -34,7 +41,7 @@ import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 })
 export class OrdersComponent implements OnInit {
   customColumn = 'actions';
-  defaultColumns = [ 'clientName', 'total', 'duration', 'serviceNumber', 'performedAt', 'validatedAt' ];
+  defaultColumns = [ 'clientName', 'total', 'duration', 'serviceNumber', 'performedAt', 'validatedAt', 'createdAt'];
   allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
@@ -45,6 +52,9 @@ export class OrdersComponent implements OnInit {
   toggleFilterValue: ToggleFilterValues = ToggleFilterValues.MONTHLY;
   toggleFilterLabel: string = this.translate.instant('filters.monthly');
   
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private readonly orderService: OrderService,
@@ -53,6 +63,9 @@ export class OrdersComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
     if (this.store.value.currentEntity) {
       this.getOrders();
     }
@@ -89,23 +102,29 @@ export class OrdersComponent implements OnInit {
   }
   
   private refreshDataSource(orders: Order[]): void {
+    this.data = [];
     orders.forEach(order => {
-      this.data.push({
-        data: {
-          uuid: order.uuid,
-          client: order.client,
-          clientName: order.client.fullName,
-          total: (order.totalInCent/100).toFixed(2) + '€',
-          duration: order.duration? order.duration + ' mins': '-',
-          serviceNumber: order.services.length,
-          services: order.services,
-          performedAt: order.performedAt ? moment(order.performedAt).format('yyyy-MM-DD'): '-',
-          validatedAt: order.validatedAt ? moment(order.validatedAt).format('yyyy-MM-DD'): '-',
-          isValidated: !!order.validatedAt
-        }
-      })
+      this.data.push(this.createDataObject(order));
     })
     this.dataSource = this.dataSourceBuilder.create(this.data);
+  }
+  
+  private createDataObject (order: Order): any {
+    return {
+      data: {
+        uuid: order.uuid,
+        client: order.client,
+        clientName: order.client.fullName,
+        total: (order.totalInCent/100).toFixed(2) + '€',
+        duration: order.duration? order.duration + ' mins': '-',
+        serviceNumber: order.services.length,
+        services: order.services,
+        performedAt: order.performedAt ? moment(order.performedAt).format('yyyy-MM-DD'): '-',
+        validatedAt: order.validatedAt ? moment(order.validatedAt).format('yyyy-MM-DD'): '-',
+        isValidated: !!order.validatedAt,
+        createdAt: moment(order.createdAt).format('yyyy-MM-DD')
+      }
+    }
   }
   
   onCreate(): void {
@@ -113,7 +132,8 @@ export class OrdersComponent implements OnInit {
       .onClose
       .subscribe((result: Order) => {
         if (result) {
-          this.refreshDataSource([result]);
+          this.data.push(this.createDataObject(result));
+          this.dataSource = this.dataSourceBuilder.create(this.data);
         }
       })
   }
@@ -145,7 +165,8 @@ export class OrdersComponent implements OnInit {
       .subscribe((result: Order) => {
         if (result) {
           this.data = this.data.filter(o => o.data.uuid !== result.uuid);
-          this.refreshDataSource([result]);
+          this.data.push(this.createDataObject(result));
+          this.dataSource = this.dataSourceBuilder.create(this.data);
         }
       })
   }
