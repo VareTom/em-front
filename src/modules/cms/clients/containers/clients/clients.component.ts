@@ -8,6 +8,7 @@ import {
 } from '@nebular/theme';
 import { Store } from 'src/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 // Services
 import { TranslateService } from '@ngx-translate/core';
@@ -47,6 +48,7 @@ export class ClientsComponent implements OnInit {
   
   constructor(private dialogService: NbDialogService,
               private store: Store,
+              private router: Router,
               private toastrService: NbToastrService,
               private translate: TranslateService,
               private readonly clientService: ClientService,
@@ -122,6 +124,6 @@ export class ClientsComponent implements OnInit {
   }
   
   onEdit(client: Client): void {
-    console.log(client);
+    this.router.navigateByUrl(`clients/${client.uuid}/details`);
   }
 }

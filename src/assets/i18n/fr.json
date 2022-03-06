@@ -203,7 +203,11 @@
     "creation-failed": "L'ajout de votre client a échoué.",
     "deletion-failed": "La suppression de votre client a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre client a été un succès!",
-
+    "details": {
+      "title": "Détails du client",
+      "no-client": "Nous n'avons pas trouvé ce client.",
+      "retrieve-failed": "Impossible de récupérer les informations de ce client."
+    },
     "columns": {
       "clientFullName": "Nom du client",
       "vehicleNumber": "Nombre de véhicule",

@@ -13,7 +13,8 @@ import { CreateClientDialogComponent } from './components/create-client-dialog/c
 import { ClientDetailsComponent } from './containers/client-details/client-details.component';
 
 const routes: Routes = [
-  { path: '', component: ClientsComponent}
+  { path: '', component: ClientsComponent},
+  { path: ':uuid/details', component: ClientDetailsComponent}
 ]
 
 @NgModule({

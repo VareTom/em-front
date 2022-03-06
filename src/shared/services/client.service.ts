@@ -48,4 +48,14 @@ export class ClientService {
         catchError(error => throwError(error))
       )
   }
+  
+  getByUuid(clientUuid: string): Observable<Client> {
+    return this.httpClient.get(`${this.baseRoute}/${clientUuid}/details`)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
 }
