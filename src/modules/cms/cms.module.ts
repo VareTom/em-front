@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes} from '@angular/router';
 
 // Guards
-import {
-  AuthGuardService as AuthGuard
-} from 'src/shared/guards/auth-guard.service';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
+import { SuperAdminGuard } from 'src/shared/guards/super-admin.guard';
 
 // Modules
 import { SharedModule } from 'src/shared/shared.module';
@@ -24,7 +23,7 @@ const routes: Routes = [
       { path: 'services', loadChildren: () => import('./services/services.module').then(m => m.ServicesModule) },
       { path: 'clients', loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule) },
       { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
-      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
+      { path: 'admin', canActivate: [SuperAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
     ]
   }
 ]

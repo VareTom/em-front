@@ -7,7 +7,7 @@ import { CodeInputModule } from 'angular-code-input';
 
 // Service
 import { AuthService } from './services/auth.service';
-import { AuthGuardService } from 'src/shared/guards/auth-guard.service';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 import { EntityService } from 'src/shared/services/entity.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/shared/services/user.service';
@@ -160,7 +160,7 @@ export class SharedModule {
         ContactService,
 
         // Guards
-        AuthGuardService
+        AuthGuard
       ]
     }
   }
