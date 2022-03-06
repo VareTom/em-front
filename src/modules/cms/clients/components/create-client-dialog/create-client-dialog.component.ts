@@ -31,6 +31,7 @@ export class CreateClientDialogComponent implements OnInit {
   carInfoForm: FormGroup = this.formBuilder.group({
     merch: [null, Validators.required],
     model: [null, Validators.required],
+    plate: [null, Validators.required],
     year: [null],
     color: [null]
   })
@@ -96,6 +97,11 @@ export class CreateClientDialogComponent implements OnInit {
   
   get isCountryRequiredInput(): boolean {
     const formControl = this.addressInfoForm.get('country');
+    return formControl.touched && formControl.getError('required');
+  }
+  
+  get isPlateRequiredInput(): boolean {
+    const formControl = this.carInfoForm.get('plate');
     return formControl.touched && formControl.getError('required');
   }
 

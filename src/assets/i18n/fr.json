@@ -241,6 +241,8 @@
     "merch-required": "Marque obligatoire",
     "model": "Modèle",
     "model-required": "Modèle obligatoire",
+    "plate": "Plaque d'immatriculation",
+    "plate-required": "La plate est obligatoire",
     "color": "Couleur",
     "year": "Année"
   },
