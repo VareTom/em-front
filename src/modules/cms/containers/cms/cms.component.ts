@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from 'src/store';
-import { User } from 'src/shared/models/user';
 
 @Component({
   selector: 'app-cms',
