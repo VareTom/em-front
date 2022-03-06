@@ -7,19 +7,24 @@ import {
   NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
 import { Store } from 'src/store';
+import { Observable } from 'rxjs';
 
 // Services
 import { TranslateService } from '@ngx-translate/core';
 import { ClientService } from 'src/shared/services/client.service';
 
-// Models
-import { Client } from 'src/shared/models/client';
+// Components
 import {
   CreateClientDialogComponent
 } from 'src/modules/cms/clients/components/create-client-dialog/create-client-dialog.component';
 import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+
+// Models
+import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
+import { Client } from 'src/shared/models/client';
 
 @Component({
   selector: 'app-clients',
@@ -37,6 +42,9 @@ export class ClientsComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -45,6 +53,9 @@ export class ClientsComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
     if (this.store.value.currentEntity) {
       this.clientService.getAllForEntity()
         .subscribe({

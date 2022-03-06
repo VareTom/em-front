@@ -11,9 +11,7 @@ import { Store } from 'src/store';
 // Services
 import { TranslateService } from '@ngx-translate/core';
 import { ServiceService } from 'src/shared/services/service.service';
-
-// Models
-import { Service } from 'src/shared/models/service';
+import { Observable } from 'rxjs';
 
 // Components
 import {
@@ -22,6 +20,11 @@ import {
 import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+
+// Models
+import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
+import { Service } from 'src/shared/models/service';
 
 @Component({
   selector: 'app-services',
@@ -39,6 +42,9 @@ export class ServicesComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
+  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -47,6 +53,9 @@ export class ServicesComponent implements OnInit {
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
     if (this.store.value.currentEntity) {
       this.getServices();
     }
