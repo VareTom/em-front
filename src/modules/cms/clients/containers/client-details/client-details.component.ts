@@ -48,5 +48,8 @@ export class ClientDetailsComponent implements OnInit {
         }
       })
   }
-
+  
+  onBack() {
+    this.router.navigateByUrl('clients');
+  }
 }

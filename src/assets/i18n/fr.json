@@ -23,7 +23,8 @@
     "delete": "Supprimer",
     "update": "Mettre à jour",
     "send": "Envoyer",
-    "invite": "Inviter"
+    "invite": "Inviter",
+    "return": "Retour"
   },
   "forms": {
     "email": "Adresse e-mail",
