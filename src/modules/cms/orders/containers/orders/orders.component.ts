@@ -24,6 +24,8 @@ import { ConfirmationDeletionDialogComponent } from 'src/shared/components/confi
 import {
   ConfirmationValidationDialogComponent
 } from 'src/modules/cms/orders/components/confirmation-validation-dialog/confirmation-validation-dialog.component';
+import { ToggleFilterValues } from 'src/shared/enums/ToggleFilterValues';
+import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 
 @Component({
   selector: 'app-orders',
@@ -40,6 +42,7 @@ export class OrdersComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
+  toggleFilterValue: ToggleFilterValues = ToggleFilterValues.MONTHLY;
   toggleFilterLabel: string = this.translate.instant('filters.monthly');
   
   constructor(private dialogService: NbDialogService,
@@ -51,14 +54,25 @@ export class OrdersComponent implements OnInit {
   
   ngOnInit(): void {
     if (this.store.value.currentEntity) {
-      this.orderService.getAllForEntity()
-        .subscribe({
-          next: (orders) => {
-            if (orders.length > 0) this.refreshDataSource(orders);
-          },
-          error: (error) => this.toastrService.danger(this.translate.instant('order.retrieve-failed'), this.translate.instant('errors.title'))
-        })
+      this.getOrders();
     }
+  }
+  
+  private getOrders(): void {
+    const filters: FiltersInterface = {
+      period: this.toggleFilterValue
+    }
+    this.orderService.getAllForEntity(filters)
+      .subscribe({
+        next: (orders) => {
+          if (orders.length > 0) {
+            this.refreshDataSource(orders);
+          } else {
+            this.dataSource.setData([]);
+          }
+        },
+        error: (error) => this.toastrService.danger(this.translate.instant('order.retrieve-failed'), this.translate.instant('errors.title'))
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -160,8 +174,11 @@ export class OrdersComponent implements OnInit {
   onToggleFilters(event: boolean): void {
     if (event) {
       this.toggleFilterLabel = this.translate.instant('filters.all-time');
+      this.toggleFilterValue = ToggleFilterValues.ALL_TIME;
     } else {
       this.toggleFilterLabel = this.translate.instant('filters.monthly');
+      this.toggleFilterValue = ToggleFilterValues.MONTHLY;
     }
+    this.getOrders();
   }
 }

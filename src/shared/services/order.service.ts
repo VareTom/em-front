@@ -8,6 +8,7 @@ import { Store } from 'src/store';
 
 // Models
 import { Order } from 'src/shared/models/order';
+import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,11 @@ export class OrderService {
       )
   }
   
-  getAllForEntity (): Observable<Order[]> {
-    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}`)
+  getAllForEntity (filters: FiltersInterface): Observable<Order[]> {
+    let queryParams: string = '?';
+    if (filters.period) queryParams += `period=${filters.period}`;
+    
+    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}${queryParams}`)
       .pipe(
         map((orders: any) => {
           return orders.map((order: any) => new Order(order));

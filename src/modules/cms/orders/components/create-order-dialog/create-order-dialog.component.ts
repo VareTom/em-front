@@ -48,10 +48,14 @@ export class CreateOrderDialogComponent implements OnInit {
         .subscribe(
           {
             next: (clients) => {
-              this.clients = clients.map(client => new SelectViewModel({
-                name: client.fullName,
-                value: client.uuid
-              }))
+              if (clients.length > 0) {
+                this.clients = clients.map(client => new SelectViewModel({
+                  name: client.fullName,
+                  value: client.uuid
+                }));
+              } else {
+                this.toastrService.warning(this.translate.instant('order.no-clients-message'), this.translate.instant('order.no-clients'));
+              }
             },
             error: () => this.toastrService.danger(this.translate.instant('order.retrieve-client-failed'), this.translate.instant('errors.title'))
           }
@@ -61,10 +65,14 @@ export class CreateOrderDialogComponent implements OnInit {
         .subscribe(
           {
             next: (services) => {
-              this.services = services.map(service => new SelectViewModel({
-                name: service.name,
-                value: service.uuid
-              }))
+              if (services.length > 0) {
+                this.services = services.map(service => new SelectViewModel({
+                  name: service.name,
+                  value: service.uuid
+                }));
+              } else {
+                this.toastrService.warning(this.translate.instant('order.no-services-message'), this.translate.instant('order.no-services'));
+              }
             },
             error: () => this.toastrService.danger(this.translate.instant('order.retrieve-service-failed'), this.translate.instant('errors.title'))
           }

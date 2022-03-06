@@ -166,6 +166,10 @@
     "validation-failed-already-validate": "Impossible de valider une commande déjà validée.",
     "validation-succeed": "La validation de votre commande a été un succès!",
     "validate": "Valider l'opération",
+    "no-clients": "Aucun client trouvé dans votre entité!",
+    "no-clients-message": "Rendez-vous sur la page client afin de les encoder avant de céer une commande pour ce dernier",
+    "no-services": "Aucun service trouvé dans votre entité",
+    "no-services-message": "Rendez-vous sur la page service afin de les encoder avant de céer une commande avec ce dernier",
     "columns": {
       "clientName": "Nom du client",
       "total": "Total",
