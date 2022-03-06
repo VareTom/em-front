@@ -119,10 +119,10 @@ export class OrdersComponent implements OnInit {
         duration: order.duration? order.duration + ' mins': '-',
         serviceNumber: order.services.length,
         services: order.services,
+        createdAt: moment(order.createdAt).format('yyyy-MM-DD'),
         performedAt: order.performedAt ? moment(order.performedAt).format('yyyy-MM-DD'): '-',
         validatedAt: order.validatedAt ? moment(order.validatedAt).format('yyyy-MM-DD'): '-',
-        isValidated: !!order.validatedAt,
-        createdAt: moment(order.createdAt).format('yyyy-MM-DD')
+        isValidated: !!order.validatedAt
       }
     }
   }

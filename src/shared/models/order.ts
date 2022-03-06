@@ -16,6 +16,7 @@ export class Order {
     this.uuid = json.uuid;
     this.duration = json.durationInMinute;
     this.totalInCent = json.totalInCent;
+    this.createdAt = json.createdAt;
     this.performedAt = json.performedAt;
     this.validatedAt = json.validatedAt;
     
