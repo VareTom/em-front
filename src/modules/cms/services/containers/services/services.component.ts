@@ -39,8 +39,6 @@ export class ServicesComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   
-  toggleFilterLabel: string = this.translate.instant('filters.monthly');
-  
   constructor(private dialogService: NbDialogService,
               private store: Store,
               private toastrService: NbToastrService,
@@ -50,14 +48,22 @@ export class ServicesComponent implements OnInit {
   
   ngOnInit(): void {
     if (this.store.value.currentEntity) {
-      this.serviceService.getAllForEntity()
-        .subscribe({
-          next: (services) => {
-            if (services.length > 0) this.refreshDataSource(services);
-          },
-          error: () => this.toastrService.danger(this.translate.instant('service.retrieve-failed'), this.translate.instant('errors.title'))
-        })
+      this.getServices();
     }
+  }
+  
+  private getServices(): void {
+    this.serviceService.getAllForEntity()
+      .subscribe({
+        next: (services) => {
+          if (services.length > 0) {
+            this.refreshDataSource(services);
+          } else {
+            this.dataSource.setData([]);
+          }
+        },
+        error: () => this.toastrService.danger(this.translate.instant('service.retrieve-failed'), this.translate.instant('errors.title'))
+      })
   }
   
   changeSort(sortRequest: NbSortRequest): void {
@@ -128,13 +134,5 @@ export class ServicesComponent implements OnInit {
           this.refreshDataSource([result]);
         }
       })
-  }
-  
-  onToggleFilters(event: boolean): void {
-    if (event) {
-      this.toggleFilterLabel = this.translate.instant('filters.all-time');
-    } else {
-      this.toggleFilterLabel = this.translate.instant('filters.monthly');
-    }
   }
 }

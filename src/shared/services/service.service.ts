@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 // Models
 import { Service } from 'src/shared/models/service';
+import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
 
 @Injectable({
   providedIn: 'root'
