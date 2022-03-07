@@ -32,6 +32,7 @@
                                nbInput
                                fullWidth
                                formControlName="password"
+                               (keyup.enter)="onLogin()"
                                type="password"
                                id="input-password">
                         <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
