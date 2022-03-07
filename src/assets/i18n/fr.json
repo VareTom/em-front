@@ -207,7 +207,9 @@
     "details": {
       "title": "Détails du client",
       "no-client": "Nous n'avons pas trouvé ce client.",
-      "retrieve-failed": "Impossible de récupérer les informations de ce client."
+      "retrieve-failed": "Impossible de récupérer les informations de ce client.",
+      "cars": "Véhicules",
+      "address": "Informations postale"
     },
     "columns": {
       "clientFullName": "Nom du client",

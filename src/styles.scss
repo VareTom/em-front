@@ -44,6 +44,16 @@ html, body {
   }
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .container {
   width: 100%;
   height: auto;
@@ -53,9 +63,6 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    button {
-      //height: 40px;
-    }
   }
 
   .filters {

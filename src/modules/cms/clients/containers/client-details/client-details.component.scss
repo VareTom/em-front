@@ -6,3 +6,49 @@
     margin-right: 20px;
   }
 }
+
+.flex-row {
+  justify-content: space-between;
+}
+
+.personal-data {
+  .flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  width: 50%;
+  margin: 20px 0;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cars, .address {
+  h4 {
+    margin-bottom: 10px;
+  }
+}
+
+.car, .address-card {
+  .flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 900px) {
+  .personal-data {
+    width: 100%;
+  }
+}
