@@ -31,7 +31,10 @@
             </div>
 
             <div class="address" *ngIf="client.address">
-                <h4>{{'client.details.address'|translate}}</h4>
+                <div class="header-title">
+                    <h4>{{'client.details.address'|translate}}</h4>
+                </div>
+
                 <div class="divider"></div>
                 <nb-card class="address-card">
                     <nb-card-body>
@@ -58,13 +61,31 @@
                                 <label class="label">{{'address.country'|translate}}</label>
                                 {{client.address.country}}
                             </div>
+                            <div class="flex-column">
+                                <div class="flex-row actions-column">
+                                    <button nbButton hero status="info" size="small" (click)="onEditAddress(client.address)">
+                                        <nb-icon icon="edit-outline"></nb-icon>
+                                    </button>
+                                    <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                                            nbButton hero status="danger" size="small" (click)="onDeleteAddress(client.address)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </nb-card-body>
                 </nb-card>
             </div>
 
             <div class="cars" *ngIf="client.cars && client.cars.length > 0">
-                <h4>{{'client.details.cars'|translate}}</h4>
+                <div class="header-title">
+                    <h4>{{'client.details.cars'|translate}}</h4>
+                    <button nbButton hero status="info" size="small"
+                            (click)="onAddCar()">
+                        {{'actions.add'|translate }}
+                    </button>
+                </div>
+
                 <div class="divider"></div>
                 <nb-card *ngFor="let car of client.cars" class="car">
                     <nb-card-body>
@@ -90,6 +111,17 @@
                             <div class="flex-column">
                                 <label class="label">{{'car.year'|translate}}</label>
                                 {{car.year}}
+                            </div>
+                            <div class="flex-column">
+                                <div class="flex-row actions-column">
+                                    <button nbButton hero status="info" size="small" (click)="onEditCar(car)">
+                                        <nb-icon icon="edit-outline"></nb-icon>
+                                    </button>
+                                    <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                                            nbButton hero status="danger" size="small" (click)="onDeleteCar(car)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </nb-card-body>

@@ -9,6 +9,11 @@ import { ClientService } from 'src/shared/services/client.service';
 
 // Models
 import { Client } from 'src/shared/models/client';
+import { Car } from 'src/shared/models/car';
+import { Observable } from 'rxjs';
+import { User } from 'src/shared/models/user';
+import { Entity } from 'src/shared/models/entity';
+import { Address } from 'src/shared/models/address';
 
 @Component({
   selector: 'app-client-details',
@@ -18,6 +23,9 @@ import { Client } from 'src/shared/models/client';
 export class ClientDetailsComponent implements OnInit {
 
   client: Client;
+  
+  connectedUser$: Observable<User>;
+  currentEntity$: Observable<Entity>;
   
   constructor(
     private store: Store,
@@ -29,6 +37,9 @@ export class ClientDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.connectedUser$ = this.store.select<User>('connectedUser');
+    this.currentEntity$ = this.store.select<Entity>('currentEntity');
+    
     if (this.route.snapshot.paramMap.get('uuid')) {
       this.getClient(this.route.snapshot.paramMap.get('uuid'));
     } else {
@@ -49,7 +60,27 @@ export class ClientDetailsComponent implements OnInit {
       })
   }
   
-  onBack() {
+  onBack(): void {
     this.router.navigateByUrl('clients');
+  }
+  
+  onAddCar(): void {
+  
+  }
+  
+  onEditAddress(address: Address): void {
+  
+  }
+  
+  onEditCar(car: Car): void {
+  
+  }
+  
+  onDeleteCar(car: Car): void {
+  
+  }
+  
+  onDeleteAddress(address: Address): void {
+  
   }
 }
