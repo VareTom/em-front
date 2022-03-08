@@ -84,7 +84,7 @@ export class ExpendituresComponent implements OnInit {
             this.dataSource.setData([]);
           }
         },
-        error: (error) => this.toastrService.danger(this.translate.instant('expenditure.retrieve-failed'), this.translate.instant('errors.title'))
+        error: (error) => this.toastrService.danger(null, this.translate.instant('expenditure.retrieve-failed'))
       })
   }
   
@@ -143,7 +143,7 @@ export class ExpendituresComponent implements OnInit {
               this.dataSource.setData(this.data);
               this.toastrService.success(null, this.translate.instant('expenditure.deletion-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('expenditure.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('expenditure.deletion-failed'))
           })
       }
     })

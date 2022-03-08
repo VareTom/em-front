@@ -140,7 +140,7 @@ export class CreateClientDialogComponent implements OnInit {
         },
         error: (error) => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('client.creation-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('client.creation-failed'));
         }
       })
   }

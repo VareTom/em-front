@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
             console.log(statistic);
             this.statistic = statistic;
           },
-          error: (error) => this.toastrService.danger(this.translate.instant('dashboard.retrieve-failed'), this.translate.instant('errors.title'))
+          error: (error) => this.toastrService.danger(null, this.translate.instant('dashboard.retrieve-failed'))
         })
     }
   }

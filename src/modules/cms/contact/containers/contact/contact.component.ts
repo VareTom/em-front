@@ -65,7 +65,7 @@ export class ContactComponent implements OnInit {
         },
         error: () => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('contact.send-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('contact.send-failed'));
         }
       })
   }

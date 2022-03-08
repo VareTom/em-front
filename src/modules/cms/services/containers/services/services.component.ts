@@ -71,7 +71,7 @@ export class ServicesComponent implements OnInit {
             this.dataSource.setData([]);
           }
         },
-        error: () => this.toastrService.danger(this.translate.instant('service.retrieve-failed'), this.translate.instant('errors.title'))
+        error: () => this.toastrService.danger(null, this.translate.instant('service.retrieve-failed'))
       })
   }
   
@@ -124,7 +124,7 @@ export class ServicesComponent implements OnInit {
               this.dataSource.setData(this.data);
               this.toastrService.success(null, this.translate.instant('service.deletion-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('service.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('service.deletion-failed'))
           })
       }
     })

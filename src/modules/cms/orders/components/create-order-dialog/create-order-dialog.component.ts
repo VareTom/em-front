@@ -57,7 +57,7 @@ export class CreateOrderDialogComponent implements OnInit {
                 this.toastrService.warning(this.translate.instant('order.no-clients-message'), this.translate.instant('order.no-clients'));
               }
             },
-            error: () => this.toastrService.danger(this.translate.instant('order.retrieve-client-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('order.retrieve-client-failed'))
           }
         )
   
@@ -74,7 +74,7 @@ export class CreateOrderDialogComponent implements OnInit {
                 this.toastrService.warning(this.translate.instant('order.no-services-message'), this.translate.instant('order.no-services'));
               }
             },
-            error: () => this.toastrService.danger(this.translate.instant('order.retrieve-service-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('order.retrieve-service-failed'))
           }
         )
     }
@@ -131,7 +131,7 @@ export class CreateOrderDialogComponent implements OnInit {
         },
         error: () => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('order.creation-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('order.creation-failed'));
         }
       })
   }
@@ -148,7 +148,7 @@ export class CreateOrderDialogComponent implements OnInit {
         },
         error: () => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('order.update-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('order.update-failed'));
         }
       })
   }

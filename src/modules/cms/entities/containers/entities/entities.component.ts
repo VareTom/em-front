@@ -64,7 +64,7 @@ export class EntitiesComponent implements OnInit {
       next: (members) => {
         this.refreshDataSource(members);
       },
-      error: () => this.toastrService.danger(this.translate.instant('entity.retrieve-failed'), this.translate.instant('errors.title'))
+      error: () => this.toastrService.danger(null, this.translate.instant('entity.retrieve-failed'))
     })
     
     if (this.store.value.currentEntity.authorUuid === this.store.value.connectedUser.uuid) this.allColumns.push(this.customColumn);
@@ -109,7 +109,7 @@ export class EntitiesComponent implements OnInit {
               this.dataSource.setData(this.data);
               this.toastrService.success(null, this.translate.instant('entity.deletion-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('entity.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('entity.deletion-failed'))
           })
       }
     })

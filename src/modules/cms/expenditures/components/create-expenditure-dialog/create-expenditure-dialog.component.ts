@@ -84,7 +84,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
         },
         error: (error) => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('expenditure.creation-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('expenditure.creation-failed'));
         }
       })
   }
@@ -100,7 +100,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
         },
         error: (error) => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('expenditure.update-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('expenditure.update-failed'));
         }
       })
   }

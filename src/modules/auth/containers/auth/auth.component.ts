@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit {
       const token = this.jwtHelper.decodeToken(localStorage.getItem('token'))
       this.userService.get(token.user.uuid).subscribe({
         next: () => this.router.navigateByUrl('dashboard'),
-        error: () => this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'))
+        error: () => {}
       });
     }
   }

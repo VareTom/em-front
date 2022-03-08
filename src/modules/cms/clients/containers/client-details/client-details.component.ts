@@ -47,7 +47,7 @@ export class ClientDetailsComponent implements OnInit {
     if (this.route.snapshot.paramMap.get('uuid')) {
       this.getClient(this.route.snapshot.paramMap.get('uuid'));
     } else {
-      this.toastrService.danger(this.translate.instant('client.details.no-client'), this.translate.instant('errors.title'));
+      this.toastrService.danger(null, this.translate.instant('client.details.no-client'));
       this.router.navigateByUrl('clients');
     }
   }
@@ -59,7 +59,7 @@ export class ClientDetailsComponent implements OnInit {
           this.client = client;
         },
         error: () => {
-          this.toastrService.danger(this.translate.instant('client.details.retrieve-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('client.details.retrieve-failed'));
         }
       })
   }
@@ -95,7 +95,7 @@ export class ClientDetailsComponent implements OnInit {
               this.toastrService.success(null, this.translate.instant('address.deletion-succeed'));
               this.router.navigateByUrl('clients');
             },
-            error: () => this.toastrService.danger(this.translate.instant('address.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('address.deletion-failed'))
           })
       }
     })
@@ -115,7 +115,7 @@ export class ClientDetailsComponent implements OnInit {
               this.toastrService.success(null, this.translate.instant('client.deletion-succeed'));
               this.router.navigateByUrl('clients');
             },
-            error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('client.deletion-failed'))
           })
       }
     })

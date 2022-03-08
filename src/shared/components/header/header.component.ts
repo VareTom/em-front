@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
               this.toastrService.success(null, this.translate.instant('entity.creation-succeed'));
             },
             error: () => {
-              this.toastrService.danger(this.translate.instant('errors.basic-failed'), this.translate.instant('errors.title'));
+              this.toastrService.danger(null, this.translate.instant('errors.basic-failed'));
             }
           });
         }

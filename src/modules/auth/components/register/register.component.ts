@@ -70,11 +70,11 @@ export class RegisterComponent implements OnInit {
               code: +code
             })
           } else {
-            this.toastrService.danger(this.translate.instant('errors.code-not-valid'), this.translate.instant('errors.title'));
+            this.toastrService.danger(null, this.translate.instant('errors.code-not-valid'));
           }
         },
         error: () => {
-          this.toastrService.danger(this.translate.instant('errors.http-not-found'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('errors.http-not-found'));
         }
       })
   }

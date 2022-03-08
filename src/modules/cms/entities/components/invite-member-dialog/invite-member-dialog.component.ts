@@ -55,7 +55,7 @@ export class InviteMemberDialogComponent implements OnInit {
         },
         error: (error) => {
           this.isSubmitted = false;
-          this.toastrService.danger(this.translate.instant('entity.invitation-failed'), this.translate.instant('errors.title'));
+          this.toastrService.danger(null, this.translate.instant('entity.invitation-failed'));
         }
       })
   }

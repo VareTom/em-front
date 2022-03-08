@@ -64,7 +64,7 @@ export class ClientsComponent implements OnInit {
           next: (clients) => {
             if (clients.length > 0) this.refreshDataSource(clients);
           },
-          error: (error) => this.toastrService.danger(this.translate.instant('client.retrieve-failed'), this.translate.instant('errors.title'))
+          error: () => this.toastrService.danger(null, this.translate.instant('client.retrieve-failed'))
         })
     }
   }
@@ -117,7 +117,7 @@ export class ClientsComponent implements OnInit {
               this.dataSource.setData(this.data);
               this.toastrService.success(null, this.translate.instant('client.deletion-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('client.deletion-failed'))
           })
       }
     })

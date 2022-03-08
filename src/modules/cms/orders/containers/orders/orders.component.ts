@@ -84,7 +84,7 @@ export class OrdersComponent implements OnInit {
             this.dataSource.setData([]);
           }
         },
-        error: (error) => this.toastrService.danger(this.translate.instant('order.retrieve-failed'), this.translate.instant('errors.title'))
+        error: (error) => this.toastrService.danger(null, this.translate.instant('order.retrieve-failed'))
       })
   }
   
@@ -149,7 +149,7 @@ export class OrdersComponent implements OnInit {
               this.dataSource.setData(this.data);
               this.toastrService.success(null, this.translate.instant('order.deletion-succeed'));
             },
-            error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))
+            error: () => this.toastrService.danger(null, this.translate.instant('order.deletion-failed'))
           })
       }
     })
@@ -182,9 +182,9 @@ export class OrdersComponent implements OnInit {
             },
             error: (error) => {
               if (error.error.statusCode === 400) {
-                this.toastrService.danger(this.translate.instant('order.validation-failed-already-validate'), this.translate.instant('errors.title'))
+                this.toastrService.danger(null, this.translate.instant('order.validation-failed-already-validate'))
               } else {
-                this.toastrService.danger(this.translate.instant('order.validation-failed'), this.translate.instant('errors.title'))
+                this.toastrService.danger(null, this.translate.instant('order.validation-failed'))
               }
             }
           })
