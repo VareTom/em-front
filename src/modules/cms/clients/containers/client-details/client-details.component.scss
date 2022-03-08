@@ -43,6 +43,12 @@
     &:not(:last-child) {
       margin-bottom: 20px;
     }
+    .flex-column {
+      flex: 1;
+    }
+    .actions-column {
+      justify-content: start !important;
+    }
   }
   margin: 20px 0;
 }
