@@ -202,8 +202,11 @@
     "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
     "creation-succeed": "L'ajout de votre nouveau client a été un succès!",
     "creation-failed": "L'ajout de votre client a échoué.",
+    "update-succeed": "La mise à jour du client a été un succès!",
+    "update-failed": "La mise à jour du client a échouée.",
     "deletion-failed": "La suppression de votre client a malheureusement échoué.",
     "deletion-succeed": "La suppression de votre client a été un succès!",
+    "info-title": "Informations personnelles sur le client",
     "details": {
       "title": "Détails du client",
       "no-client": "Nous n'avons pas trouvé ce client.",
@@ -248,7 +251,9 @@
     "plate": "Plaque d'immatriculation",
     "plate-required": "La plate est obligatoire",
     "color": "Couleur",
-    "year": "Année"
+    "year": "Année",
+    "deletion-succeed": "Suppression du véhicule effectué",
+    "deletion-failed": "La suppression du véhicule a échoué"
   },
   "confirm-deletion-dialog": {
     "title": "Confirmation de suppression",

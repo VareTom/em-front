@@ -1,1 +1,36 @@
-<p>client-info-dialog works!</p>
+<nb-card accent="info">
+    <nb-card-header>{{ 'client.info-title'|translate }}</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="clientInfoForm" class="container-form">
+            <div class="form-control-group">
+                <label class="label" for="firstName">{{ 'client.create-form.first-name'| translate }}*</label>
+                <input nbInput
+                       fullWidth
+                       id="firstName"
+                       formControlName="firstName"
+                       autofocus>
+                <ng-container *ngIf="isFirstNameRequiredInput">
+                    <p class="caption status-danger">
+                        {{ 'client.create-form.first-name-required'| translate }}
+                    </p>
+                </ng-container>
+            </div>
+            <div class="form-control-group">
+                <label class="label" for="lastName">{{ 'client.create-form.last-name'| translate }}</label>
+                <input nbInput
+                       fullWidth
+                       id="lastName"
+                       formControlName="lastName"
+                       autofocus>
+            </div>
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="info"
+                    [disabled]="!clientInfoForm.valid"
+                    (click)="onSubmit()"> {{ submitButtonText }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>
