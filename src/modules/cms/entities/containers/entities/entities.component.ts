@@ -107,7 +107,7 @@ export class EntitiesComponent implements OnInit {
             next: () => {
               this.data = this.data.filter(m => m.data.uuid !== member.uuid);
               this.dataSource.setData(this.data);
-              this.toastrService.success(this.translate.instant('entity.deletion-succeed'));
+              this.toastrService.success(null, this.translate.instant('entity.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('entity.deletion-failed'), this.translate.instant('errors.title'))
           })

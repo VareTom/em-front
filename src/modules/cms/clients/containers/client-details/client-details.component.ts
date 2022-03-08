@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from 'src/store';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 
 // Services
 import { ClientService } from 'src/shared/services/client.service';
@@ -14,6 +14,9 @@ import { Observable } from 'rxjs';
 import { User } from 'src/shared/models/user';
 import { Entity } from 'src/shared/models/entity';
 import { Address } from 'src/shared/models/address';
+import {
+  ConfirmationDeletionDialogComponent
+} from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 
 @Component({
   selector: 'app-client-details',
@@ -30,6 +33,7 @@ export class ClientDetailsComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
+    private dialogService: NbDialogService,
     private translate: TranslateService,
     private readonly clientService: ClientService,
     private toastrService: NbToastrService,
@@ -80,7 +84,40 @@ export class ClientDetailsComponent implements OnInit {
   
   }
   
-  onDeleteAddress(address: Address): void {
+  onDeleteAddress(): void {
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.deleteClientAddress(this.client.uuid)
+          .subscribe({
+            next: () => {
+              delete this.client.address;
+              this.toastrService.success(null, this.translate.instant('address.deletion-succeed'));
+              this.router.navigateByUrl('clients');
+            },
+            error: () => this.toastrService.danger(this.translate.instant('address.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
+  }
   
+  onEditClient(client: Client): void {
+  
+  }
+  
+  onDeleteClient(client: Client): void {
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.delete(client.uuid)
+          .subscribe({
+            next: () => {
+              this.toastrService.success(null, this.translate.instant('client.deletion-succeed'));
+              this.router.navigateByUrl('clients');
+            },
+            error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
+          })
+      }
+    })
   }
 }

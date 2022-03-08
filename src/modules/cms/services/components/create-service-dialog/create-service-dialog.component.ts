@@ -82,7 +82,7 @@ export class CreateServiceDialogComponent implements OnInit {
       .subscribe({
         next: (serviceCreated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('service.creation-succeed'))
+          this.toastrService.success(null, this.translate.instant('service.creation-succeed'))
           this.dialogRef.close(serviceCreated);
         },
         error: (error) => {
@@ -102,7 +102,7 @@ export class CreateServiceDialogComponent implements OnInit {
       .subscribe({
         next: (serviceUpdated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('service.update-succeed'));
+          this.toastrService.success(null, this.translate.instant('service.update-succeed'));
           this.dialogRef.close(serviceUpdated);
         },
         error: (error) => {

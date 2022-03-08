@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
         if (result) {
           this.entityService.create(result).subscribe({
             next: (result) => {
-              this.toastrService.success(this.translate.instant('entity.creation-succeed'));
+              this.toastrService.success(null, this.translate.instant('entity.creation-succeed'));
             },
             error: () => {
               this.toastrService.danger(this.translate.instant('errors.basic-failed'), this.translate.instant('errors.title'));

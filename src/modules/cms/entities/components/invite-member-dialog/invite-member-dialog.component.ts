@@ -50,7 +50,7 @@ export class InviteMemberDialogComponent implements OnInit {
       .subscribe({
         next: (memberCreated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('entity.invitation-succeed'));
+          this.toastrService.success(null, this.translate.instant('entity.invitation-succeed'));
           this.dialogRef.close(memberCreated);
         },
         error: (error) => {

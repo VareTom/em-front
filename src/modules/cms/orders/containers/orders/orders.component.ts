@@ -147,7 +147,7 @@ export class OrdersComponent implements OnInit {
             next: () => {
               this.data = this.data.filter(o => o.data.uuid !== order.uuid);
               this.dataSource.setData(this.data);
-              this.toastrService.success(this.translate.instant('order.deletion-succeed'));
+              this.toastrService.success(null, this.translate.instant('order.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('order.deletion-failed'), this.translate.instant('errors.title'))
           })
@@ -178,7 +178,7 @@ export class OrdersComponent implements OnInit {
         this.orderService.validate(order.uuid)
           .subscribe({
             next: () => {
-              this.toastrService.success(this.translate.instant('order.validation-succeed'));
+              this.toastrService.success(null, this.translate.instant('order.validation-succeed'));
             },
             error: (error) => {
               if (error.error.statusCode === 400) {

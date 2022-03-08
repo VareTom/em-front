@@ -115,7 +115,7 @@ export class ClientsComponent implements OnInit {
             next: () => {
               this.data = this.data.filter(c => c.data.uuid !== client.uuid);
               this.dataSource.setData(this.data);
-              this.toastrService.success(this.translate.instant('client.deletion-succeed'));
+              this.toastrService.success(null, this.translate.instant('client.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('client.deletion-failed'), this.translate.instant('errors.title'))
           })

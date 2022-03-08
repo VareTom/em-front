@@ -141,7 +141,7 @@ export class ExpendituresComponent implements OnInit {
             next: () => {
               this.data = this.data.filter(ex => ex.data.uuid !== expenditure.uuid);
               this.dataSource.setData(this.data);
-              this.toastrService.success(this.translate.instant('expenditure.deletion-succeed'));
+              this.toastrService.success(null, this.translate.instant('expenditure.deletion-succeed'));
             },
             error: () => this.toastrService.danger(this.translate.instant('expenditure.deletion-failed'), this.translate.instant('errors.title'))
           })

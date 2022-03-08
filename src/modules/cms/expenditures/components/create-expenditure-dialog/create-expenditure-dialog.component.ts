@@ -79,7 +79,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
       .subscribe({
         next: (expenditureCreated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('expenditure.creation-succeed'));
+          this.toastrService.success(null, this.translate.instant('expenditure.creation-succeed'));
           this.dialogRef.close(expenditureCreated);
         },
         error: (error) => {
@@ -95,7 +95,7 @@ export class CreateExpenditureDialogComponent implements OnInit {
       .subscribe({
         next: (expenditureUpdated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('expenditure.update-succeed'));
+          this.toastrService.success(null, this.translate.instant('expenditure.update-succeed'));
           this.dialogRef.close(expenditureUpdated);
         },
         error: (error) => {

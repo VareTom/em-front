@@ -126,7 +126,7 @@ export class CreateOrderDialogComponent implements OnInit {
       .subscribe({
         next: (createdOrder) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('order.creation-succeed'));
+          this.toastrService.success(null, this.translate.instant('order.creation-succeed'));
           this.dialogRef.close(createdOrder);
         },
         error: () => {
@@ -143,7 +143,7 @@ export class CreateOrderDialogComponent implements OnInit {
       .subscribe({
         next: (orderUpdated) => {
           this.isSubmitted = false;
-          this.toastrService.success(this.translate.instant('order.update-succeed'));
+          this.toastrService.success(null, this.translate.instant('order.update-succeed'));
           this.dialogRef.close(orderUpdated);
         },
         error: () => {

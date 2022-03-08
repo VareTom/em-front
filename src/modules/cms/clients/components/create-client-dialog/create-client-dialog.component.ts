@@ -136,7 +136,7 @@ export class CreateClientDialogComponent implements OnInit {
         next: (createdClient) => {
           this.isSubmitted = false;
           this.dialogRef.close(createdClient);
-          this.toastrService.success(this.translate.instant('client.creation-succeed'));
+          this.toastrService.success(null, this.translate.instant('client.creation-succeed'));
         },
         error: (error) => {
           this.isSubmitted = false;

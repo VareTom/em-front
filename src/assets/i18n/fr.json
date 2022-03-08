@@ -236,7 +236,9 @@
     "locality": "Localité",
     "locality-required": "Localité obligatoire",
     "country": "Pays",
-    "country-required": "Pays obligatoire"
+    "country-required": "Pays obligatoire",
+    "deletion-succeed": "Suppression de l'adresse effectué",
+    "deletion-failed": "La suppression de l'adresse a échoué"
   },
   "car": {
     "merch": "Marque",
