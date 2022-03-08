@@ -80,8 +80,8 @@ export class ClientService {
       )
   }
   
-  editClientCar(clientUuid: string,parameters: any): Observable<Client> {
-    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/car`, parameters)
+  editClientCar(clientUuid: string, carUuid: string, parameters: any): Observable<Client> {
+    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/car/${carUuid}`, parameters)
       .pipe(
         map((result: any) => {
           return new Client(result);
@@ -90,8 +90,8 @@ export class ClientService {
       )
   }
   
-  deleteClientCar(clientUuid: string): Observable<Client> {
-    return this.httpClient.delete(`${this.baseRoute}/${clientUuid}/car`)
+  deleteClientCar(clientUuid: string,carUuid: string): Observable<Client> {
+    return this.httpClient.delete(`${this.baseRoute}/${clientUuid}/car/${carUuid}`)
       .pipe(
         map((result: any) => {
           return new Client(result);

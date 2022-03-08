@@ -17,6 +17,9 @@ import { Address } from 'src/shared/models/address';
 import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+import {
+  ClientInfoDialogComponent
+} from 'src/modules/cms/clients/components/client-info-dialog/client-info-dialog.component';
 
 @Component({
   selector: 'app-client-details',
@@ -72,6 +75,30 @@ export class ClientDetailsComponent implements OnInit {
   
   }
   
+  onCreateAddress(): void {
+  
+  }
+  
+  onEditClient(client: Client): void {
+    const dialogRef = this.dialogService.open(ClientInfoDialogComponent, {
+      context: {
+        clientToUpdate: client
+      }
+    });
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.update(client.uuid,result)
+          .subscribe({
+            next: (updatedClient) => {
+              this.client = updatedClient;
+              this.toastrService.success(null, this.translate.instant('client.update-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('client.update-failed'))
+          })
+      }
+    })
+  }
+  
   onEditAddress(address: Address): void {
   
   }
@@ -81,7 +108,19 @@ export class ClientDetailsComponent implements OnInit {
   }
   
   onDeleteCar(car: Car): void {
-  
+    const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.deleteClientCar(this.client.uuid,car.uuid)
+          .subscribe({
+            next: () => {
+              this.client.cars = this.client.cars.filter(c => c.uuid !== car.uuid);
+              this.toastrService.success(null, this.translate.instant('car.deletion-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('car.deletion-failed'))
+          })
+      }
+    })
   }
   
   onDeleteAddress(): void {
@@ -99,10 +138,6 @@ export class ClientDetailsComponent implements OnInit {
           })
       }
     })
-  }
-  
-  onEditClient(client: Client): void {
-  
   }
   
   onDeleteClient(client: Client): void {

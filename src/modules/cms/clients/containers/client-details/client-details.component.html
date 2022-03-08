@@ -25,6 +25,17 @@
                                 <label class="label">{{'client.create-form.last-name'|translate}}</label>
                                 {{client.lastName}}
                             </div>
+                            <div class="flex-column">
+                                <div class="flex-row actions-column">
+                                    <button nbButton hero status="info" size="small" (click)="onEditClient(client)">
+                                        <nb-icon icon="edit-outline"></nb-icon>
+                                    </button>
+                                    <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                                            nbButton hero status="danger" size="small" (click)="onDeleteClient(client)">
+                                        <nb-icon icon="trash-2-outline"></nb-icon>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -33,6 +44,11 @@
             <div class="address" *ngIf="client.address">
                 <div class="header-title">
                     <h4>{{'client.details.address'|translate}}</h4>
+                    <button nbButton hero status="info" size="small"
+                            *ngIf="!client.address"
+                            (click)="onCreateAddress()">
+                        {{'actions.create'|translate }}
+                    </button>
                 </div>
 
                 <div class="divider"></div>
@@ -67,7 +83,7 @@
                                         <nb-icon icon="edit-outline"></nb-icon>
                                     </button>
                                     <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
-                                            nbButton hero status="danger" size="small" (click)="onDeleteAddress(client.address)">
+                                            nbButton hero status="danger" size="small" (click)="onDeleteAddress()">
                                         <nb-icon icon="trash-2-outline"></nb-icon>
                                     </button>
                                 </div>
