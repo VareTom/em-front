@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 // Models
 import { Client } from 'src/shared/models/client';
+import { Car } from 'src/shared/models/car';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,56 @@ export class ClientService {
   
   getByUuid(clientUuid: string): Observable<Client> {
     return this.httpClient.get(`${this.baseRoute}/${clientUuid}/details`)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  addClientCar(clientUuid: string,parameters: any): Observable<Client> {
+    return this.httpClient.post(`${this.baseRoute}/${clientUuid}/car`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  editClientCar(clientUuid: string,parameters: any): Observable<Client> {
+    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/car`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  deleteClientCar(clientUuid: string): Observable<Client> {
+    return this.httpClient.delete(`${this.baseRoute}/${clientUuid}/car`)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  editClientAddress(clientUuid: string,parameters: any): Observable<Client> {
+    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/address`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new Client(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
+  deleteClientAddress(clientUuid: string): Observable<Client> {
+    return this.httpClient.delete(`${this.baseRoute}/${clientUuid}/address`)
       .pipe(
         map((result: any) => {
           return new Client(result);

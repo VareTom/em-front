@@ -228,8 +228,8 @@
     }
   },
   "address": {
-    "street": "Rue et numéro",
-    "street-required": "Rue et numéro obligatoire",
+    "street": "Rue et Numéro",
+    "street-required": "Rue et Numéro obligatoire",
     "box": "Boîte",
     "postalCode": "Code postale",
     "postalCode-required": "Code postale obligatoire",
