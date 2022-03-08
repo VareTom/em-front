@@ -27,7 +27,7 @@
                     <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
                     <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
                         <button nbButton hero status="info" size="small" (click)="onEdit(row.data)">
-                            <nb-icon icon="edit-outline"></nb-icon>
+                            <nb-icon icon="eye-outline"></nb-icon>
                         </button>
                         <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
                                 nbButton hero status="danger" size="small" (click)="onDelete(row.data)">
