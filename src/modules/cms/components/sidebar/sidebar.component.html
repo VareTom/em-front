@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="menu">
-        <nb-menu [items]="menuItems">
+        <nb-menu [items]="(menuItems$|async)">
         </nb-menu>
     </div>
     <div class="policy">

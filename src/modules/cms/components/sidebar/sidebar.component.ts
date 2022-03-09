@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from 'src/store';
+import { Observable } from 'rxjs';
+import { User } from 'src/shared/models/user';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +11,9 @@ import { Store } from 'src/store';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  menuItems$: Observable<NbMenuItem[]>;
+
   menuItems: NbMenuItem[] = [
     {
       title: this.translate.instant('sidebar.dashboard'),
@@ -25,6 +30,7 @@ export class SidebarComponent implements OnInit {
   constructor(private translate: TranslateService, private store: Store) { }
 
   ngOnInit(): void {
+    this.menuItems$ = this.store.select<NbMenuItem[]>('menuItems');
     if (this.store.value.connectedUser.entity) {
       this.menuItems.splice(1, 0,
         {
@@ -49,5 +55,7 @@ export class SidebarComponent implements OnInit {
         }
       )
     }
+
+    this.store.set('menuItems', this.menuItems);
   }
 }
