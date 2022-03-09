@@ -1,1 +1,71 @@
-<p>create-client-car-dialog works!</p>
+<nb-card accent="info">
+  <nb-card-header>{{ titleText }}</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="carInfoForm" class="container-form">
+      <div class="form-control-group">
+        <label class="label" for="merch">{{ 'car.merch'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="merch"
+               formControlName="merch"
+               autofocus>
+        <ng-container *ngIf="isMerchRequiredInput">
+          <p class="caption status-danger">
+            {{ 'car.merch-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="model">{{ 'car.model'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="model"
+               formControlName="model"
+               autofocus>
+        <ng-container *ngIf="isModelRequiredInput">
+          <p class="caption status-danger">
+            {{ 'car.model-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="plate">{{ 'car.plate'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="plate"
+               formControlName="plate"
+               autofocus>
+        <ng-container *ngIf="isPlateRequiredInput">
+          <p class="caption status-danger">
+            {{ 'car.plate-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="color">{{ 'car.color'| translate }}</label>
+        <input nbInput
+               fullWidth
+               id="color"
+               formControlName="color"
+               autofocus>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="year">{{ 'car.year'| translate }}</label>
+        <input nbInput
+               fullWidth
+               type="number"
+               id="year"
+               formControlName="year"
+               autofocus>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="actions">
+      <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+      <button nbButton hero status="info"
+              [disabled]="!carInfoForm.valid"
+              (click)="onSubmit()"> {{ submitButtonText }} </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

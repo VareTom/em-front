@@ -3,6 +3,7 @@ import { Store } from 'src/store';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { Observable } from 'rxjs';
 
 // Services
 import { ClientService } from 'src/shared/services/client.service';
@@ -10,16 +11,20 @@ import { ClientService } from 'src/shared/services/client.service';
 // Models
 import { Client } from 'src/shared/models/client';
 import { Car } from 'src/shared/models/car';
-import { Observable } from 'rxjs';
 import { User } from 'src/shared/models/user';
 import { Entity } from 'src/shared/models/entity';
 import { Address } from 'src/shared/models/address';
+
+// Components
 import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
 import {
   ClientInfoDialogComponent
 } from 'src/modules/cms/clients/components/client-info-dialog/client-info-dialog.component';
+import {
+  CreateClientCarDialogComponent
+} from 'src/modules/cms/clients/components/create-client-car-dialog/create-client-car-dialog.component';
 
 @Component({
   selector: 'app-client-details',
@@ -29,10 +34,10 @@ import {
 export class ClientDetailsComponent implements OnInit {
 
   client: Client;
-  
+
   connectedUser$: Observable<User>;
   currentEntity$: Observable<Entity>;
-  
+
   constructor(
     private store: Store,
     private router: Router,
@@ -46,7 +51,7 @@ export class ClientDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.connectedUser$ = this.store.select<User>('connectedUser');
     this.currentEntity$ = this.store.select<Entity>('currentEntity');
-    
+
     if (this.route.snapshot.paramMap.get('uuid')) {
       this.getClient(this.route.snapshot.paramMap.get('uuid'));
     } else {
@@ -54,7 +59,7 @@ export class ClientDetailsComponent implements OnInit {
       this.router.navigateByUrl('clients');
     }
   }
-  
+
   private getClient(uuid: string): void {
     this.clientService.getByUuid(uuid)
       .subscribe({
@@ -66,19 +71,31 @@ export class ClientDetailsComponent implements OnInit {
         }
       })
   }
-  
+
   onBack(): void {
     this.router.navigateByUrl('clients');
   }
-  
+
   onAddCar(): void {
-  
+    const dialogRef = this.dialogService.open(CreateClientCarDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.addClientCar(this.client.uuid, result)
+          .subscribe({
+            next: (client) => {
+              this.client = client;
+              this.toastrService.success(null, this.translate.instant('car.creation-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('car.creation-failed'))
+          })
+      }
+    })
   }
-  
+
   onCreateAddress(): void {
-  
+
   }
-  
+
   onEditClient(client: Client): void {
     const dialogRef = this.dialogService.open(ClientInfoDialogComponent, {
       context: {
@@ -98,15 +115,31 @@ export class ClientDetailsComponent implements OnInit {
       }
     })
   }
-  
+
   onEditAddress(address: Address): void {
-  
+
   }
-  
+
   onEditCar(car: Car): void {
-  
+    const dialogRef = this.dialogService.open(CreateClientCarDialogComponent, {
+      context: {
+        carToUpdate: car
+      }
+    });
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.editClientCar(this.client.uuid, car.uuid, result)
+          .subscribe({
+            next: (client) => {
+              this.client = client;
+              this.toastrService.success(null, this.translate.instant('car.update-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('car.update-failed'))
+          })
+      }
+    })
   }
-  
+
   onDeleteCar(car: Car): void {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
@@ -122,7 +155,7 @@ export class ClientDetailsComponent implements OnInit {
       }
     })
   }
-  
+
   onDeleteAddress(): void {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
@@ -132,14 +165,13 @@ export class ClientDetailsComponent implements OnInit {
             next: () => {
               delete this.client.address;
               this.toastrService.success(null, this.translate.instant('address.deletion-succeed'));
-              this.router.navigateByUrl('clients');
             },
             error: () => this.toastrService.danger(null, this.translate.instant('address.deletion-failed'))
           })
       }
     })
   }
-  
+
   onDeleteClient(client: Client): void {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {

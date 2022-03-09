@@ -240,10 +240,16 @@
     "locality-required": "Localité obligatoire",
     "country": "Pays",
     "country-required": "Pays obligatoire",
-    "deletion-succeed": "Suppression de l'adresse effectué",
-    "deletion-failed": "La suppression de l'adresse a échoué"
+    "creation-succeed": "L'ajout de l'adresse a été effectué!",
+    "creation-failed": "L'ajout de l'adresse a échoué.",
+    "update-succeed": "La mise à jour de l'adresse a été effectué!",
+    "update-failed": "La mise à jour de l'adresse a échoué.",
+    "deletion-succeed": "Suppression de l'adresse effectué!",
+    "deletion-failed": "La suppression de l'adresse a échoué."
   },
   "car": {
+    "update-title": "Mise à jour du véhicule",
+    "creation-title": "Ajout d'un véhicule",
     "merch": "Marque",
     "merch-required": "Marque obligatoire",
     "model": "Modèle",
@@ -252,8 +258,12 @@
     "plate-required": "La plate est obligatoire",
     "color": "Couleur",
     "year": "Année",
-    "deletion-succeed": "Suppression du véhicule effectué",
-    "deletion-failed": "La suppression du véhicule a échoué"
+    "creation-succeed": "La création du véhicule effectué!",
+    "creation-failed": "La création du véhicule a échoué.",
+    "update-succeed": "La mise à jour du véhicule a été effectué!",
+    "update-failed": "La mise à jour du véhicule a échoué.",
+    "deletion-succeed": "Suppression du véhicule effectué!",
+    "deletion-failed": "La suppression du véhicule a échoué."
   },
   "confirm-deletion-dialog": {
     "title": "Confirmation de suppression",
