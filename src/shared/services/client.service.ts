@@ -110,8 +110,8 @@ export class ClientService {
       )
   }
 
-  editClientAddress(clientUuid: string, addressUuid: string, parameters: any): Observable<Client> {
-    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/address/${addressUuid}`, parameters)
+  editClientAddress(clientUuid: string, parameters: any): Observable<Client> {
+    return this.httpClient.put(`${this.baseRoute}/${clientUuid}/address`, parameters)
       .pipe(
         map((result: any) => {
           return new Client(result);

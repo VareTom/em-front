@@ -139,7 +139,7 @@ export class ClientDetailsComponent implements OnInit {
     });
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.editClientAddress(this.client.uuid, address.uuid, result)
+        this.clientService.editClientAddress(this.client.uuid, result)
           .subscribe({
             next: (client) => {
               this.client = client;
