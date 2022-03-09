@@ -53,6 +53,12 @@
   margin: 20px 0;
 }
 
+.divider {
+  &.spacing {
+    margin-bottom: 20px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .personal-data {
     width: 100%;
