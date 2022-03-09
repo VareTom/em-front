@@ -25,6 +25,9 @@ import {
 import {
   CreateClientCarDialogComponent
 } from 'src/modules/cms/clients/components/create-client-car-dialog/create-client-car-dialog.component';
+import {
+  CreateClientAddressDialogComponent
+} from 'src/modules/cms/clients/components/create-client-address-dialog/create-client-address-dialog.component';
 
 @Component({
   selector: 'app-client-details',
@@ -93,7 +96,19 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   onCreateAddress(): void {
-
+    const dialogRef = this.dialogService.open(CreateClientAddressDialogComponent);
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.createClientAddress(this.client.uuid, result)
+          .subscribe({
+            next: (client) => {
+              this.client = client;
+              this.toastrService.success(null, this.translate.instant('address.creation-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('address.creation-failed'))
+          })
+      }
+    })
   }
 
   onEditClient(client: Client): void {
@@ -117,7 +132,23 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   onEditAddress(address: Address): void {
-
+    const dialogRef = this.dialogService.open(CreateClientAddressDialogComponent, {
+      context: {
+        addressToUpdate: address
+      }
+    });
+    dialogRef.onClose.subscribe((result) => {
+      if (result) {
+        this.clientService.editClientAddress(this.client.uuid, address.uuid, result)
+          .subscribe({
+            next: (client) => {
+              this.client = client;
+              this.toastrService.success(null, this.translate.instant('address.update-succeed'));
+            },
+            error: () => this.toastrService.danger(null, this.translate.instant('address.update-failed'))
+          })
+      }
+    })
   }
 
   onEditCar(car: Car): void {

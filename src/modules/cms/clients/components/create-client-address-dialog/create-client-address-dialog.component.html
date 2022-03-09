@@ -1,1 +1,76 @@
-<p>create-client-address-dialog works!</p>
+<nb-card accent="info">
+  <nb-card-header>{{ titleText }}</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="addressInfoForm" class="container-form">
+      <div class="form-control-group">
+        <label class="label" for="street">{{ 'address.street'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="street"
+               formControlName="street"
+               autofocus>
+        <ng-container *ngIf="isStreetRequiredInput">
+          <p class="caption status-danger">
+            {{ 'address.street-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="box">{{ 'address.box'| translate }}</label>
+        <input nbInput
+               fullWidth
+               id="box"
+               formControlName="box"
+               autofocus>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="postalCode">{{ 'address.postalCode'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               type="number"
+               id="postalCode"
+               formControlName="postalCode"
+               autofocus>
+        <ng-container *ngIf="isPostalCodeRequiredInput">
+          <p class="caption status-danger">
+            {{ 'address.postalCode-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="locality">{{ 'address.locality'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="locality"
+               formControlName="locality"
+               autofocus>
+        <ng-container *ngIf="isLocalityRequiredInput">
+          <p class="caption status-danger">
+            {{ 'address.locality-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="form-control-group">
+        <label class="label" for="country">{{ 'address.country'| translate }} *</label>
+        <input nbInput
+               fullWidth
+               id="country"
+               formControlName="country"
+               autofocus>
+        <ng-container *ngIf="isCountryRequiredInput">
+          <p class="caption status-danger">
+            {{ 'address.country-required'| translate }}
+          </p>
+        </ng-container>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="actions">
+      <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+      <button nbButton hero status="info"
+              [disabled]="!addressInfoForm.valid"
+              (click)="onSubmit()"> {{ submitButtonText }} </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

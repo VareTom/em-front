@@ -231,6 +231,8 @@
     }
   },
   "address": {
+    "update-title": "Mise à jour de l'adresse",
+    "creation-title": "Ajout de l'adresse",
     "street": "Rue et Numéro",
     "street-required": "Rue et Numéro obligatoire",
     "box": "Boîte",
