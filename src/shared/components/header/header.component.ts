@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit {
           this.entityService.create(result).subscribe({
             next: (result) => {
               this.toastrService.success(null, this.translate.instant('entity.creation-succeed'));
+              location.reload();
             },
             error: () => {
               this.toastrService.danger(null, this.translate.instant('errors.basic-failed'));
@@ -66,7 +67,7 @@ export class HeaderComponent implements OnInit {
         }
     });
   }
-  
+
   onAdminSide(): void {
     this.router.navigateByUrl('admin');
   }
