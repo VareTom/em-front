@@ -22,7 +22,7 @@ export class CarService {
   }
 
   create(clientUuid: string,parameters: any): Observable<Client> {
-    return this.httpClient.post(`${this.baseRoute}/${clientUuid}/car`, parameters)
+    return this.httpClient.post(`${this.baseRoute}/${clientUuid}`, parameters)
       .pipe(
         map((result: any) => {
           return new Client(result);
