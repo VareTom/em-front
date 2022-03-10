@@ -4,18 +4,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CodeInputModule } from 'angular-code-input';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+// Guards
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 // Service
 import { AuthService } from './services/auth.service';
-import { AuthGuard } from 'src/shared/guards/auth.guard';
 import { EntityService } from 'src/shared/services/entity.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/shared/services/user.service';
 import { ExpenditureService } from 'src/shared/services/expenditure.service';
 import { ServiceService } from 'src/shared/services/service.service';
 import { OrderService } from 'src/shared/services/order.service';
 import { StatisticService } from 'src/shared/services/statistic.service';
 import { ContactService } from 'src/shared/services/contact.service';
+import { AddressService } from 'src/shared/services/address.service';
+import { CarService } from 'src/shared/services/car.service';
 
 // Modules Nebular
 import {
@@ -74,7 +78,7 @@ const nebularToastrConfig = {
     CodeInputModule.forRoot({
       codeLength: 6
     }),
-  
+
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
@@ -109,7 +113,7 @@ const nebularToastrConfig = {
     ReactiveFormsModule,
     FormsModule,
     CodeInputModule,
-  
+
     NgxEchartsModule,
 
     // Nebular
@@ -158,6 +162,8 @@ export class SharedModule {
         OrderService,
         StatisticService,
         ContactService,
+        CarService,
+        AddressService,
 
         // Guards
         AuthGuard

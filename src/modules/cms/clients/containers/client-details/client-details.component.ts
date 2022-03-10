@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 // Services
 import { ClientService } from 'src/shared/services/client.service';
+import { AddressService } from 'src/shared/services/address.service';
+import { CarService } from 'src/shared/services/car.service';
 
 // Models
 import { Client } from 'src/shared/models/client';
@@ -47,6 +49,8 @@ export class ClientDetailsComponent implements OnInit {
     private dialogService: NbDialogService,
     private translate: TranslateService,
     private readonly clientService: ClientService,
+    private readonly carService: CarService,
+    private readonly addressService: AddressService,
     private toastrService: NbToastrService,
     private route: ActivatedRoute
   ) { }
@@ -83,7 +87,7 @@ export class ClientDetailsComponent implements OnInit {
     const dialogRef = this.dialogService.open(CreateClientCarDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.addClientCar(this.client.uuid, result)
+        this.carService.create(this.client.uuid, result)
           .subscribe({
             next: (client) => {
               this.client = client;
@@ -99,7 +103,7 @@ export class ClientDetailsComponent implements OnInit {
     const dialogRef = this.dialogService.open(CreateClientAddressDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.createClientAddress(this.client.uuid, result)
+        this.addressService.create(this.client.uuid, result)
           .subscribe({
             next: (client) => {
               this.client = client;
@@ -139,7 +143,7 @@ export class ClientDetailsComponent implements OnInit {
     });
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.editClientAddress(this.client.uuid, result)
+        this.addressService.update(address.uuid, result)
           .subscribe({
             next: (client) => {
               this.client = client;
@@ -159,7 +163,7 @@ export class ClientDetailsComponent implements OnInit {
     });
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.editClientCar(this.client.uuid, car.uuid, result)
+        this.carService.update(this.client.uuid, car.uuid, result)
           .subscribe({
             next: (client) => {
               this.client = client;
@@ -175,7 +179,7 @@ export class ClientDetailsComponent implements OnInit {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.deleteClientCar(this.client.uuid,car.uuid)
+        this.carService.delete(car.uuid)
           .subscribe({
             next: () => {
               this.client.cars = this.client.cars.filter(c => c.uuid !== car.uuid);
@@ -191,7 +195,7 @@ export class ClientDetailsComponent implements OnInit {
     const dialogRef = this.dialogService.open(ConfirmationDeletionDialogComponent);
     dialogRef.onClose.subscribe((result) => {
       if (result) {
-        this.clientService.deleteClientAddress(this.client.uuid)
+        this.addressService.delete(this.client.address.uuid)
           .subscribe({
             next: () => {
               delete this.client.address;

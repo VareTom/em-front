@@ -8,5 +8,7 @@
   "client": "clients",
   "order": "orders",
   "statistic": "statistics",
-  "contact": "mails"
+  "contact": "mails",
+  "car": "cars",
+  "address": "addresses"
 }
