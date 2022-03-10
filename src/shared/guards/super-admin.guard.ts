@@ -15,8 +15,8 @@ export class SuperAdminGuard implements CanActivate {
               private router: Router) { }
   
   canActivate(): boolean {
-    if (this.store.value.connectedUser && this.store.value.currentEntity) {
-      return this.store.value.currentEntity.authorUuid === this.store.value.connectedUser.uuid;
+    if (this.store.value.connectedUser) {
+      return this.store.value.connectedUser.isSuperAdmin;
     }
     return false;
   }
