@@ -287,5 +287,19 @@
     "confirm-sended-title": "Merci!",
     "confirm-sended-text": "Nous avons bien reçu votre message.",
     "send-failed": "L'envoi de votre message à échoué"
+  },
+  "admin": {
+    "user-title": "Liste des utilisateurs",
+    "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
+    "invitation-succeed": "L'invitation du nouvel utilisateur a été un succès!",
+    "invitation-failed": "L'invitation du nouvel utilisateur a échoué.",
+    "columns": {
+      "email": "Email",
+      "createdAt": "Date d'invitation",
+      "entityName": "Nom de l'entité",
+      "isSuperAdmin": "SuperAdmin ?",
+      "isDisabled": "Désactivé ?",
+      "isConfirmed": "Inscription confirmée ?"
+    }
   }
 }
