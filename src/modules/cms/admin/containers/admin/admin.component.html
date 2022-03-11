@@ -1,1 +1,37 @@
-<p>admin works!</p>
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <div class="header-title">
+                <h1>{{ 'admin.title'|translate }}</h1>
+                <button nbButton hero status="info" size="large"
+                        (click)="onInvite()">
+                    {{'admin.invite'|translate }}
+                </button>
+            </div>
+            <div class="divider"></div>
+
+            <table class="table" [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
+
+                <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+                <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+                <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
+                    <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
+                        {{ 'expenditure.columns.'+ column |translate }}
+                    </th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+                </ng-container>
+
+                <ng-container [nbTreeGridColumnDef]="customColumn">
+                    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
+                        <button nbButton hero status="info" size="small" (click)="onDisabled(row.data)">
+                            <nb-icon [icon]="row.data.isDisabled ? 'unlock-outline' :'lock-outline'"></nb-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+            </table>
+        </div>
+    </nb-layout-column>
+</nb-layout>

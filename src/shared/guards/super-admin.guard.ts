@@ -11,8 +11,7 @@ import { AuthService } from 'src/shared/services/auth.service';
 export class SuperAdminGuard implements CanActivate {
 
   constructor(private authService: AuthService,
-              private store: Store,
-              private router: Router) { }
+              private store: Store) { }
   
   canActivate(): boolean {
     if (this.store.value.connectedUser) {

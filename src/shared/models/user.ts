@@ -8,6 +8,7 @@ export class User {
   deletedAt: string;
   isSuperAdmin: boolean;
   isConfirmed: boolean;
+  isDisabled: boolean;
   entity?: Entity;
 
   constructor(json: any) {
@@ -18,6 +19,7 @@ export class User {
     this.deletedAt = json.deletedAt;
     this.isSuperAdmin = json.isSuperAdmin;
     this.isConfirmed = json.isConfirmed;
+    this.isDisabled = json.isDisabled;
 
     if (json.entity) {
       this.entity = new Entity(json.entity);
