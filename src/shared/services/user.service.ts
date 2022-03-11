@@ -53,4 +53,19 @@ export class UserService {
         catchError(error => throwError(error))
       )
   }
+  
+  /**
+   * Disable or Enable user (inverse value of isDisabled column)
+   * Only super Admin can call this route
+   * @param uuid
+   */
+  disable (uuid: string): Observable<User> {
+    return this.httpClient.get(`${this.baseRoute}/${uuid}/disabled`)
+      .pipe(
+        map((result: any) => {
+          return new User(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
 }

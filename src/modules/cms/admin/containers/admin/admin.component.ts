@@ -26,7 +26,7 @@ import { Observable } from 'rxjs';
 export class AdminComponent implements OnInit {
   
   customColumn = 'actions';
-  defaultColumns = [ 'email', 'entityName', 'isDisabled', 'isConfirmed', 'isSuperAdmin', 'createdAt' ];
+  defaultColumns = [ 'email', 'entityName', 'isDisabledString', 'isConfirmed', 'isSuperAdmin', 'createdAt' ];
   allColumns = [...this.defaultColumns, this.customColumn];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
@@ -68,6 +68,14 @@ export class AdminComponent implements OnInit {
       })
   }
   
+  tooltipDisabledText(user: User): string {
+    if (user.isDisabled) {
+      return this.translate.instant('actions.enabled');
+    } else {
+      return this.translate.instant('actions.disabled');
+    }
+  }
+  
   changeSort(sortRequest: NbSortRequest): void {
     this.dataSource.sort(sortRequest);
     this.sortColumn = sortRequest.column;
@@ -92,7 +100,8 @@ export class AdminComponent implements OnInit {
           entityName: user.entity? user.entity.name: '-',
           isConfirmed: user.isConfirmed ? this.translate.instant('global.yes'): this.translate.instant('global.no'),
           isSuperAdmin: user.isSuperAdmin ? this.translate.instant('global.yes'): this.translate.instant('global.no'),
-          isDisabled: user.isDisabled ? this.translate.instant('global.yes'): this.translate.instant('global.no')
+          isDisabledString: user.isDisabled ? this.translate.instant('global.yes'): this.translate.instant('global.no'),
+          isDisabled: user.isDisabled
         }
       });
     })
@@ -100,7 +109,24 @@ export class AdminComponent implements OnInit {
   }
   
   onDisabled(user: User): void {
-  
+    this.userService.disable(user.uuid)
+      .subscribe({
+        next: () => {
+          if (user.isDisabled) {
+            this.toastrService.success(null, this.translate.instant('admin.enabled-succeed'));
+          } else {
+            this.toastrService.success(null, this.translate.instant('admin.disabled-succeed'));
+          }
+          this.getUsers();
+        },
+        error: () => {
+          if (user.isDisabled) {
+            this.toastrService.danger(null, this.translate.instant('admin.enabled-failed'));
+          } else {
+            this.toastrService.danger(null, this.translate.instant('admin.disabled-failed'));
+          }
+        }
+      })
   }
   
   onInvite(): void {

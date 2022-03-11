@@ -25,8 +25,13 @@
                 <ng-container [nbTreeGridColumnDef]="customColumn">
                     <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ 'actions.actions'| translate}}</th>
                     <td nbTreeGridCell *nbTreeGridCellDef="let row" class="actions-column">
-                        <button nbButton hero status="info" size="small" (click)="onDisabled(row.data)" *ngIf="(connectedUser$|async).uuid !== row.data.uuid">
-                            <nb-icon [icon]="row.data.isDisabled ? 'unlock-outline' :'lock-outline'"></nb-icon>
+                        <button nbButton outline status="info" size="small"
+                                [nbTooltip]="tooltipDisabledText(row.data)"
+                                nbTooltipPlacement="bottom"
+                                nbTooltipStatus="info"
+                                (click)="onDisabled(row.data)"
+                                *ngIf="(connectedUser$|async).uuid !== row.data.uuid">
+                            <nb-icon [icon]="row.data.isDisabled ? 'flash' :'flash-off'"></nb-icon>
                         </button>
                     </td>
                 </ng-container>

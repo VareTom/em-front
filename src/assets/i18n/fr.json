@@ -24,7 +24,9 @@
     "update": "Mettre à jour",
     "send": "Envoyer",
     "invite": "Inviter",
-    "return": "Retour"
+    "return": "Retour",
+    "disabled": "Désactiver",
+    "enabled": "Activer"
   },
   "forms": {
     "email": "Adresse e-mail",
@@ -290,7 +292,11 @@
   },
   "admin": {
     "user-title": "Liste des utilisateurs",
-    "retrieve-failed": "Impossible de récupérer les informations de vos clients.",
+    "retrieve-failed": "Impossible de récupérer les informations de vos utilisateurs.",
+    "disabled-failed": "Impossible de désactiver cet utilisateur.",
+    "disabled-succeed": "Utilisateur désactivé!",
+    "enabled-failed": "Impossible de réactiver cet utilisateur.",
+    "enabled-succeed": "Utilisateur réactivé!",
     "invitation-succeed": "L'invitation du nouvel utilisateur a été un succès!",
     "invitation-failed": "L'invitation du nouvel utilisateur a échoué.",
     "columns": {
@@ -298,7 +304,7 @@
       "createdAt": "Date d'invitation",
       "entityName": "Nom de l'entité",
       "isSuperAdmin": "SuperAdmin ?",
-      "isDisabled": "Désactivé ?",
+      "isDisabledString": "Désactivé ?",
       "isConfirmed": "Inscription confirmée ?"
     }
   }
