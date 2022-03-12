@@ -68,4 +68,19 @@ export class UserService {
         catchError(error => throwError(error))
       )
   }
+  
+  /**
+   * Invite user to join plateform
+   * Only super ADmin can call this route
+   * @param parameters
+   */
+  invite (parameters: any): Observable<User> {
+    return this.httpClient.post(`${this.baseRoute}/invite`, parameters)
+      .pipe(
+        map((result: any) => {
+          return new User(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
 }

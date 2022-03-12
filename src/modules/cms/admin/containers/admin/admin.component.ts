@@ -17,6 +17,9 @@ import { UserService } from 'src/shared/services/user.service';
 // Models
 import { User } from 'src/shared/models/user';
 import { Observable } from 'rxjs';
+import {
+  InviteUserDialogComponent
+} from 'src/modules/cms/admin/components/invite-user-dialog/invite-user-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -130,6 +133,9 @@ export class AdminComponent implements OnInit {
   }
   
   onInvite(): void {
-  
+    const dialogRef = this.dialogService.open(InviteUserDialogComponent);
+    dialogRef.onClose.subscribe((result: User) => {
+      this.refreshDataSource([result]);
+    })
   }
 }

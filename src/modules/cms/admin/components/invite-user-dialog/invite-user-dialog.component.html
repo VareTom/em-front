@@ -1,0 +1,43 @@
+<nb-card accent="info"
+         [nbSpinner]="isSubmitted"
+         nbSpinnerStatus="info">
+    <nb-card-header>{{ 'entity.invitation'|translate }}</nb-card-header>
+    <nb-card-body>
+        <form class="container-form" [formGroup]="memberForm">
+
+            <div class="form-control-group">
+                <label class="label" for="email">{{ 'forms.email'| translate }}*</label>
+                <nb-form-field>
+
+                    <input nbInput
+                           type="email"
+                           fullWidth
+                           id="email"
+                           formControlName="email"
+                           autofocus>
+                    <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+                </nb-form-field>
+
+                <ng-container *ngIf="isEmailRequiredInput">
+                    <p class="caption status-danger">
+                        {{ 'forms.email-required'| translate }}
+                    </p>
+                </ng-container>
+                <ng-container *ngIf="isEmailInvalidInput">
+                    <p class="caption status-danger">
+                        {{ 'forms.email-invalid'| translate }}
+                    </p>
+                </ng-container>
+            </div>
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="actions">
+            <button nbButton hero status="danger" (click)="onClose()"> {{ 'actions.cancel'|translate }} </button>
+            <button nbButton hero status="info"
+                    [disabled]="!memberForm.valid"
+                    (click)="onSubmit()"> {{ 'actions.invite'|translate }} </button>
+        </div>
+    </nb-card-footer>
+</nb-card>
