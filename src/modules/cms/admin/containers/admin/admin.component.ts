@@ -93,7 +93,6 @@ export class AdminComponent implements OnInit {
   }
   
   private refreshDataSource(users: User[]): void {
-    this.data = [];
     users.forEach(user => {
       this.data.push({
         data: {
@@ -135,7 +134,7 @@ export class AdminComponent implements OnInit {
   onInvite(): void {
     const dialogRef = this.dialogService.open(InviteUserDialogComponent);
     dialogRef.onClose.subscribe((result: User) => {
-      this.refreshDataSource([result]);
+      if (result) this.refreshDataSource([result]);
     })
   }
 }
