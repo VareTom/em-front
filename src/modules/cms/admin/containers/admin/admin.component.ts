@@ -58,6 +58,7 @@ export class AdminComponent implements OnInit {
   }
   
   private getUsers(): void {
+    this.data = [];
     this.userService.getAll()
       .subscribe({
         next: (users) => {
