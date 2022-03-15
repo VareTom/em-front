@@ -182,9 +182,9 @@ export class OrdersComponent implements OnInit {
             },
             error: (error) => {
               if (error.error.statusCode === 400) {
-                this.toastrService.danger(null, this.translate.instant('order.validation-failed-already-validate'))
+                this.toastrService.danger(null, this.translate.instant('order.validation-failed-already-validate'));
               } else {
-                this.toastrService.danger(null, this.translate.instant('order.validation-failed'))
+                this.toastrService.danger(null, this.translate.instant('order.validation-failed'));
               }
             }
           })

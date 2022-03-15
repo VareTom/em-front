@@ -82,6 +82,7 @@
     "http-server": "Une erreur est survenue au niveau de notre serveur. Encore désolé...",
     "title": "Ah shit, here we go again.",
     "basic-failed": "Une erreur est survenue... Merci de réessayer plus tard!",
+    "email-already-used": "Cet email est déjà utilisé par un autre utilisateur",
     "code-not-valid": "Le code inséré n'est pas valide!"
   },
   "dashboard": {

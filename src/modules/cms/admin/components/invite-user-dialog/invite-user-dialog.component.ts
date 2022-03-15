@@ -52,9 +52,13 @@ export class InviteUserDialogComponent implements OnInit {
           this.toastrService.success(null, this.translate.instant('admin.invitation-succeed'));
           this.dialogRef.close(user);
         },
-        error: () => {
+        error: (error) => {
           this.isSubmitted = false;
-          this.toastrService.danger(null, this.translate.instant('admin.invitation-failed'));
+          if (error.error.statusCode === 400) {
+            this.toastrService.danger(null, this.translate.instant('errors.email-already-used'));
+          } else {
+            this.toastrService.danger(null, this.translate.instant('admin.invitation-failed'));
+          }
         }
       })
   }
