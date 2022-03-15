@@ -45,10 +45,12 @@ export class OrderService {
       )
   }
   
-  validate (orderUuid: string): Observable<void> {
+  validate (orderUuid: string): Observable<Order> {
     return this.httpClient.get(`${this.baseRoute}/${orderUuid}/validate`)
       .pipe(
-        map(() => { }),
+        map((result: any) => {
+          return new Order(result);
+        }),
         catchError(error => throwError(error))
       )
   }

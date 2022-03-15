@@ -177,7 +177,10 @@ export class OrdersComponent implements OnInit {
       if (result) {
         this.orderService.validate(order.uuid)
           .subscribe({
-            next: () => {
+            next: (order) => {
+              this.data = this.data.filter(o => o.data.uuid !== order.uuid);
+              this.data.push(this.createDataObject(order));
+              this.dataSource = this.dataSourceBuilder.create(this.data);
               this.toastrService.success(null, this.translate.instant('order.validation-succeed'));
             },
             error: (error) => {
