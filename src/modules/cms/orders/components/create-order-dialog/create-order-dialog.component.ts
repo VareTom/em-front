@@ -80,13 +80,15 @@ export class CreateOrderDialogComponent implements OnInit {
     }
     
     if (this.orderToUpdate) {
+      console.log(this.orderToUpdate);
       this.submitButtonText = this.translate.instant('actions.update');
       this.orderForm.patchValue({
-        durationInMinute: this.orderToUpdate.duration.toString() !== '-' ?this.orderToUpdate.duration.toString().split(' ')[0]: null,
-        performedAt: this.orderToUpdate.performedAt !== '-' ? this.orderToUpdate.performedAt: null,
+        durationInMinute: this.orderToUpdate.duration ?? null,
+        performedAt: this.orderToUpdate.performedAt ?? null,
         clientUuid: this.orderToUpdate.client.uuid ?? null,
         servicesUuid: this.orderToUpdate.services.map(service => service.uuid)
       });
+      console.log(this.orderForm.value);
     }
   }
   

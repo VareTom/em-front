@@ -33,6 +33,7 @@ import { ToggleFilterValues } from 'src/shared/enums/ToggleFilterValues';
 
 // Interfaces
 import { FiltersInterface } from 'src/shared/interfaces/filters.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -60,6 +61,7 @@ export class OrdersComponent implements OnInit {
               private readonly orderService: OrderService,
               private toastrService: NbToastrService,
               private translate: TranslateService,
+              private router: Router,
               private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) { }
   
   ngOnInit(): void {
@@ -156,19 +158,7 @@ export class OrdersComponent implements OnInit {
   }
   
   onEdit(order: Order): void {
-    this.dialogService.open(CreateOrderDialogComponent,{
-      context: {
-        orderToUpdate: order
-      }
-    })
-      .onClose
-      .subscribe((result: Order) => {
-        if (result) {
-          this.data = this.data.filter(o => o.data.uuid !== result.uuid);
-          this.data.push(this.createDataObject(result));
-          this.dataSource = this.dataSourceBuilder.create(this.data);
-        }
-      })
+    this.router.navigateByUrl(`orders/${order.uuid}/details`);
   }
   
   onValidate(order: Order): void {

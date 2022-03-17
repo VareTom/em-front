@@ -197,6 +197,11 @@
     "validation-dialog": {
       "title": "Validation de la commande",
       "text": "Vous êtes sur le point de valider une commande, vous ne pourrez plus la modifier.\nÊtes-vous sûr de vouloir le faire ?"
+    },
+    "details": {
+      "title": "Détails de la commande",
+      "retrieve-failed": "Impossible de récupérer cette commande.",
+      "no-order": "Cette commande est introuvable."
     }
   },
   "client": {

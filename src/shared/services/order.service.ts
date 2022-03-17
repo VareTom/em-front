@@ -32,11 +32,21 @@ export class OrderService {
       )
   }
   
+  getByUuid (uuid: string): Observable<Order> {
+    return this.httpClient.get(`${this.baseRoute}/${uuid}`)
+      .pipe(
+        map((result: any) => {
+          return new Order(result);
+        }),
+        catchError(error => throwError(error))
+      )
+  }
+  
   getAllForEntity (filters: FiltersInterface): Observable<Order[]> {
     let queryParams: string = '?';
     if (filters.period) queryParams += `period=${filters.period}`;
     
-    return this.httpClient.get(`${this.baseRoute}/${this.store.value.currentEntity.uuid}${queryParams}`)
+    return this.httpClient.get(`${this.baseRoute}/entity/${this.store.value.currentEntity.uuid}${queryParams}`)
       .pipe(
         map((orders: any) => {
           return orders.map((order: any) => new Order(order));
