@@ -1,0 +1,16 @@
+.header-title-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  button {
+    margin-right: 20px;
+  }
+}
+
+.order-action-row {
+  margin: 10px 0;
+
+  button:not(:last-child) {
+    margin-right: 10px;
+  }
+}

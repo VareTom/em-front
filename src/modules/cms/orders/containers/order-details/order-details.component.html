@@ -1,0 +1,37 @@
+<nb-layout>
+    <nb-layout-column *ngIf="order">
+        <div class="container">
+            <div class="header-title-details">
+                <button nbButton size="small"
+                        [nbTooltip]="'actions.return'|translate"
+                        nbTooltipPlacement="bottom"
+                        nbTooltipStatus="info"
+                        status="info" (click)="onBack()">
+                    <nb-icon icon="arrow-left"></nb-icon>
+                </button>
+                <h1>{{ 'order.details.title'|translate }}</h1>
+            </div>
+            <div class="divider"></div>
+
+            <div class="flex-row order-action-row">
+                <button nbButton size="small" fullWidth
+                        status="info" (click)="onEdit()">
+                    <nb-icon icon="edit-outline"></nb-icon>
+                    {{'actions.update'|translate}}
+                </button>
+                <button *ngIf="!order.validatedAt && (currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                        nbButton hero status="success" size="small" fullWidth
+                        (click)="onValidate()">
+                    <nb-icon icon="checkmark-circle"></nb-icon>
+                    {{'order.validate'|translate}}
+                </button>
+                <button nbButton size="small" fullWidth
+                        *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                        status="danger" (click)="onDelete()">
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                    {{'actions.delete'|translate}}
+                </button>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>
