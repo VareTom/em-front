@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from 'src/store';
 import { Observable } from 'rxjs';
-import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbToastrService, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 
 // Services
 import { OrderService } from 'src/shared/services/order.service';
@@ -12,6 +12,9 @@ import { OrderService } from 'src/shared/services/order.service';
 import { User } from 'src/shared/models/user';
 import { Entity } from 'src/shared/models/entity';
 import { Order } from 'src/shared/models/order';
+import { Service } from 'src/shared/models/service';
+
+// Components
 import {
   CreateOrderDialogComponent
 } from 'src/modules/cms/orders/components/create-order-dialog/create-order-dialog.component';
@@ -21,6 +24,8 @@ import {
 import {
   ConfirmationDeletionDialogComponent
 } from 'src/shared/components/confirmation-deletion-dialog/confirmation-deletion-dialog.component';
+
+
 
 @Component({
   selector: 'app-order-details',
@@ -32,6 +37,10 @@ export class OrderDetailsComponent implements OnInit {
   connectedUser$: Observable<User>;
   currentEntity$: Observable<Entity>;
   
+  defaultColumns = [ 'serviceName', 'description', 'code', 'priceInCent' ];
+  dataSource: NbTreeGridDataSource<any>;
+  data: any[] = [];
+  
   order: Order;
   
   constructor(
@@ -41,6 +50,7 @@ export class OrderDetailsComponent implements OnInit {
     private toastrService: NbToastrService,
     private dialogService: NbDialogService,
     private store: Store,
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private translate: TranslateService,
   ) { }
 
@@ -49,7 +59,6 @@ export class OrderDetailsComponent implements OnInit {
     this.currentEntity$ = this.store.select<Entity>('currentEntity');
   
     if (this.route.snapshot.paramMap.get('uuid')) {
-      console.log('oui')
       this.getOrder(this.route.snapshot.paramMap.get('uuid'));
     } else {
       this.toastrService.danger(null, this.translate.instant('order.details.no-order'));
@@ -60,9 +69,31 @@ export class OrderDetailsComponent implements OnInit {
   private getOrder(uuid: string): void {
     this.orderService.getByUuid(uuid)
       .subscribe({
-        next: (order) => this.order = order,
+        next: (order) => {
+          this.order = order;
+          if (order.services.length > 0) {
+            this.refreshDataSource(order.services);
+          }else {
+            this.dataSource.setData([]);
+          }
+        },
         error: () => this.toastrService.danger(null, this.translate.instant('order.details.retrieve-failed'))
       })
+  }
+  
+  private refreshDataSource (orderServices: Service[]): void {
+    this.data = [];
+    orderServices.forEach(orderService => {
+      this.data.push({
+        data: {
+          serviceName: orderService.name,
+          description: orderService.description,
+          code: orderService.code,
+          priceInCent: (orderService.priceInCent / 100).toFixed(2) + ' €'
+        }
+      });
+    });
+    this.dataSource = this.dataSourceBuilder.create(this.data);
   }
   
   onEdit(): void {
@@ -75,6 +106,7 @@ export class OrderDetailsComponent implements OnInit {
       .subscribe((result: Order) => {
         if (result) {
           this.order = result;
+          this.refreshDataSource(result.services);
         }
       })
   }

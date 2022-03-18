@@ -11,6 +11,7 @@
                 </button>
                 <h1>{{ 'order.details.title'|translate }}</h1>
             </div>
+
             <div class="divider"></div>
 
             <div class="flex-row order-action-row">
@@ -31,6 +32,32 @@
                     <nb-icon icon="trash-2-outline"></nb-icon>
                     {{'actions.delete'|translate}}
                 </button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="order-details">
+                <div class="header-title">
+                    <h4>{{'order.details.lines'|translate}}</h4>
+                </div>
+
+                <div class="divider" [ngClass]="!order.services ? 'spacing':''"></div>
+
+                <table class="table" [nbTreeGrid]="dataSource"
+                       equalColumnsWidth
+                        *ngIf="order.services.length > 0">
+
+                    <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="defaultColumns"></tr>
+                    <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: defaultColumns"></tr>
+
+                    <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
+                        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+                            {{ 'order.columns.'+ column |translate }}
+                        </th>
+
+                        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+                    </ng-container>
+                </table>
             </div>
         </div>
     </nb-layout-column>

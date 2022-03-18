@@ -201,7 +201,8 @@
     "details": {
       "title": "Détails de la commande",
       "retrieve-failed": "Impossible de récupérer cette commande.",
-      "no-order": "Cette commande est introuvable."
+      "no-order": "Cette commande est introuvable.",
+      "lines": "Détails de la commande"
     }
   },
   "client": {

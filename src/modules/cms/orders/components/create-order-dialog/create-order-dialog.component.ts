@@ -3,6 +3,7 @@ import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from 'src/store';
+import moment from 'moment';
 
 // Models
 import { SelectViewModel } from 'src/shared/models/selectViewModel';
@@ -80,16 +81,13 @@ export class CreateOrderDialogComponent implements OnInit {
     }
     
     if (this.orderToUpdate) {
-      //TODO:: udpate date == not set
-      console.log(this.orderToUpdate);
       this.submitButtonText = this.translate.instant('actions.update');
       this.orderForm.patchValue({
         durationInMinute: this.orderToUpdate.duration ?? null,
-        performedAt: this.orderToUpdate.performedAt ?? null,
+        performedAt: moment(this.orderToUpdate.performedAt).format('yyyy-MM-DD') ?? null,
         clientUuid: this.orderToUpdate.client.uuid ?? null,
         servicesUuid: this.orderToUpdate.services.map(service => service.uuid)
       });
-      console.log(this.orderForm.value);
     }
   }
   
