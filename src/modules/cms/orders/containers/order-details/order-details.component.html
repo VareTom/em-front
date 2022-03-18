@@ -28,7 +28,7 @@
                     {{'order.validate'|translate}}
                 </button>
                 <button nbButton size="small"
-                        *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                        *ngIf="!order.validatedAt && (currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
                         status="danger" (click)="onDelete()">
                     <nb-icon icon="trash-2-outline"></nb-icon>
                     {{'actions.delete'|translate}}

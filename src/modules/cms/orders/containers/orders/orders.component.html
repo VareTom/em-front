@@ -38,7 +38,7 @@
                                 nbTooltipPlacement="bottom" nbTooltipStatus="success" (click)="onValidate(row.data)">
                             <nb-icon icon="checkmark-circle"></nb-icon>
                         </button>
-                        <button *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
+                        <button *ngIf="!row.data.isValidated && (currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
                                 nbButton hero status="danger" size="small" (click)="onDelete(row.data)">
                             <nb-icon icon="trash-2-outline"></nb-icon>
                         </button>
