@@ -182,7 +182,11 @@
       "serviceNumber": "Nombre de service",
       "performedAt": "Date de la prestation",
       "validatedAt": "Date de la validation",
-      "createdAt": "Date d'ajout"
+      "createdAt": "Date d'ajout",
+      "serviceName": "Nom du service",
+      "serviceDescription": "Description du service",
+      "serviceCode": "Code",
+      "servicePriceInCent": "Prix de la prestation"
     },
     "create-form": {
       "select-service": "Sélectionnez au moins un service",
@@ -202,7 +206,10 @@
       "title": "Détails de la commande",
       "retrieve-failed": "Impossible de récupérer cette commande.",
       "no-order": "Cette commande est introuvable.",
-      "lines": "Détails de la commande"
+      "client": "Information sur le client",
+      "services": "Services prestés",
+      "invoice": "Télécharger le devis",
+      "client-redirect": "Voir la fiche client"
     }
   },
   "client": {

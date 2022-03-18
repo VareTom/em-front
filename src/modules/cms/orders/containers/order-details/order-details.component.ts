@@ -37,7 +37,7 @@ export class OrderDetailsComponent implements OnInit {
   connectedUser$: Observable<User>;
   currentEntity$: Observable<Entity>;
   
-  defaultColumns = [ 'serviceName', 'description', 'code', 'priceInCent' ];
+  defaultColumns = [ 'serviceName', 'serviceDescription', 'serviceCode', 'servicePriceInCent' ];
   dataSource: NbTreeGridDataSource<any>;
   data: any[] = [];
   
@@ -87,9 +87,9 @@ export class OrderDetailsComponent implements OnInit {
       this.data.push({
         data: {
           serviceName: orderService.name,
-          description: orderService.description,
-          code: orderService.code,
-          priceInCent: (orderService.priceInCent / 100).toFixed(2) + ' €'
+          serviceDescription: orderService.description,
+          serviceCode: orderService.code,
+          servicePriceInCent: (orderService.priceInCent / 100).toFixed(2) + ' €'
         }
       });
     });
@@ -151,5 +151,9 @@ export class OrderDetailsComponent implements OnInit {
           })
       }
     })
+  }
+  
+  onShowClientDetails(): void {
+    this.router.navigateByUrl(`clients/${this.order.client.uuid}/details`);
   }
 }

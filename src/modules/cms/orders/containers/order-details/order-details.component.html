@@ -14,19 +14,20 @@
 
             <div class="divider"></div>
 
-            <div class="flex-row order-action-row">
-                <button nbButton size="small" fullWidth
+            <div class="order-action-row">
+                <button *ngIf="!order.validatedAt"
+                        nbButton size="small"
                         status="info" (click)="onEdit()">
                     <nb-icon icon="edit-outline"></nb-icon>
                     {{'actions.update'|translate}}
                 </button>
                 <button *ngIf="!order.validatedAt && (currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
-                        nbButton hero status="success" size="small" fullWidth
+                        nbButton hero status="success" size="small"
                         (click)="onValidate()">
                     <nb-icon icon="checkmark-circle"></nb-icon>
                     {{'order.validate'|translate}}
                 </button>
-                <button nbButton size="small" fullWidth
+                <button nbButton size="small"
                         *ngIf="(currentEntity$|async).authorUuid === (connectedUser$|async).uuid"
                         status="danger" (click)="onDelete()">
                     <nb-icon icon="trash-2-outline"></nb-icon>
@@ -36,9 +37,53 @@
 
             <div class="divider"></div>
 
-            <div class="order-details">
+            <div class="details-card">
+                <div class="card-row">
+                    <nb-card>
+                        <nb-card-header>
+                            {{'order.create-form.client'|translate}}
+                            <button nbButton size="small" class="button-space"
+                                    [nbTooltip]="'order.details.client-redirect'|translate"
+                                    nbTooltipPlacement="bottom"
+                                    nbTooltipStatus="info"
+                                    status="info" (click)="onShowClientDetails()">
+                                <nb-icon icon="skip-forward-outline"></nb-icon>
+                            </button>
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{ order.client.fullName }}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card *ngIf="order.duration">
+                        <nb-card-header>
+                            {{'order.create-form.duration'|translate}}
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{ order.duration }}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card *ngIf="order.performedAt">
+                        <nb-card-header>
+                            {{'order.create-form.performed-at'|translate}}
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{ order.performedAt | date: 'dd:MM:YYYY' }}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card *ngIf="order.validatedAt">
+                        <nb-card-header>
+                            {{'order.columns.validatedAt'|translate}}
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{ order.validatedAt | date: 'dd:MM:YYYY' }}
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+
+            <div class="order-service-details">
                 <div class="header-title">
-                    <h4>{{'order.details.lines'|translate}}</h4>
+                    <h4>{{'order.details.services'|translate}}</h4>
                 </div>
 
                 <div class="divider" [ngClass]="!order.services ? 'spacing':''"></div>
@@ -58,6 +103,15 @@
                         <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
                     </ng-container>
                 </table>
+
+                <div class="total-box">
+                    <nb-card>
+                        <nb-card-body>
+                            <h6>{{'order.columns.total'|translate}}</h6>
+                            {{ order.totalInCent/ 100 | currency: 'EUR' }}
+                        </nb-card-body>
+                    </nb-card>
+                </div>
             </div>
         </div>
     </nb-layout-column>
